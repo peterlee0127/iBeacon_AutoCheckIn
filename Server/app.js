@@ -5,7 +5,6 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var routes = require('./routes/index');
 var app = express();
 
 //var session = require('express-session');
@@ -31,8 +30,10 @@ app.use(session({
 }));
 */
 
-app.use('/', routes);
-app.use('/getList', routes);
+app.get("*", function(req,res)
+{
+  res.sendfile("./public/index.html");
+});
 		
 
 /// catch 404 and forwarding to error handler
