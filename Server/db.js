@@ -18,20 +18,5 @@ var student = new Schema({
 	}
 });
 
-var classHistory = new Schema({
-	admin:String,
-	student_list : [student],
-	class_name : String,
-	class_room : String,
-	class_time : String,
-	'lock':{
-		type:Boolean,
-		default:false,
-		required:true
-	}
-});
-
-classHistory.set('collection', 'classHistory');
 mongoose.model('Student', student);
-mongoose.model('ClassHistory', classHistory);
 mongoose.connect(url);
