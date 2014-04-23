@@ -29,7 +29,11 @@
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
 				<div class="checkbox" ng-repeat="student in students">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(student.stu_id)"> {{ student.name }}{{  student.stu_id}}
+						<input type="checkbox" ng-click="changeStudent(student.stu_id)">
+						姓名:{{ student.name }}
+						學號:{{  student.stu_id}}
+						有到:{{ student.come }}
+						已鎖定:{{student.lock}}
 					</label>
 				</div>
 
