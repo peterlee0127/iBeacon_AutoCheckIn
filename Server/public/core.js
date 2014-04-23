@@ -6,7 +6,7 @@ function mainController($scope, $http) {
 	// when landing on the page, get all todos and show them
 	$http.get('/api/getList')
 		.success(function(data) {
-			$scope.todos = data;
+			$scope.students = data;
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -17,7 +17,7 @@ function mainController($scope, $http) {
 		$http.post('/api/todos', $scope.formData)
 			.success(function(data) {
 				$scope.formData = {}; // clear the form so our user is ready to enter another
-				$scope.todos = data;
+				$scope.students = data;
 				console.log(data);
 			})
 			.error(function(data) {
@@ -29,7 +29,7 @@ function mainController($scope, $http) {
 	$scope.deleteTodo = function(id) {
 		$http.delete('/api/todos/' + id)
 			.success(function(data) {
-				$scope.todos = data;
+				$scope.students = data;
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);

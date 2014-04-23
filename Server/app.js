@@ -37,8 +37,8 @@ var Student = mongoose.model('Student',
     'stu_id':String,
 	'name':String,
 	'come':{
-			type:String,
-			default:'false',
+			type:Boolean,
+			default:false,
 		    required:true
 	},
 	'lock':{
@@ -48,7 +48,24 @@ var Student = mongoose.model('Student',
 	}
 });
 
+//API
 
+app.get('/api/getList' , function(req,res)
+{
+		Student.find(function (err,student)
+		{
+				if(err)
+				  res.send(err);
+				else
+				{
+				  res.json(student);
+//						console.log(student);
+				}
+		});
+});
+
+
+// index Page
 app.get("*", function(req,res)
 {
   res.sendfile("./public/index.html");

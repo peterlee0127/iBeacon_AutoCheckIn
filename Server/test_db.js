@@ -7,25 +7,24 @@ var Student = mongoose.model('Student',
 						'stu_id':String,
 	'name':String,
 	'come':{
-			type:String,
-			default:'false',
-					required:true
+			type:Boolean,
+			default:false,
+		   required:true
 	},
 	'lock':{
 			type:Boolean,
 			default:false,
-					required:true
+		   required:true
 	}
 				});
-
 
 
 Student.create(
 {				
 		stu_id : "499850000",	
 		name : "peterlee",
-		come : "true",
-		lock : "true"
+		come : true,
+		lock : true
 				
 },function(err,todo){
 		if(err)
