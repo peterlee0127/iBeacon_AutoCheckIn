@@ -1,11 +1,11 @@
 var express = require('express');
-var db = require('./db.js');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var mongoose = require('mongoose');
 
 //var session = require('express-session');
 //var MongoStore = require('connect-mongo')(session);
@@ -29,6 +29,25 @@ app.use(session({
 		})
 }));
 */
+
+mongoose.connect('mongodb://localhost:27017/db_hw');
+
+var Student = mongoose.model('Student',
+{
+    'stu_id':String,
+	'name':String,
+	'come':{
+			type:String,
+			default:'false',
+		    required:true
+	},
+	'lock':{
+			type:Boolean,
+			default:false,
+		    required:true
+	}
+});
+
 
 app.get("*", function(req,res)
 {
