@@ -66,26 +66,11 @@ app.get('/api/getList' , function(req,res)
 
 app.post('/api/changeStudent/', function(req, res) {
 	console.log("get changeStudent POST");
+	// Student.findOne()
 
-		Student.update({
-			stu_id : req,
-			come : false
-		}, function(err, student) {
-			if (err)
-				res.send(err);
-			});
 
-			Student.find( function (err,student)
-			{
-					if(err)
-						res.send(err);
-					else if(stude)
-					{
-						res.json(student);
-					}
-			});
 
-	});
+});
 
 
 

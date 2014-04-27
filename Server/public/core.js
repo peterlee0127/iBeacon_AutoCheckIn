@@ -15,7 +15,8 @@ function mainController($scope, $http) {
 
 	// delete a todo after checking it
 	$scope.changeStudent = function(stu_id) {
-		$http.post('/api/changeStudent/' , JSON.stringify(stu_id))
+		var data = {  "stu_id":stu_id }
+		$http.post('/api/changeStudent/' , JSON.stringify(data))
 			.success(function(data) {
 			})
 			.error(function(data) {
