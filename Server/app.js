@@ -57,7 +57,7 @@ app.get('/api/getList' , function(req,res)
 				  res.send(err);
 				else
 				{
-				  res.json(student);
+				  	res.json(student);
 				}
 		});
 });
@@ -65,10 +65,25 @@ app.get('/api/getList' , function(req,res)
 
 
 app.post('/api/changeStudent/', function(req, res) {
-	console.log("get changeStudent POST");
-	// Student.findOne()
+	console.log("get changeStudent POST:" + req.body.stu_id);
+//A.findOneAndUpdate(conditions, update, options, callback) // executes
+/*
+	Student.findOneAndUpdate( {  stu_id:req.body.stu_id }, { $set:{ come: true} } ,function (err, doc) {
+			console.log("find:"+ req.body.stu_id);
 
+			doc.save();
+	 });
+*/
+	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	{
+		if(student.come)
+			student.come=false;
+		else
+			student.come=true;
 
+		student.lock=true;
+		student.save();
+	});
 
 });
 
