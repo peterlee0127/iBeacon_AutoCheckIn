@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 
-//var session = require('express-session');
-//var MongoStore = require('connect-mongo')(session);
+// var session = require('express-session');
+// var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -28,7 +28,6 @@ app.use(session({
 		})
 }));
 */
-
 mongoose.connect('mongodb://localhost:27017/db_hw');
 
 var Student = mongoose.model('Student',
@@ -56,30 +55,17 @@ app.get('/api/getList' , function(req,res)
 				if(err)
 				  res.send(err);
 				else
-				{
-				  	res.json(student);
-				}
+					res.json(student);
 		});
 });
 
 
 
 app.post('/api/changeStudent/', function(req, res) {
-	console.log("get changeStudent POST:" + req.body.stu_id);
-//A.findOneAndUpdate(conditions, update, options, callback) // executes
-/*
-	Student.findOneAndUpdate( {  stu_id:req.body.stu_id }, { $set:{ come: true} } ,function (err, doc) {
-			console.log("find:"+ req.body.stu_id);
-
-			doc.save();
-	 });
-*/
+	// console.log("get changeStudent POST:" + req.body.stu_id);
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
-		if(student.come)
-			student.come=false;
-		else
-			student.come=true;
+			student.come=!student.come;
 
 		student.lock=true;
 		student.save();
