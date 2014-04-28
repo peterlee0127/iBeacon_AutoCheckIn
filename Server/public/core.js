@@ -12,24 +12,12 @@ function mainController($scope, $http) {
 			console.log('Error: ' + data);
 		});
 
-	// when submitting the add form, send the text to the node API
-	$scope.createTodo = function() {
-		$http.post('/api/todos', $scope.formData)
-			.success(function(data) {
-				$scope.formData = {}; // clear the form so our user is ready to enter another
-				$scope.students = data;
-				console.log(data);
-			})
-			.error(function(data) {
-				console.log('Error: ' + data);
-			});
-	};
 
 	// delete a todo after checking it
-	$scope.changeStudent = function(id) {
-		$http.delete('/api/changeStudent/' + id)
+	$scope.changeStudent = function(stu_id) {
+		var data = {  "stu_id":stu_id }
+		$http.post('/api/changeStudent/' , JSON.stringify(data))
 			.success(function(data) {
-				$scope.students = data;
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);

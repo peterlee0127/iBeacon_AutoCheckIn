@@ -11,7 +11,6 @@ var mongoose = require('mongoose');
 //var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(favicon());
@@ -34,7 +33,7 @@ mongoose.connect('mongodb://localhost:27017/db_hw');
 
 var Student = mongoose.model('Student',
 {
-    'stu_id':String,
+  'stu_id':String,
 	'name':String,
 	'come':{
 			type:Boolean,
@@ -58,50 +57,44 @@ app.get('/api/getList' , function(req,res)
 				  res.send(err);
 				else
 				{
-				  res.json(student);
-//						console.log(student);
+				  	res.json(student);
 				}
 		});
 });
 
 
+
+app.post('/api/changeStudent/', function(req, res) {
+	console.log("get changeStudent POST:" + req.body.stu_id);
+//A.findOneAndUpdate(conditions, update, options, callback) // executes
+/*
+	Student.findOneAndUpdate( {  stu_id:req.body.stu_id }, { $set:{ come: true} } ,function (err, doc) {
+			console.log("find:"+ req.body.stu_id);
+
+			doc.save();
+	 });
+*/
+	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	{
+		if(student.come)
+			student.come=false;
+		else
+			student.come=true;
+
+		student.lock=true;
+		student.save();
+	});
+
+});
+
+
+
 // index Page
-app.get("*", function(req,res)
+app.get("/", function(req,res)
 {
   res.sendfile("./public/index.html");
 });
-		
 
-/// catch 404 and forwarding to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-/// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
 
 
 module.exports = app;
