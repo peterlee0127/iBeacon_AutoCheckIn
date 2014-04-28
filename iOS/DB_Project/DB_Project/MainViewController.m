@@ -77,7 +77,7 @@
     UserInfoModel *model =[UserInfoModel shareInstance];
     if(![[model getUserName] isEqualToString:@""])
     {
-    
+
     }
     else
     {

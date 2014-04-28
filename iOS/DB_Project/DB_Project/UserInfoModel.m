@@ -9,6 +9,9 @@
 #import "UserInfoModel.h"
 
 @interface UserInfoModel ()
+{
+    NSString *plistPath;
+}
 
 @property (nonatomic,strong) NSMutableDictionary *infoDict;
 
@@ -42,12 +45,12 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSFileManager *fileManager=[[NSFileManager alloc] init];
     
-    NSString *plistPath = [documentsDirectory stringByAppendingPathComponent:@"/userInfo.plist"];
+    plistPath = [documentsDirectory stringByAppendingPathComponent:@"/userInfo.plist"];
     if (![fileManager fileExistsAtPath:plistPath])
     {
         self.infoDict=[[NSMutableDictionary alloc] init];
         self.infoDict[@"user"]=@"";
-        [self.infoDict writeToFile:plistPath atomically:YES];
+        [self saveData];
     
     }
     else
@@ -59,12 +62,16 @@
 -(void) saveUser:(NSString *) userName
 {
     self.infoDict[@"user"]=userName;
+    [self saveData];
 }
 -(NSString *) getUserName
 {
     return self.infoDict[@"user"];
 }
-
+-(void) saveData
+{
+    [self.infoDict writeToFile:plistPath atomically:YES];
+}
 
 
 
