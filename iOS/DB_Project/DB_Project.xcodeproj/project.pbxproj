@@ -21,6 +21,9 @@
 		D08FB76C190D5A76002DA3C8 /* DB_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D08FB76B190D5A76002DA3C8 /* DB_ProjectTests.m */; };
 		D08FB778190D5A95002DA3C8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08FB776190D5A95002DA3C8 /* MainViewController.m */; };
 		D08FB779190D5A95002DA3C8 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08FB777190D5A95002DA3C8 /* MainViewController.xib */; };
+		D0CCB1D9190E2816004F8137 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CCB1D7190E2816004F8137 /* UserInfoViewController.m */; };
+		D0CCB1DA190E2816004F8137 /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0CCB1D8190E2816004F8137 /* UserInfoViewController.xib */; };
+		D0CCB1DD190E2917004F8137 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CCB1DC190E2917004F8137 /* UserInfoModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		D08FB775190D5A95002DA3C8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		D08FB776190D5A95002DA3C8 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		D08FB777190D5A95002DA3C8 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		D0CCB1D6190E2816004F8137 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		D0CCB1D7190E2816004F8137 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		D0CCB1D8190E2816004F8137 /* UserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
+		D0CCB1DB190E2917004F8137 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		D0CCB1DC190E2917004F8137 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +122,8 @@
 			children = (
 				D08FB755190D5A76002DA3C8 /* AppDelegate.h */,
 				D08FB756190D5A76002DA3C8 /* AppDelegate.m */,
-				D08FB775190D5A95002DA3C8 /* MainViewController.h */,
-				D08FB776190D5A95002DA3C8 /* MainViewController.m */,
-				D08FB777190D5A95002DA3C8 /* MainViewController.xib */,
+				D0CCB1DE190E2A1D004F8137 /* Model */,
+				D0CCB1DF190E2A26004F8137 /* ViewController */,
 				D08FB758190D5A76002DA3C8 /* Images.xcassets */,
 				D08FB74D190D5A76002DA3C8 /* Supporting Files */,
 			);
@@ -150,6 +157,28 @@
 				D08FB768190D5A76002DA3C8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0CCB1DE190E2A1D004F8137 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0CCB1DB190E2917004F8137 /* UserInfoModel.h */,
+				D0CCB1DC190E2917004F8137 /* UserInfoModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D0CCB1DF190E2A26004F8137 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D08FB775190D5A95002DA3C8 /* MainViewController.h */,
+				D08FB776190D5A95002DA3C8 /* MainViewController.m */,
+				D08FB777190D5A95002DA3C8 /* MainViewController.xib */,
+				D0CCB1D6190E2816004F8137 /* UserInfoViewController.h */,
+				D0CCB1D7190E2816004F8137 /* UserInfoViewController.m */,
+				D0CCB1D8190E2816004F8137 /* UserInfoViewController.xib */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D08FB751190D5A76002DA3C8 /* InfoPlist.strings in Resources */,
+				D0CCB1DA190E2816004F8137 /* UserInfoViewController.xib in Resources */,
 				D08FB779190D5A95002DA3C8 /* MainViewController.xib in Resources */,
 				D08FB759190D5A76002DA3C8 /* Images.xcassets in Resources */,
 			);
@@ -256,6 +286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D08FB757190D5A76002DA3C8 /* AppDelegate.m in Sources */,
+				D0CCB1DD190E2917004F8137 /* UserInfoModel.m in Sources */,
+				D0CCB1D9190E2816004F8137 /* UserInfoViewController.m in Sources */,
 				D08FB778190D5A95002DA3C8 /* MainViewController.m in Sources */,
 				D08FB753190D5A76002DA3C8 /* main.m in Sources */,
 			);
@@ -454,6 +486,7 @@
 				D08FB771190D5A76002DA3C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D08FB772190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "DB_ProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +495,7 @@
 				D08FB774190D5A76002DA3C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
