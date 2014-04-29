@@ -14,7 +14,6 @@ function mainController($scope, $http) {
 
 	var reloadData=$scope.reloadData = function()
 	{
-			alert("reload");
 		$http.get('/api/getList')
 			.success(function(data) {
 				$scope.students = data;
@@ -27,8 +26,8 @@ function mainController($scope, $http) {
 
 
 	$scope.changeStudent = function(stu_id) {
-		var data = {  "stu_id":stu_id };
-		$http.post('/api/changeStudent/' , JSON.stringify(data))
+		var post = {  "stu_id":stu_id };
+		$http.post('/api/changeStudent/' , JSON.stringify(post))
 			.success(function(data) {
 				reloadData();
 			})

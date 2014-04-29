@@ -69,6 +69,7 @@ app.post('/api/changeStudent/', function(req, res) {
 
 		student.lock=true;
 		student.save();
+			res.end("ok");
 	});
 
 });
