@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
+
 
 // var session = require('express-session');
 // var MongoStore = require('connect-mongo')(session);
@@ -14,7 +16,7 @@ var mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 
 app.use(favicon());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -67,21 +69,33 @@ app.post('/api/changeStudent/', function(req, res) {
 	{
 			student.come=!student.come;
 
-		student.lock=true;
-		student.save();
+			student.lock=true;
+			student.save();
 			res.end("ok");
 	});
 
 });
 
 
-
 // index Page
 app.get("/", function(req,res)
 {
-  res.sendfile("./public/index.html");
+  	res.sendfile("./public/index.html");
 });
 
 
+// Server Configure
+app.set('port', process.env.PORT || 8080);
 
-module.exports = app;
+var server = app.listen(app.get('port'), function() {
+	console.log("Server is listening on port:" + server.address().port);
+	debug('Express server listening on port ' + server.address().port);
+});
+
+
+// Socket.IO configure
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket){
+
+
+});
