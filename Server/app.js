@@ -69,7 +69,7 @@ app.post('/api/changeStudent/', function(req, res) {
 	{
 			student.come=!student.come;
 
-			student.lock=true;
+			// student.lock=true;  //disable for testing
 			student.save();
 			res.end("ok");
 	});
