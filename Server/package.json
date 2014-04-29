@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./start_server"
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "4.*",
@@ -15,8 +15,8 @@
     "debug": "*",
     "ejs": "*",
     "stylus": "*",
-	"socket.io": "0.*",
+	  "socket.io": "0.*",
     "mongoose" : "*",
-    "connect-mongo" : "*"				
+    "connect-mongo" : "*"
  }
 }

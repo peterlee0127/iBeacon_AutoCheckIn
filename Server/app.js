@@ -64,12 +64,11 @@ app.get('/api/getList' , function(req,res)
 
 
 app.post('/api/changeStudent/', function(req, res) {
-	// console.log("get changeStudent POST:" + req.body.stu_id);
+
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
-
-			// student.lock=true;  //disable for testing
+			// student.lock=true;  //when change from Web , lock the come status
 			student.save();
 			res.end("ok");
 	});
