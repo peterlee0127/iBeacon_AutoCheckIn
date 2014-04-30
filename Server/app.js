@@ -91,10 +91,23 @@ var server = app.listen(app.get('port'), function() {
 	debug('Express server listening on port ' + server.address().port);
 });
 
+var socketArr=[];
+
+function socketObj(socketID,userID){
+		this.socketID=socketID;
+		this.userID=userID;
+};
 
 // Socket.IO configure
 var io = require('socket.io').listen(server);
 io.on('connection', function(socket){
+
+
+	socket.on('addUser',function(message){
+		var obj=new socketObj(socket.id,message.userID);
+		socketArr.push(obj);
+		console.log("socket.id:"+obj.socketID+" userID:"+obj.userID);
+	});
 
 
 });

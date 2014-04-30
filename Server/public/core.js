@@ -28,7 +28,6 @@ function mainController($scope, $http) {
 		var post = {  "stu_id":stu_id };
 		$http.post('/api/changeStudent/' , JSON.stringify(post))
 			.success(function(data) {
-				console.log(data);
 				reloadData();
 			})
 			.error(function(data) {
