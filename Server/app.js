@@ -5,17 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
 
-//var session = require('express-session');
-//var MongoStore = require('connect-mongo')(session);
+
+// var session = require('express-session');
+// var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(favicon());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -29,12 +30,11 @@ app.use(session({
 		})
 }));
 */
-
 mongoose.connect('mongodb://localhost:27017/db_hw');
 
 var Student = mongoose.model('Student',
 {
-    'stu_id':String,
+  'stu_id':String,
 	'name':String,
 	'come':{
 			type:Boolean,
@@ -57,51 +57,87 @@ app.get('/api/getList' , function(req,res)
 				if(err)
 				  res.send(err);
 				else
-				{
-				  res.json(student);
-//						console.log(student);
-				}
+					res.json(student);
 		});
 });
 
 
+
+app.post('/api/changeStudent/', function(req, res) {
+
+	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	{
+			student.come=!student.come;
+			// student.lock=true;  //when change from Web , lock the come status
+			student.save();
+			res.end("ok");
+	});
+
+});
+
+
 // index Page
-app.get("*", function(req,res)
+app.get("/", function(req,res)
 {
-  res.sendfile("./public/index.html");
-});
-		
-
-/// catch 404 and forwarding to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-/// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  	res.sendfile("./public/index.html");
 });
 
 
-module.exports = app;
+// Server Configure
+app.set('port', process.env.PORT || 8080);
+
+var server = app.listen(app.get('port'), function() {
+	console.log("Server is listening on port:" + server.address().port);
+	debug('Express server listening on port ' + server.address().port);
+});
+
+var socketArr=[];
+
+function socketObj(socketID,userID){
+		this.socketID=socketID;
+		this.userID=userID;
+};
+
+// Socket.IO configure
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket){
+
+
+	socket.on('addUser',function(message){
+		var obj=new socketObj(socket.id,message.userID);
+		socketArr.push(obj);
+
+		console.log("user add:"+obj.socketID+" userID:"+obj.userID);
+
+		Student.findOne( {  stu_id:obj.userID },function(err,student)
+		{
+				student.come=true;
+				student.save();
+				socket.emit('reloadData', { my: 'data' });
+		});
+
+	});
+
+	  socket.on('disconnect', function () {
+
+				console.log("user leave:"+socket.id);
+				for(var i=0;i<socketArr.count;i++){
+						var Obj=socketArr[i];
+
+						if(socket.id==Obj.socketID)
+						{
+
+								Student.findOne( {  stu_id:obj.userID },function(err,student)
+								{
+										student.come=false;
+										student.save();
+										socket.emit('reloadData', { my: 'data' });
+								});
+								socketArr.remove(i);
+						}
+
+				}
+  	});
+
+
+});
