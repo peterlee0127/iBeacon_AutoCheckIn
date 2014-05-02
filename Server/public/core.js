@@ -35,5 +35,24 @@ function mainController($scope, $http) {
 				reloadData();
 			});
 	};
+	var socket = io.connect('http://localhost:8080/');
 
+		socket.on('connect', function(data) {
+
+
+			socket.emit('addUser', { userID: '499850070' });
+
+		});
+
+
+		socket.on('disconnect', function(data) {
+
+
+
+		});
+
+		socket.on('reloadData', function(data){
+			alert("alert");
+			reloadData();
+		});
 }

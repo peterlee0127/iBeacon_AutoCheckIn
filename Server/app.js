@@ -106,8 +106,38 @@ io.on('connection', function(socket){
 	socket.on('addUser',function(message){
 		var obj=new socketObj(socket.id,message.userID);
 		socketArr.push(obj);
-		console.log("socket.id:"+obj.socketID+" userID:"+obj.userID);
+
+		console.log("user add:"+obj.socketID+" userID:"+obj.userID);
+
+		Student.findOne( {  stu_id:obj.userID },function(err,student)
+		{
+				student.come=true;
+				student.save();
+				socket.emit('reloadData', { my: 'data' });
+		});
+
 	});
+
+	  socket.on('disconnect', function () {
+
+				console.log("user leave:"+socket.id);
+				for(var i=0;i<socketArr.count;i++){
+						var Obj=socketArr[i];
+
+						if(socket.id==Obj.socketID)
+						{
+
+								Student.findOne( {  stu_id:obj.userID },function(err,student)
+								{
+										student.come=false;
+										student.save();
+										socket.emit('reloadData', { my: 'data' });
+								});
+								socketArr.remove(i);
+						}
+
+				}
+  	});
 
 
 });
