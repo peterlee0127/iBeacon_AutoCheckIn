@@ -75,7 +75,7 @@
 -(void) checkUserInfo
 {
     UserInfoModel *model =[UserInfoModel shareInstance];
-    if(![[model getUserName] isEqualToString:@""])
+    if(![[model getStuName] isEqualToString:@""])
     {
 
     }
