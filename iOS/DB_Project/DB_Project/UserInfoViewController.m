@@ -28,20 +28,20 @@
 {
     [super viewDidLoad];
 
-    self.textField.delegate=self;
-    self.textField.backgroundColor=[UIColor whiteColor];
+    self.stuIdTextField.delegate=self;
+    self.stuIdTextField.backgroundColor=[UIColor whiteColor];
 
     
     
-    [self.view addSubview:self.textField];
+    [self.view addSubview:self.stuIdTextField];
     // Do any additional setup after loading the view from its nib.
 }
 -(IBAction) saveUserInfo:(id) sender
 {
     UserInfoModel *model=[UserInfoModel shareInstance];
-    if(![self.textField.text isEqualToString:@""])
+    if(![self.stuIdTextField.text isEqualToString:@""])
     {
-        [model saveUser:self.textField.text];
+        [model saveUser:self.stuIdTextField.text];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 
@@ -68,7 +68,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.view.frame=CGRectMake(0, 0, 320, self.view.frame.size.height);
     } completion:nil];
-    [self.textField resignFirstResponder];
+    [self.stuIdTextField resignFirstResponder];
 
 }
 

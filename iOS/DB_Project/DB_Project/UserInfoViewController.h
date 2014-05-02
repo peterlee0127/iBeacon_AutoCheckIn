@@ -11,6 +11,8 @@
 @interface UserInfoViewController : UIViewController <UITextFieldDelegate>
 
 
-@property (nonatomic,strong) IBOutlet UITextField *textField;
+@property (nonatomic,strong) IBOutlet UITextField *stuIdTextField;
+@property (nonatomic,strong) IBOutlet UITextField *stuNameTextField;
+
 
 @end

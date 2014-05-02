@@ -22,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D04C27F3191401CC00705BBA /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		D08FB743190D5A76002DA3C8 /* DB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08FB746190D5A76002DA3C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D08FB748190D5A76002DA3C8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -110,6 +111,7 @@
 				D08FB74F190D5A76002DA3C8 /* InfoPlist.strings */,
 				D08FB752190D5A76002DA3C8 /* main.m */,
 				D08FB754190D5A76002DA3C8 /* DB_Project-Prefix.pch */,
+				D04C27F3191401CC00705BBA /* Config.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
