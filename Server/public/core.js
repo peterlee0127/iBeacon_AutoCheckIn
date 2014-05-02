@@ -40,7 +40,7 @@ function mainController($scope, $http) {
 		socket.on('connect', function(data) {
 
 
-			socket.emit('addUser', { userID: '499850070' });
+			socket.emit('addUser', { userID: '4998570', stu_name:'測試' });
 
 		});
 
