@@ -119,8 +119,30 @@ io.on('connection', function(socket){
 
 		Student.findOne( {  stu_id:obj.userID },function(err,student)
 		{
+			if(!student)
+			{
+				console.log("user no found");
+
+				Student.create(
+				{
+						stu_id :obj.userID ,
+						name : message.stu_name,
+						come : true,
+						lock : false
+
+				},function(err,todo){
+						if(err)
+							console.log("err");
+						else
+						console.log("insert user successful");
+				});
+
+				socket.emit('reloadData', { my: 'data' });
+				return;
+			}
 				student.come=true;
 				student.save();
+
 				socket.emit('reloadData', { my: 'data' });
 		});
 
@@ -136,6 +158,11 @@ io.on('connection', function(socket){
 								console.log("user leave:"+Obj.userID);
 								Student.findOne( {  stu_id:Obj.userID },function(err,student)
 								{
+										if(!student)
+										{
+											console.log("user no found");
+											return;
+										}
 										student.come=false;
 										student.save();
 										socket.emit('reloadData', { my: 'data' });
