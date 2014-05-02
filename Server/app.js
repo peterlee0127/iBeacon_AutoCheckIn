@@ -5,16 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
 
-//var session = require('express-session');
-//var MongoStore = require('connect-mongo')(session);
+
+// var session = require('express-session');
+// var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
 
 app.use(favicon());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -28,7 +30,6 @@ app.use(session({
 		})
 }));
 */
-
 mongoose.connect('mongodb://localhost:27017/db_hw');
 
 var Student = mongoose.model('Student',
@@ -56,45 +57,87 @@ app.get('/api/getList' , function(req,res)
 				if(err)
 				  res.send(err);
 				else
-				{
-				  	res.json(student);
-				}
+					res.json(student);
 		});
 });
 
 
 
 app.post('/api/changeStudent/', function(req, res) {
-	console.log("get changeStudent POST:" + req.body.stu_id);
-//A.findOneAndUpdate(conditions, update, options, callback) // executes
-/*
-	Student.findOneAndUpdate( {  stu_id:req.body.stu_id }, { $set:{ come: true} } ,function (err, doc) {
-			console.log("find:"+ req.body.stu_id);
 
-			doc.save();
-	 });
-*/
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
-		if(student.come)
-			student.come=false;
-		else
-			student.come=true;
-
-		student.lock=true;
-		student.save();
+			student.come=!student.come;
+			// student.lock=true;  //when change from Web , lock the come status
+			student.save();
+			res.end("ok");
 	});
 
 });
 
 
-
 // index Page
 app.get("/", function(req,res)
 {
-  res.sendfile("./public/index.html");
+  	res.sendfile("./public/index.html");
 });
 
 
+// Server Configure
+app.set('port', process.env.PORT || 8080);
 
-module.exports = app;
+var server = app.listen(app.get('port'), function() {
+	console.log("Server is listening on port:" + server.address().port);
+	debug('Express server listening on port ' + server.address().port);
+});
+
+var socketArr=[];
+
+function socketObj(socketID,userID){
+		this.socketID=socketID;
+		this.userID=userID;
+};
+
+// Socket.IO configure
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket){
+
+
+	socket.on('addUser',function(message){
+		var obj=new socketObj(socket.id,message.userID);
+		socketArr.push(obj);
+
+		console.log("user add:"+obj.socketID+" userID:"+obj.userID);
+
+		Student.findOne( {  stu_id:obj.userID },function(err,student)
+		{
+				student.come=true;
+				student.save();
+				socket.emit('reloadData', { my: 'data' });
+		});
+
+	});
+
+	  socket.on('disconnect', function () {
+
+				console.log("user leave:"+socket.id);
+				for(var i=0;i<socketArr.count;i++){
+						var Obj=socketArr[i];
+
+						if(socket.id==Obj.socketID)
+						{
+
+								Student.findOne( {  stu_id:obj.userID },function(err,student)
+								{
+										student.come=false;
+										student.save();
+										socket.emit('reloadData', { my: 'data' });
+								});
+								socketArr.remove(i);
+						}
+
+				}
+  	});
+
+
+});

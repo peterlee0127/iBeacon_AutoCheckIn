@@ -9,16 +9,13 @@
 				<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
 				<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 				<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-				<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.5/socket.io.min.js"></script>
+				<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.6/socket.io.min.js"></script>
 				<style>
 						html { overflow-y:scroll; }
 						body { padding-top:50px; }
 						#student-list { margin-bottom:30px; }
 						#student-form  { margin-bottom:50px; }
 				</style>
-
-
-
 				<script src="core.js"></script>
 		</head>
 		<body ng-controller="mainController">
@@ -27,15 +24,14 @@
 			<div class="col-sm-4 col-sm-offset-4">
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="student in students">
-					<label>
-						<input type="checkbox" ng-click="changeStudent(student.stu_id)">
+				 <tbody>
+				<div class="text" ng-repeat="student in students"	ng-click="changeStudent(student.stu_id)" >
 						姓名:{{ student.name }}
-						學號:{{  student.stu_id}}
+						學號:{{ student.stu_id}}
 						有到:{{ student.come }}
 						已鎖定:{{student.lock}}
-					</label>
 				</div>
+			</tbody>
 
 			</div>
 		</div>
