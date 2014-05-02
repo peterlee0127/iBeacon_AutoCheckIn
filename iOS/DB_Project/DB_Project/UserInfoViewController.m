@@ -41,7 +41,7 @@
     UserInfoModel *model=[UserInfoModel shareInstance];
     if(![self.stuIdTextField.text isEqualToString:@""])
     {
-        [model saveUser:self.stuIdTextField.text];
+        [model saveStuName:self.stuIdTextField.text];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 
