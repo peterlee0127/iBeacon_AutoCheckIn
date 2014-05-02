@@ -11,8 +11,17 @@
 @interface UserInfoModel : NSObject
 
 +(instancetype) shareInstance;
--(void) saveUser:(NSString *) userName;
--(NSString *) getUserName;
+
+
+
+#pragma mark - Data getter/setter
+
+-(void) saveStuName:(NSString *) stuName;
+-(NSString *) getStuName;
+
+-(void) saveStuId:(NSString *) stuId;
+-(NSString *) getStuId;
+
 
 
 @end

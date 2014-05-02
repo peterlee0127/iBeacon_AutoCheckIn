@@ -49,7 +49,8 @@
     if (![fileManager fileExistsAtPath:plistPath])
     {
         self.infoDict=[[NSMutableDictionary alloc] init];
-        self.infoDict[@"user"]=@"";
+        self.infoDict[stuName]=@"";
+        self.infoDict[stuId]=@"";
         [self saveData];
     
     }
@@ -59,15 +60,27 @@
     }
     
 }
--(void) saveUser:(NSString *) userName
+-(void) saveStuName:(NSString *) stuName
 {
-    self.infoDict[@"user"]=userName;
+    self.infoDict[stuName]=stuName;
     [self saveData];
 }
--(NSString *) getUserName
+-(NSString *) getStuName
 {
-    return self.infoDict[@"user"];
+    return self.infoDict[stuName];
 }
+
+-(void) saveStuId:(NSString *) stuId
+{
+    self.infoDict[stuId]=stuId;
+    [self saveData];
+}
+-(NSString *) getStuId
+{
+    return self.infoDict[stuId];
+}
+
+
 -(void) saveData
 {
     [self.infoDict writeToFile:plistPath atomically:YES];
