@@ -104,6 +104,14 @@ io.on('connection', function(socket){
 
 
 	socket.on('addUser',function(message){
+
+		for(var i=0;i<socketArr.length;i++){
+				var Obj=socketArr[i];
+				if(message.userID==Obj.userID)
+					return;
+		}
+
+
 		var obj=new socketObj(socket.id,message.userID);
 		socketArr.push(obj);
 
@@ -120,23 +128,23 @@ io.on('connection', function(socket){
 
 	  socket.on('disconnect', function () {
 
-				console.log("user leave:"+socket.id);
-				for(var i=0;i<socketArr.count;i++){
+				for(var i=0;i<socketArr.length;i++){
 						var Obj=socketArr[i];
 
 						if(socket.id==Obj.socketID)
 						{
-
-								Student.findOne( {  stu_id:obj.userID },function(err,student)
+								console.log("leave:"+Obj.userID);
+								Student.findOne( {  stu_id:Obj.userID },function(err,student)
 								{
 										student.come=false;
 										student.save();
 										socket.emit('reloadData', { my: 'data' });
 								});
-								socketArr.remove(i);
+								delete socketArr[i];
 						}
 
 				}
+
   	});
 
 
