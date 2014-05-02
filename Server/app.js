@@ -115,7 +115,7 @@ io.on('connection', function(socket){
 		var obj=new socketObj(socket.id,message.userID);
 		socketArr.push(obj);
 
-		console.log("user add:"+obj.socketID+" userID:"+obj.userID);
+		console.log("add userID:"+obj.userID);
 
 		Student.findOne( {  stu_id:obj.userID },function(err,student)
 		{
@@ -133,14 +133,16 @@ io.on('connection', function(socket){
 
 						if(socket.id==Obj.socketID)
 						{
-								console.log("leave:"+Obj.userID);
+								console.log("user leave:"+Obj.userID);
 								Student.findOne( {  stu_id:Obj.userID },function(err,student)
 								{
 										student.come=false;
 										student.save();
 										socket.emit('reloadData', { my: 'data' });
+
+										socketArr.splice(Obj, 1);
 								});
-								delete socketArr[i];
+
 						}
 
 				}
