@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
+
 
 // var session = require('express-session');
 // var MongoStore = require('connect-mongo')(session);
@@ -14,7 +16,7 @@ var mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 
 app.use(favicon());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -62,26 +64,117 @@ app.get('/api/getList' , function(req,res)
 
 
 app.post('/api/changeStudent/', function(req, res) {
-	// console.log("get changeStudent POST:" + req.body.stu_id);
+
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
-
-		student.lock=true;
-		student.save();
+			// student.lock=true;  //when change from Web , lock the come status
+			student.save();
 			res.end("ok");
 	});
 
 });
 
 
-
 // index Page
 app.get("/", function(req,res)
 {
-  res.sendfile("./public/index.html");
+  	res.sendfile("./public/index.html");
 });
 
 
+// Server Configure
+app.set('port', process.env.PORT || 8080);
 
-module.exports = app;
+var server = app.listen(app.get('port'), function() {
+	console.log("Server is listening on port:" + server.address().port);
+	debug('Express server listening on port ' + server.address().port);
+});
+
+var socketArr=[];
+
+function socketObj(socketID,userID){
+		this.socketID=socketID;
+		this.userID=userID;
+};
+
+// Socket.IO configure
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket){
+
+
+	socket.on('addUser',function(message){
+
+		for(var i=0;i<socketArr.length;i++){
+				var Obj=socketArr[i];
+				if(message.userID==Obj.userID)
+					return;
+		}
+
+
+		var obj=new socketObj(socket.id,message.userID);
+		socketArr.push(obj);
+
+		console.log("add userID:"+obj.userID);
+
+		Student.findOne( {  stu_id:obj.userID },function(err,student)
+		{
+			if(!student)
+			{
+				console.log("user no found");
+
+				Student.create(
+				{
+						stu_id :obj.userID ,
+						name : message.stu_name,
+						come : true,
+						lock : false
+
+				},function(err,todo){
+						if(err)
+							console.log("err");
+						else
+						console.log("insert user successful");
+				});
+
+				socket.emit('reloadData', { my: 'data' });
+				return;
+			}
+				student.come=true;
+				student.save();
+
+				socket.emit('reloadData', { my: 'data' });
+		});
+
+	});
+
+	  socket.on('disconnect', function () {
+
+				for(var i=0;i<socketArr.length;i++){
+						var Obj=socketArr[i];
+
+						if(socket.id==Obj.socketID)
+						{
+								console.log("user leave:"+Obj.userID);
+								Student.findOne( {  stu_id:Obj.userID },function(err,student)
+								{
+										if(!student)
+										{
+											console.log("user no found");
+											return;
+										}
+										student.come=false;
+										student.save();
+										socket.emit('reloadData', { my: 'data' });
+
+										socketArr.splice(Obj, 1);
+								});
+
+						}
+
+				}
+
+  	});
+
+
+});

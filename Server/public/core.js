@@ -19,9 +19,8 @@ function mainController($scope, $http) {
 				$scope.students = data;
 			})
 			.error(function(data) {
-				console.log('Error: ' + data);
+					console.log('Error: ' + data);
 			});
-
 	}
 
 
@@ -36,5 +35,23 @@ function mainController($scope, $http) {
 				reloadData();
 			});
 	};
+	var socket = io.connect('http://localhost:8080/');
 
+		socket.on('connect', function(data) {
+
+
+			socket.emit('addUser', { userID: '4998570', stu_name:'測試' });
+
+		});
+
+
+		socket.on('disconnect', function(data) {
+
+
+
+		});
+
+		socket.on('reloadData', function(data){
+			reloadData();
+		});
 }
