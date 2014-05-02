@@ -52,7 +52,6 @@ function mainController($scope, $http) {
 		});
 
 		socket.on('reloadData', function(data){
-			alert("alert");
 			reloadData();
 		});
 }
