@@ -139,7 +139,7 @@ io.on('connection', function(socket){
 						console.log("insert user successful");
 				});
 
-				socket.emit('reloadData', { my: 'data' });
+				socket.broadcast.emit('reloadData', { my: 'data' });
 				return;
 			}
 				student.come=true;
@@ -158,6 +158,8 @@ io.on('connection', function(socket){
 						if(socket.id==Obj.socketID)
 						{
 								console.log("user leave:"+Obj.userID);
+								var index=i;
+
 								Student.findOne( {  stu_id:Obj.userID },function(err,student)
 								{
 										if(!student)
@@ -169,8 +171,9 @@ io.on('connection', function(socket){
 										student.save();
 
 
+										socketArr.splice(index, 1);
 										socket.broadcast.emit('reloadData', { my: 'data' });
-										socketArr.splice(i, 1);
+
 
 								});
 

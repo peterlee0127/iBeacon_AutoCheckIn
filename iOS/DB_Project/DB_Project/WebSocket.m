@@ -40,6 +40,10 @@
     self.webSocket=[[SocketIO alloc] initWithDelegate:self];
     [self.webSocket connectToHost:defaultServer onPort:[defaultPort integerValue]];
 }
+-(void) disconnect
+{
+    [self.webSocket disconnect];
+}
 
 #pragma mark - SocketIO Delegate
 

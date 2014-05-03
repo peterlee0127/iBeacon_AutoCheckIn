@@ -14,7 +14,6 @@ function mainController($scope, $http) {
 
 	var reloadData=$scope.reloadData = function()
 	{
-		alert("will reload");
 		$http.get('/api/getList')
 			.success(function(data) {
 				$scope.students = data;
@@ -41,7 +40,6 @@ function mainController($scope, $http) {
 		socket.on('connect', function(data) {
 
 
-			socket.emit('addUser', { userID: '4998570', stu_name:'測試' });
 
 		});
 

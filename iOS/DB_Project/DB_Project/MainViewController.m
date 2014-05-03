@@ -94,7 +94,14 @@
     
     }
 }
-
+-(IBAction) showSetting:(id)sender
+{
+    WebSocket *socket=[WebSocket shareInstance];
+    [socket disconnect];
+    
+    UserInfoViewController *infoVC=[[UserInfoViewController alloc] initWithNibName:@"UserInfoViewController" bundle:nil];
+    [self presentViewController:infoVC animated:YES completion:nil];
+}
 
 
 

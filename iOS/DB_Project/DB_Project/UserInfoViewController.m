@@ -10,6 +10,11 @@
 #import "UserInfoModel.h"
 
 @interface UserInfoViewController ()
+{
+
+    UserInfoModel *InfoModel;
+    
+}
 
 @end
 
@@ -27,7 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    InfoModel=[UserInfoModel shareInstance];
 
+    self.stuIdTextField.text=[InfoModel getStuId];
+    self.stuNameTextField.text=[InfoModel getStuName];
+    
     self.stuIdTextField.delegate=self;
     self.stuIdTextField.backgroundColor=[UIColor whiteColor];
 
@@ -40,11 +49,11 @@
 }
 -(IBAction) saveUserInfo:(id) sender
 {
-    UserInfoModel *model=[UserInfoModel shareInstance];
+  
     if(![self.stuIdTextField.text isEqualToString:@""] && ![self.stuNameTextField.text isEqualToString:@""])
     {
-        [model saveStuId:self.stuIdTextField.text];
-        [model saveStuName:self.stuNameTextField.text];
+        [InfoModel saveStuId:self.stuIdTextField.text];
+        [InfoModel saveStuName:self.stuNameTextField.text];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 

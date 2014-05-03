@@ -13,6 +13,7 @@
 
 +(instancetype) shareInstance;
 -(void) connectToServer;
+-(void) disconnect;
 
 
 @end
