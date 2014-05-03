@@ -170,9 +170,7 @@ io.on('connection', function(socket){
 
 
 										socket.broadcast.emit('reloadData', { my: 'data' });
-
-
-										socketArr.splice(Obj, 0);
+										socketArr.splice(i, 1);
 
 								});
 
