@@ -107,8 +107,10 @@ io.on('connection', function(socket){
 
 		for(var i=0;i<socketArr.length;i++){
 				var Obj=socketArr[i];
-				if(message.userID==Obj.userID)
+				if(message.userID==Obj.userID)	{
+					console.log(Obj.userID+":is exist");
 					return;
+				}
 		}
 
 
@@ -143,7 +145,7 @@ io.on('connection', function(socket){
 				student.come=true;
 				student.save();
 
-				socket.emit('reloadData', { my: 'data' });
+				socket.broadcast.emit('reloadData', { my: 'data' });
 		});
 
 	});
@@ -165,9 +167,13 @@ io.on('connection', function(socket){
 										}
 										student.come=false;
 										student.save();
-										socket.emit('reloadData', { my: 'data' });
 
-										socketArr.splice(Obj, 1);
+
+										socket.broadcast.emit('reloadData', { my: 'data' });
+
+
+										socketArr.splice(Obj, 0);
+
 								});
 
 						}

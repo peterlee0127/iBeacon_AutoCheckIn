@@ -14,6 +14,7 @@ function mainController($scope, $http) {
 
 	var reloadData=$scope.reloadData = function()
 	{
+		alert("will reload");
 		$http.get('/api/getList')
 			.success(function(data) {
 				$scope.students = data;

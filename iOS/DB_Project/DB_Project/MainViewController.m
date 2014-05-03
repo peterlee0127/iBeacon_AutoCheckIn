@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UserInfoViewController.h"
 #import "UserInfoModel.h"
+#import "WebSocket.h"
 
 
 @interface MainViewController () <CLLocationManagerDelegate>
@@ -55,6 +56,27 @@
     [super viewDidAppear:animated];
     [self checkUserInfo];
 }
+-(void) checkUserInfo
+{
+    UserInfoModel *model =[UserInfoModel shareInstance];
+    if(![[model getStuName] isEqualToString:@""])
+    {
+        [self connectSocket];
+    }
+    else
+    {
+        UserInfoViewController *infoVC=[[UserInfoViewController alloc] initWithNibName:@"UserInfoViewController" bundle:nil];
+        [self presentViewController:infoVC animated:YES completion:nil];
+    }
+}
+-(void) connectSocket
+{
+
+    WebSocket *socket=[WebSocket shareInstance];
+    [socket connectToServer];
+}
+
+
 -(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
 
@@ -72,19 +94,8 @@
     
     }
 }
--(void) checkUserInfo
-{
-    UserInfoModel *model =[UserInfoModel shareInstance];
-    if(![[model getStuName] isEqualToString:@""])
-    {
 
-    }
-    else
-    {
-        UserInfoViewController *infoVC=[[UserInfoViewController alloc] initWithNibName:@"UserInfoViewController" bundle:nil];
-        [self presentViewController:infoVC animated:YES completion:nil];
-    }
-}
+
 
 
 @end

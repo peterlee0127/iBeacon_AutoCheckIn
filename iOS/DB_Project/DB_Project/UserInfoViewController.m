@@ -31,6 +31,8 @@
     self.stuIdTextField.delegate=self;
     self.stuIdTextField.backgroundColor=[UIColor whiteColor];
 
+    self.stuNameTextField.delegate=self;
+    self.stuNameTextField.backgroundColor=[UIColor whiteColor];
     
     
     [self.view addSubview:self.stuIdTextField];
@@ -39,9 +41,10 @@
 -(IBAction) saveUserInfo:(id) sender
 {
     UserInfoModel *model=[UserInfoModel shareInstance];
-    if(![self.stuIdTextField.text isEqualToString:@""])
+    if(![self.stuIdTextField.text isEqualToString:@""] && ![self.stuNameTextField.text isEqualToString:@""])
     {
-        [model saveStuName:self.stuIdTextField.text];
+        [model saveStuId:self.stuIdTextField.text];
+        [model saveStuName:self.stuNameTextField.text];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 
