@@ -17,12 +17,6 @@ function mainController($scope, $http) {
 		$http.get('/api/getList')
 			.success(function(data) {
 				$scope.students = data;
-				// for(student in $scope.students){
-				// 		if(student.lock)
-				// 			student.fontColor='red';
-				// 		else
-				// 			student.fontColor='green';
-				// }
 			})
 			.error(function(data) {
 					console.log('Error: ' + data);

@@ -16,12 +16,12 @@ var mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 
 app.use(favicon());
-// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 /*
 app.use(session({
 		secret: settings.cookie_secret,
