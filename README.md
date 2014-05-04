@@ -1,13 +1,13 @@
-DB_Project
+iBeacon_AutoCheckIn
 ==========
 
 <hr>
 
 
-<h2>功能:</h2>
-1:iBeacon 讓手機知道學生是否有到教室   
-2:Socket.IO 通知   
-3:Mongoose (mongodb) 資料庫架構
+<h2>Feature:</h2>
+1:Client:iOS ,Web(Angular.js)   
+2:Server:Node.JS + Socket.IO (WebSocket)   
+3:DB:Mongoose (mongodb) NoSQL
 
 <hr>
 
