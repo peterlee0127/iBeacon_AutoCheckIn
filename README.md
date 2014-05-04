@@ -11,7 +11,7 @@ DB_Project
 
 <hr>
 
-<img src="web.png" width='320'></img>
+<img src="web.png" width='600'></img>
 <hr>
-<img src="ios.png" width='320'></img>
+<img src="ios.png" width='600'></img>
 <hr>
