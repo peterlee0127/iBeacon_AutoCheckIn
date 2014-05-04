@@ -81,7 +81,7 @@
         self.view.frame=CGRectMake(0, 0, 320, self.view.frame.size.height);
     } completion:nil];
     [self.stuIdTextField resignFirstResponder];
-
+    [self.stuNameTextField resignFirstResponder];
 }
 
 

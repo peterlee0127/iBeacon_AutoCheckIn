@@ -21,6 +21,7 @@
 		D0CCB1D9190E2816004F8137 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CCB1D7190E2816004F8137 /* UserInfoViewController.m */; };
 		D0CCB1DA190E2816004F8137 /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0CCB1D8190E2816004F8137 /* UserInfoViewController.xib */; };
 		D0CCB1DD190E2917004F8137 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CCB1DC190E2917004F8137 /* UserInfoModel.m */; };
+		D0DCD1241916AAEA00C695A8 /* iBeaconModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DCD1231916AAEA00C695A8 /* iBeaconModel.m */; };
 		D0FD86BB19151C5400E04B7E /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD86B119151C5400E04B7E /* SocketIO.m */; };
 		D0FD86BC19151C5400E04B7E /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD86B319151C5400E04B7E /* SocketIOJSONSerialization.m */; };
 		D0FD86BD19151C5400E04B7E /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FD86B519151C5400E04B7E /* SocketIOPacket.m */; };
@@ -57,6 +58,8 @@
 		D0CCB1D8190E2816004F8137 /* UserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
 		D0CCB1DB190E2917004F8137 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		D0CCB1DC190E2917004F8137 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		D0DCD1221916AAEA00C695A8 /* iBeaconModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBeaconModel.h; sourceTree = "<group>"; };
+		D0DCD1231916AAEA00C695A8 /* iBeaconModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBeaconModel.m; sourceTree = "<group>"; };
 		D0FD86B019151C5400E04B7E /* SocketIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocketIO.h; path = SocketIO/SocketIO.h; sourceTree = "<group>"; };
 		D0FD86B119151C5400E04B7E /* SocketIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocketIO.m; path = SocketIO/SocketIO.m; sourceTree = "<group>"; };
 		D0FD86B219151C5400E04B7E /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocketIOJSONSerialization.h; path = SocketIO/SocketIOJSONSerialization.h; sourceTree = "<group>"; };
@@ -168,6 +171,8 @@
 				D0CCB1DC190E2917004F8137 /* UserInfoModel.m */,
 				D0A47DF61915422C0093595A /* WebSocket.h */,
 				D0A47DF71915422C0093595A /* WebSocket.m */,
+				D0DCD1221916AAEA00C695A8 /* iBeaconModel.h */,
+				D0DCD1231916AAEA00C695A8 /* iBeaconModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				D0FD86BD19151C5400E04B7E /* SocketIOPacket.m in Sources */,
 				D0A47DF81915422C0093595A /* WebSocket.m in Sources */,
 				D08FB778190D5A95002DA3C8 /* MainViewController.m in Sources */,
+				D0DCD1241916AAEA00C695A8 /* iBeaconModel.m in Sources */,
 				D0FD86BC19151C5400E04B7E /* SocketIOJSONSerialization.m in Sources */,
 				D0FD86BF19151C5400E04B7E /* SocketIOTransportXHR.m in Sources */,
 				D0FD86BE19151C5400E04B7E /* SocketIOTransportWebsocket.m in Sources */,

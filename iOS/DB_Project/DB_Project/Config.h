@@ -7,8 +7,10 @@
 //
 
 
-static NSString *const defaultServer =  @"peterlee0127.no-ip.org";
+//static NSString *const defaultServer =  @"peterlee0127.no-ip.org";
+static NSString *const defaultServer =  @"192.168.1.109";
 static NSString *const defaultPort = @"8080";
+static NSString *const defaultBeaconAPI = @"getBeacon";
 
 
 static NSString *const kStuName = @"kStuName";
