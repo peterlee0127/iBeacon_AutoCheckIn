@@ -31,13 +31,16 @@
 				        姓名
 				        </th>
 								<th>
-								Stu_Id
+								學號
 								</th>
 								<th>
 								出席
 								</th>
 								<th>
 								鎖定
+								</th>
+								<th>
+									刪除
 								</th>
 				    </tr>
 				</thead>
@@ -50,10 +53,13 @@
 									{{ student.stu_id}}
 								</td>
 								<td>
-									{{ student.come }}
+									<div class="text" ng-click="changeStudent(student.stu_id)">{{student.come}}</div><br><br>
 								</td>
 								<td>
-									<div class="lock" ng-click="changeStudent(student.stu_id)">{{student.lock}}</div><br><br>
+									<div class="lock" ng-click="lockStudent(student.stu_id)">{{student.lock}}</div><br><br>
+								</td>
+								<td>
+									<div class="delete" ng-click="deleteStudent(student.stu_id)">刪除</div><br><br>
 								</td>
 				    </tr>
 				</tbody>

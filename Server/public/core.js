@@ -35,6 +35,32 @@ function mainController($scope, $http) {
 				reloadData();
 			});
 	};
+
+	$scope.lockStudent = function(stu_id) {
+		var post = {  "stu_id":stu_id };
+		$http.post('/api/lockStudent/' , JSON.stringify(post))
+			.success(function(data) {
+				reloadData();
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+				reloadData();
+			});
+	};
+
+	$scope.deleteStudent = function(stu_id) {
+		var post = {  "stu_id":stu_id };
+		$http.post('/api/deleteStudent/' , JSON.stringify(post))
+			.success(function(data) {
+				reloadData();
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+				reloadData();
+			});
+	};
+
+
 	var socket = io.connect('http://localhost:8080/');
 
 		socket.on('connect', function(data) {

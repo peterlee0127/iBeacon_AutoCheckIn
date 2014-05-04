@@ -68,8 +68,30 @@ app.post('/api/changeStudent/', function(req, res) {
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
+
+			student.save();
+			res.end("ok");
+	});
+
+});
+
+app.post('/api/lockStudent/', function(req, res) {
+
+	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	{
 			student.lock=!student.lock;  //when change from Web , lock the come status
 			student.save();
+			res.end("ok");
+	});
+
+});
+
+app.post('/api/deleteStudent/', function(req, res) {
+
+	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	{
+			// delete student;
+			student.remove();
 			res.end("ok");
 	});
 
