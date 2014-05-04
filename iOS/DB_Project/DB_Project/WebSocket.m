@@ -63,7 +63,7 @@
 }
 -(void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
-
+    [self connectToServer];
 }
 
 
