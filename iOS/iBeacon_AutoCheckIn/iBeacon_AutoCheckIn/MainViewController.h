@@ -12,6 +12,11 @@
 
 @property (nonatomic,strong) IBOutlet UILabel *label;
 @property (nonatomic,strong) IBOutlet UILabel *socketStatus;
+@property (nonatomic,strong) IBOutlet UILabel *serverLabel;
 
+@property (nonatomic,strong) IBOutlet UIProgressView *progressView;
+
+@property (nonatomic,strong) IBOutlet UILabel *stuIDLabel;
+@property (nonatomic,strong) IBOutlet UILabel *stuNameLabel;
 
 @end

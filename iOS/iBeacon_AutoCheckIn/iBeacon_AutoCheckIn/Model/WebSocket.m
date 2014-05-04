@@ -60,9 +60,13 @@
 }
 -(void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
-    [self connectToServer];
-      [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
+    [self performSelector:@selector(connectToServer) withObject:nil afterDelay:2];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
 }
-
+-(void)socketIO:(SocketIO *)socket onError:(NSError *)error
+{
+     [self performSelector:@selector(connectToServer) withObject:nil afterDelay:2];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
+}
 
 @end

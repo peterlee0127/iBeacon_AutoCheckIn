@@ -15,7 +15,7 @@
 
 @interface MainViewController ()
 
-
+@property (nonatomic,strong) NSTimer *timer;
 
 @end
 
@@ -37,10 +37,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDisConnect) name:kSocketDisConnect object:nil];
     self.title=@"iBeacon AutoCheckIn";
     
+    self.serverLabel.text=[NSString stringWithFormat:@"Connect to: %@",defaultServer];
+    self.serverLabel.adjustsFontSizeToFitWidth=YES;
     
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"設定" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingVC)];
  
+    float theInterval = 1.0 / 50.0;
+   self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view from its nib.
+}
+- (void)progressViewAnimation
+{
+    if (self.progressView.progress != 1.0){
+        self.progressView.progress = self.progressView.progress + 0.05;
+    }
+    else{
+        self.progressView.progress = 0.0;
+    }
 }
 -(void) viewDidDisappear:(BOOL)animated
 {
@@ -67,6 +80,9 @@
     {
         [self disConnectSocket];
         [self connectSocket];
+        
+        self.stuIDLabel.text=[model getStuId];
+        self.stuNameLabel.text=[model getStuName];
     }
     else
     {
@@ -102,10 +118,17 @@
 -(void) socketConnected
 {
     self.socketStatus.text=@"已連線";
+    [self.timer invalidate];
+    self.timer=nil;
+    self.progressView.progress=1.0;
 }
 -(void) socketDisConnect
 {
     self.socketStatus.text=@"未連線";
+    [self.timer invalidate];
+    self.timer=nil;
+    float theInterval = 1.0 / 20.0;
+    self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
 }
 
 @end
