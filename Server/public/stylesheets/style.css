@@ -5,3 +5,13 @@ body {
 a {
   color: #00b7ff;
 }
+
+.lock
+{
+    color:red;
+}
+
+.unlock
+{
+  color:green;
+}

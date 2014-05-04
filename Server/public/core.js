@@ -23,6 +23,40 @@ function mainController($scope, $http) {
 			});
 	}
 
+	$scope.lock = {};
+	$scope.come = {};
+	$scope.turnGreen = function (){
+			$scope.come.style = {"color":"green"};
+	    $scope.lock.style = {"color":"green"};
+	}
+
+	$scope.turnRed = function() {
+			$scope.come.style = {"color":"red"};
+	    $scope.lock.style = {"color":"red"};
+	}
+
+	$scope.lockColor = function(lock){
+		if(lock){
+			$scope.turnRed();
+			return "鎖定";
+		}
+		else{
+			$scope.turnGreen();
+			return "未鎖定";
+		}
+	}
+
+	$scope.comeColor = function(come){
+		if(!come){
+		  $scope.turnRed();
+			return "沒到";
+		}
+		else{
+			$scope.turnGreen();
+			return "有到";
+		}
+	}
+
 
 	$scope.changeStudent = function(stu_id) {
 		var post = {  "stu_id":stu_id };
@@ -35,12 +69,37 @@ function mainController($scope, $http) {
 				reloadData();
 			});
 	};
+
+	$scope.lockStudent = function(stu_id) {
+		var post = {  "stu_id":stu_id };
+		$http.post('/api/lockStudent/' , JSON.stringify(post))
+			.success(function(data) {
+				reloadData();
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+				reloadData();
+			});
+	};
+
+	$scope.deleteStudent = function(stu_id) {
+		var post = {  "stu_id":stu_id };
+		$http.post('/api/deleteStudent/' , JSON.stringify(post))
+			.success(function(data) {
+				reloadData();
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+				reloadData();
+			});
+	};
+
+
 	var socket = io.connect('http://localhost:8080/');
 
 		socket.on('connect', function(data) {
 
 
-			socket.emit('addUser', { userID: '4998570', stu_name:'測試' });
 
 		});
 

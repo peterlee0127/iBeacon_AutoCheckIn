@@ -3,40 +3,84 @@
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 
-				<title>People List</title>
-
+				<title>iBeacon AutoCheckIn</title>
 				<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 				<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
 				<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 				<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 				<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.6/socket.io.min.js"></script>
+				<link rel="stylesheet" type="text/css" href="style.css">
 				<style>
 						html { overflow-y:scroll; }
 						body { padding-top:50px; }
 						#student-list { margin-bottom:30px; }
 						#student-form  { margin-bottom:50px; }
 				</style>
+
 				<script src="core.js"></script>
 		</head>
 		<body ng-controller="mainController">
 
 			<div id="student-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div class="col-xs-6 col-sm-offset-4">
 
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				 <tbody>
-				<div class="text" ng-repeat="student in students"	ng-click="changeStudent(student.stu_id)" >
-						姓名:{{ student.name }}
-						學號:{{ student.stu_id}}
-						有到:{{ student.come }}
-						已鎖定:{{student.lock}}
-				</div>
-			</tbody>
+		<table class="table table-bordered">
+				<thead>
+				    <tr>
+				        <th>
+				        學號
+				        </th>
+								<th>
+								姓名
+								</th>
+								<th>
+								出席
+								</th>
+								<th>
+								出席時間
+								</th>
+								<th>
+								離開時間
+								</th>
+								<th>
+								鎖定
+								</th>
+								<th>
+									刪除
+								</th>
+				    </tr>
+				</thead>
+				<tbody>
+				    <tr ng-repeat="student in students">
+				        <td>
+									{{ student.stu_id }}
+								</td>
+								<td>
+									{{ student.name}}
+								</td>
+								<td>
+									<p ng-style="come.style" ng-click="changeStudent(student.stu_id)">{{  comeColor(student.come) }}</p><br><br>
+								</td>
+								<td>
+									<div class="text" ng-repeat="time in student.in">{{ time | date:'HH:mm:ss'}}</div><br><br>
+								</td>
+								<td>
+									<div class="text" ng-repeat="time in student.out">{{ time | date:'HH:mm:ss'}}</div><br><br>
+								</td>
+								<td>
+									<p ng-style="lock.style" ng-click="lockStudent(student.stu_id)">{{ lockColor(student.lock) }}</p><br><br>
+								</td>
+								<td>
+									<div class="delete" ng-click="deleteStudent(student.stu_id)">刪除</div><br><br>
+								</td>
+				    </tr>
+				</tbody>
+
+
 
 			</div>
 		</div>
 
-		</div>
 </body>
 
 </html>
