@@ -72,7 +72,7 @@
         [self.locationManager startRangingBeaconsInRegion:beacon];
         
     }];
-    
+    [self.locationManager startUpdatingLocation];
     
  
 }

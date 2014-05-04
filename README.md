@@ -13,5 +13,5 @@ iBeacon_AutoCheckIn
 
 <img src="web.png" width='600'></img>
 <hr>
-<img src="ios.png" width='600'></img>
+<img src="phone.png" width='600'></img>
 <hr>
