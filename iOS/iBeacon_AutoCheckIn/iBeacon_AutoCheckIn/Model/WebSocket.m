@@ -10,6 +10,7 @@
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
 #import "UserInfoModel.h"
+#import "iBeaconModel.h"
 
 @interface WebSocket () <SocketIODelegate>
 

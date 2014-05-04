@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "iBeaconModel.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,8 @@
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:mainVC];
     
     self.window.rootViewController=nav;
+    
+    [iBeaconModel shareInstance];
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

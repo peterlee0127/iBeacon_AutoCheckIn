@@ -148,10 +148,10 @@
 			children = (
 				D05EB2381916B7C80050CF56 /* iBeaconModel.h */,
 				D05EB2391916B7C80050CF56 /* iBeaconModel.m */,
-				D05EB23A1916B7C80050CF56 /* UserInfoModel.h */,
-				D05EB23B1916B7C80050CF56 /* UserInfoModel.m */,
 				D05EB23C1916B7C80050CF56 /* WebSocket.h */,
 				D05EB23D1916B7C80050CF56 /* WebSocket.m */,
+				D05EB23A1916B7C80050CF56 /* UserInfoModel.h */,
+				D05EB23B1916B7C80050CF56 /* UserInfoModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";

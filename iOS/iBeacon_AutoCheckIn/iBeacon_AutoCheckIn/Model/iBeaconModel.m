@@ -13,6 +13,7 @@
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSMutableArray *beaconArray;
+@property (nonatomic,assign) NSUInteger range;
 
 @end
 
@@ -43,7 +44,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    NSString *url=[NSString stringWithFormat:@"%@:%@/%@",defaultServer,defaultServer,defaultBeaconAPI];
+    NSString *url=[NSString stringWithFormat:@"http://%@:%@/%@",defaultServer,defaultPort,defaultBeaconAPI];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         self.beaconArray=(NSMutableArray *)responseObject;
@@ -64,15 +65,16 @@
     [self.beaconArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict=(NSDictionary *)obj;
             
+        NSUUID *uuid=[[NSUUID alloc] initWithUUIDString:dict[@"beacon_id"]];
+        CLBeaconRegion *beacon=[[CLBeaconRegion alloc] initWithProximityUUID:uuid major:[dict[@"major"] integerValue] minor:[dict[@"minor"] integerValue] identifier:dict[@"identifier"]];
+        self.range=[dict[@"range"] integerValue];
         
+        [self.locationManager startRangingBeaconsInRegion:beacon];
         
     }];
     
     
-    NSUUID *uuid=[[NSUUID alloc] initWithUUIDString:@"1618E6B0-7912-4A22-8464-7042987A7F58"];
-    CLBeaconRegion *beacon=[[CLBeaconRegion alloc] initWithProximityUUID:uuid major:0 minor:0 identifier:@"ClassRoom"];
-    
-    [self.locationManager startRangingBeaconsInRegion:beacon];
+ 
 }
 
 
@@ -88,9 +90,11 @@
     if(beacons.count>0)
     {
         CLBeacon *beacon = [beacons lastObject];
-        NSLog(@"%@ %ld %2.fm",region.identifier,beacon.proximity,beacon.accuracy);
+        if(beacon.accuracy>=self.range)
+            return;
+        NSLog(@"Place:%@    %.2lfm",region.identifier,beacon.accuracy);
         
-//        self.label.text=[NSString stringWithFormat:@"%@ %d %2.fm",region.identifier,beacon.proximity,beacon.accuracy];
+;
         
     }
 }
