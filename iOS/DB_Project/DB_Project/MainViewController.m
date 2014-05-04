@@ -61,6 +61,7 @@
     UserInfoModel *model =[UserInfoModel shareInstance];
     if(![[model getStuName] isEqualToString:@""])
     {
+        [self disConnectSocket];
         [self connectSocket];
     }
     else
@@ -76,6 +77,12 @@
     [socket connectToServer];
 }
 
+-(void) disConnectSocket
+{
+    
+    WebSocket *socket=[WebSocket shareInstance];
+    [socket disconnect];
+}
 
 -(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {

@@ -19,11 +19,6 @@
 @end
 
 @implementation WebSocket
-{
-
-    
-    
-}
 
 
 +(instancetype) shareInstance
