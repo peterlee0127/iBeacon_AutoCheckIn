@@ -3,7 +3,7 @@
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 
-				<title>People List</title>
+				<title>iBeacon AutoCheckIn</title>
 
 				<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 				<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
@@ -21,16 +21,18 @@
 		<body ng-controller="mainController">
 
 			<div id="student-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div class="col-xs-6 col-sm-offset-4">
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
 				 <tbody>
-				<div class="text" ng-repeat="student in students"	ng-click="changeStudent(student.stu_id)" >
+					<h4>
+				<div class="text" ng-repeat="student in students">
 						姓名:{{ student.name }}
 						學號:{{ student.stu_id}}
 						有到:{{ student.come }}
-						已鎖定:{{student.lock}}
+						<font color='green' ng-click="changeStudent(student.stu_id)">已鎖定:{{student.lock}}</font><br><br>
 				</div>
+				<h4>
 			</tbody>
 
 			</div>

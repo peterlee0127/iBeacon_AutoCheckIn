@@ -68,7 +68,7 @@ app.post('/api/changeStudent/', function(req, res) {
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
-			// student.lock=true;  //when change from Web , lock the come status
+			student.lock=!student.lock;  //when change from Web , lock the come status
 			student.save();
 			res.end("ok");
 	});
@@ -142,10 +142,13 @@ io.on('connection', function(socket){
 				socket.broadcast.emit('reloadData', { my: 'data' });
 				return;
 			}
-				student.come=true;
-				student.save();
+				if(!student.lock)
+				{
+					student.come=true;
+					student.save();
 
-				socket.broadcast.emit('reloadData', { my: 'data' });
+					socket.broadcast.emit('reloadData', { my: 'data' });
+			 }
 		});
 
 	});
@@ -167,9 +170,12 @@ io.on('connection', function(socket){
 											console.log("user no found");
 											return;
 										}
-										student.come=false;
-										student.save();
 
+										if(!student.lock)
+										{
+											student.come=false;
+											student.save();
+										}
 
 										socketArr.splice(index, 1);
 										socket.broadcast.emit('reloadData', { my: 'data' });
