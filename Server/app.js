@@ -45,7 +45,11 @@ var Student = mongoose.model('Student',
 			type:Boolean,
 			default:false,
 		    required:true
-	}
+	},
+
+	'in': [{ type:Date}],
+	'out': [{type:Date}]
+
 });
 
 //API
@@ -150,7 +154,8 @@ io.on('connection', function(socket){
 						stu_id :obj.userID ,
 						name : message.stu_name,
 						come : true,
-						lock : false
+						lock : false,
+						in: new Date()
 
 				},function(err,todo){
 						if(err)
@@ -166,9 +171,9 @@ io.on('connection', function(socket){
 				{
 					student.come=true;
 					student.save();
-
-					socket.broadcast.emit('reloadData', { my: 'data' });
 			 }
+				student.in.push(new Date());
+				socket.broadcast.emit('reloadData', { my: 'data' });
 		});
 
 	});
@@ -196,6 +201,7 @@ io.on('connection', function(socket){
 											student.come=false;
 											student.save();
 										}
+										student.out.push(new Date());
 
 										socketArr.splice(index, 1);
 										socket.broadcast.emit('reloadData', { my: 'data' });

@@ -23,6 +23,40 @@ function mainController($scope, $http) {
 			});
 	}
 
+	$scope.lock = {};
+	$scope.come = {};
+	$scope.turnGreen = function (){
+			$scope.come.style = {"color":"green"};
+	    $scope.lock.style = {"color":"green"};
+	}
+
+	$scope.turnRed = function() {
+			$scope.come.style = {"color":"red"};
+	    $scope.lock.style = {"color":"red"};
+	}
+
+	$scope.lockColor = function(lock){
+		if(lock){
+			$scope.turnRed();
+			return "鎖定";
+		}
+		else{
+			$scope.turnGreen();
+			return "未鎖定";
+		}
+	}
+
+	$scope.comeColor = function(come){
+		if(!come){
+		  $scope.turnRed();
+			return "沒到";
+		}
+		else{
+			$scope.turnGreen();
+			return "有到";
+		}
+	}
+
 
 	$scope.changeStudent = function(stu_id) {
 		var post = {  "stu_id":stu_id };

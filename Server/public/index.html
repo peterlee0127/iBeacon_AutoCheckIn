@@ -37,6 +37,12 @@
 								出席
 								</th>
 								<th>
+								出席時間
+								</th>
+								<th>
+								離開時間
+								</th>
+								<th>
 								鎖定
 								</th>
 								<th>
@@ -53,10 +59,16 @@
 									{{ student.name}}
 								</td>
 								<td>
-									<div class="text" ng-click="changeStudent(student.stu_id)">{{student.come}}</div><br><br>
+									<p ng-style="come.style" ng-click="changeStudent(student.stu_id)">{{  comeColor(student.come) }}</p><br><br>
 								</td>
 								<td>
-									<div class="lock" ng-click="lockStudent(student.stu_id)">{{student.lock}}</div><br><br>
+									<div class="text" ng-repeat="time in student.in">{{ time | date:'HH:mm:ss'}}</div><br><br>
+								</td>
+								<td>
+									<div class="text" ng-repeat="time in student.out">{{ time | date:'HH:mm:ss'}}</div><br><br>
+								</td>
+								<td>
+									<p ng-style="lock.style" ng-click="lockStudent(student.stu_id)">{{ lockColor(student.lock) }}</p><br><br>
 								</td>
 								<td>
 									<div class="delete" ng-click="deleteStudent(student.stu_id)">刪除</div><br><br>
