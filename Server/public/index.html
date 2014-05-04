@@ -28,10 +28,10 @@
 				<thead>
 				    <tr>
 				        <th>
-				        姓名
+				        學號
 				        </th>
 								<th>
-								學號
+								姓名
 								</th>
 								<th>
 								出席
@@ -47,10 +47,10 @@
 				<tbody>
 				    <tr ng-repeat="student in students">
 				        <td>
-									{{ student.name }}
+									{{ student.stu_id }}
 								</td>
 								<td>
-									{{ student.stu_id}}
+									{{ student.name}}
 								</td>
 								<td>
 									<div class="text" ng-click="changeStudent(student.stu_id)">{{student.come}}</div><br><br>
