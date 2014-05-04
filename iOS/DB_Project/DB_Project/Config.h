@@ -7,9 +7,12 @@
 //
 
 
-static NSString *const defaultServer =  @"172.20.10.2";
+static NSString *const defaultServer =  @"peterlee0127.no-ip.org";
 static NSString *const defaultPort = @"8080";
 
 
 static NSString *const kStuName = @"kStuName";
 static NSString *const kStuId = @"kStuId";
+
+static NSString *const kSocketConnected = @"kSocketConnected";
+static NSString *const kSocketDisConnect = @"kSocketDisConnect";

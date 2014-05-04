@@ -33,9 +33,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketConnected) name:kSocketConnected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDisConnect) name:kSocketDisConnect object:nil];
     // Do any additional setup after loading the view from its nib.
 }
+
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -109,7 +111,15 @@
     UserInfoViewController *infoVC=[[UserInfoViewController alloc] initWithNibName:@"UserInfoViewController" bundle:nil];
     [self presentViewController:infoVC animated:YES completion:nil];
 }
+#pragma mark - SocketIO Status
 
-
+-(void) socketConnected
+{
+    self.socketStatus.text=@"已連線";
+}
+-(void) socketDisConnect
+{
+    self.socketStatus.text=@"未連線";
+}
 
 @end

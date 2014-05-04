@@ -32,14 +32,14 @@
 		366D643A10A24F19A47E4CF5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		D04C27F3191401CC00705BBA /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
-		D08FB743190D5A76002DA3C8 /* DB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08FB743190D5A76002DA3C8 /* iBeacon_AutoCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeacon_AutoCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08FB746190D5A76002DA3C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D08FB748190D5A76002DA3C8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D08FB74A190D5A76002DA3C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D08FB74E190D5A76002DA3C8 /* DB_Project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DB_Project-Info.plist"; sourceTree = "<group>"; };
+		D08FB74E190D5A76002DA3C8 /* iBeacon_AutoCheckIn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iBeacon_AutoCheckIn-Info.plist"; sourceTree = "<group>"; };
 		D08FB750190D5A76002DA3C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D08FB752190D5A76002DA3C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D08FB754190D5A76002DA3C8 /* DB_Project-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DB_Project-Prefix.pch"; sourceTree = "<group>"; };
+		D08FB754190D5A76002DA3C8 /* iBeacon_AutoCheckIn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iBeacon_AutoCheckIn-Prefix.pch"; sourceTree = "<group>"; };
 		D08FB755190D5A76002DA3C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D08FB756190D5A76002DA3C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D08FB758190D5A76002DA3C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		D08FB73A190D5A76002DA3C8 = {
 			isa = PBXGroup;
 			children = (
-				D08FB74C190D5A76002DA3C8 /* DB_Project */,
+				D08FB74C190D5A76002DA3C8 /* iBeacon_AutoCheckIn */,
 				D08FB765190D5A76002DA3C8 /* DB_ProjectTests */,
 				D08FB745190D5A76002DA3C8 /* Frameworks */,
 				D08FB744190D5A76002DA3C8 /* Products */,
@@ -99,7 +99,7 @@
 		D08FB744190D5A76002DA3C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D08FB743190D5A76002DA3C8 /* DB_Project.app */,
+				D08FB743190D5A76002DA3C8 /* iBeacon_AutoCheckIn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,7 +116,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D08FB74C190D5A76002DA3C8 /* DB_Project */ = {
+		D08FB74C190D5A76002DA3C8 /* iBeacon_AutoCheckIn */ = {
 			isa = PBXGroup;
 			children = (
 				D0FD86AE19151C2100E04B7E /* Library */,
@@ -127,16 +127,17 @@
 				D08FB758190D5A76002DA3C8 /* Images.xcassets */,
 				D08FB74D190D5A76002DA3C8 /* Supporting Files */,
 			);
+			name = iBeacon_AutoCheckIn;
 			path = DB_Project;
 			sourceTree = "<group>";
 		};
 		D08FB74D190D5A76002DA3C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D08FB74E190D5A76002DA3C8 /* DB_Project-Info.plist */,
+				D08FB74E190D5A76002DA3C8 /* iBeacon_AutoCheckIn-Info.plist */,
 				D08FB74F190D5A76002DA3C8 /* InfoPlist.strings */,
 				D08FB752190D5A76002DA3C8 /* main.m */,
-				D08FB754190D5A76002DA3C8 /* DB_Project-Prefix.pch */,
+				D08FB754190D5A76002DA3C8 /* iBeacon_AutoCheckIn-Prefix.pch */,
 				D04C27F3191401CC00705BBA /* Config.h */,
 			);
 			name = "Supporting Files";
@@ -213,9 +214,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D08FB742190D5A76002DA3C8 /* DB_Project */ = {
+		D08FB742190D5A76002DA3C8 /* iBeacon_AutoCheckIn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "DB_Project" */;
+			buildConfigurationList = D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "iBeacon_AutoCheckIn" */;
 			buildPhases = (
 				B991E8D73469463D8F652CCB /* Check Pods Manifest.lock */,
 				D08FB73F190D5A76002DA3C8 /* Sources */,
@@ -227,9 +228,9 @@
 			);
 			dependencies = (
 			);
-			name = DB_Project;
+			name = iBeacon_AutoCheckIn;
 			productName = DB_Project;
-			productReference = D08FB743190D5A76002DA3C8 /* DB_Project.app */;
+			productReference = D08FB743190D5A76002DA3C8 /* iBeacon_AutoCheckIn.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -250,7 +251,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "DB_Project" */;
+			buildConfigurationList = D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "iBeacon_AutoCheckIn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -262,7 +263,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D08FB742190D5A76002DA3C8 /* DB_Project */,
+				D08FB742190D5A76002DA3C8 /* iBeacon_AutoCheckIn */,
 			);
 		};
 /* End PBXProject section */
@@ -432,9 +433,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DB_Project/DB_Project-Prefix.pch";
-				INFOPLIST_FILE = "DB_Project/DB_Project-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "DB_Project/iBeacon_AutoCheckIn-Prefix.pch";
+				INFOPLIST_FILE = "DB_Project/iBeacon_AutoCheckIn-Info.plist";
+				PRODUCT_NAME = iBeacon_AutoCheckIn;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -446,9 +447,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DB_Project/DB_Project-Prefix.pch";
-				INFOPLIST_FILE = "DB_Project/DB_Project-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "DB_Project/iBeacon_AutoCheckIn-Prefix.pch";
+				INFOPLIST_FILE = "DB_Project/iBeacon_AutoCheckIn-Info.plist";
+				PRODUCT_NAME = iBeacon_AutoCheckIn;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -456,7 +457,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "DB_Project" */ = {
+		D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "iBeacon_AutoCheckIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D08FB76D190D5A76002DA3C8 /* Debug */,
@@ -465,7 +466,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "DB_Project" */ = {
+		D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "iBeacon_AutoCheckIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D08FB770190D5A76002DA3C8 /* Debug */,

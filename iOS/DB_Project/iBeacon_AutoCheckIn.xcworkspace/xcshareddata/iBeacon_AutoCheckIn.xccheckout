@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>27832187-E7AB-4714-BE7D-FF9ACA958E98</string>
+	<string>FAD9E081-FECA-498F-B838-52AB3054A704</string>
 	<key>IDESourceControlProjectName</key>
-	<string>DB_Project</string>
+	<string>iBeacon_AutoCheckIn</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B5DF46AB-0A29-4A03-9F15-14C360ACF6AA</key>
+		<key>8E8BEF2C-C143-42FD-97B6-59C965C45B00</key>
 		<string>https://github.com/peterlee0127/DB_Project.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iOS/DB_Project/DB_Project.xcworkspace</string>
+	<string>iOS/DB_Project/iBeacon_AutoCheckIn.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B5DF46AB-0A29-4A03-9F15-14C360ACF6AA</key>
+		<key>8E8BEF2C-C143-42FD-97B6-59C965C45B00</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,16 +25,16 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B5DF46AB-0A29-4A03-9F15-14C360ACF6AA</string>
+	<string>8E8BEF2C-C143-42FD-97B6-59C965C45B00</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B5DF46AB-0A29-4A03-9F15-14C360ACF6AA</string>
+			<string>8E8BEF2C-C143-42FD-97B6-59C965C45B00</string>
 			<key>IDESourceControlWCCName</key>
-			<string>DB_HW_Project</string>
+			<string>iBeacon_AutoCheckIn</string>
 		</dict>
 	</array>
 </dict>

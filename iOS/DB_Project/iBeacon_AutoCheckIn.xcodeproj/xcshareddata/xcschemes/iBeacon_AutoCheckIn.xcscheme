@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D08FB742190D5A76002DA3C8"
-               BuildableName = "DB_Project.app"
-               BlueprintName = "DB_Project"
-               ReferencedContainer = "container:DB_Project.xcodeproj">
+               BuildableName = "iBeacon_AutoCheckIn.app"
+               BlueprintName = "iBeacon_AutoCheckIn"
+               ReferencedContainer = "container:iBeacon_AutoCheckIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "D08FB75D190D5A76002DA3C8"
                BuildableName = "DB_ProjectTests.xctest"
                BlueprintName = "DB_ProjectTests"
-               ReferencedContainer = "container:DB_Project.xcodeproj">
+               ReferencedContainer = "container:iBeacon_AutoCheckIn.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D08FB742190D5A76002DA3C8"
-            BuildableName = "DB_Project.app"
-            BlueprintName = "DB_Project"
-            ReferencedContainer = "container:DB_Project.xcodeproj">
+            BuildableName = "iBeacon_AutoCheckIn.app"
+            BlueprintName = "iBeacon_AutoCheckIn"
+            ReferencedContainer = "container:iBeacon_AutoCheckIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D08FB742190D5A76002DA3C8"
-            BuildableName = "DB_Project.app"
-            BlueprintName = "DB_Project"
-            ReferencedContainer = "container:DB_Project.xcodeproj">
+            BuildableName = "iBeacon_AutoCheckIn.app"
+            BlueprintName = "iBeacon_AutoCheckIn"
+            ReferencedContainer = "container:iBeacon_AutoCheckIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D08FB742190D5A76002DA3C8"
-            BuildableName = "DB_Project.app"
-            BlueprintName = "DB_Project"
-            ReferencedContainer = "container:DB_Project.xcodeproj">
+            BuildableName = "iBeacon_AutoCheckIn.app"
+            BlueprintName = "iBeacon_AutoCheckIn"
+            ReferencedContainer = "container:iBeacon_AutoCheckIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

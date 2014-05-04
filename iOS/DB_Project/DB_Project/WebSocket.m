@@ -55,10 +55,12 @@
     dict[@"stu_name"]=[infoModel getStuName];
     
     [self.webSocket sendEvent:@"addUser" withData:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSocketConnected object:nil];
 }
 -(void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
     [self connectToServer];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
 }
 
 
