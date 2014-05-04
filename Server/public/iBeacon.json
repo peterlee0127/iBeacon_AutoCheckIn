@@ -1,0 +1,23 @@
+[
+	{
+		"beacon_id":"1618E6B0-7912-4A22-8464-7042987A7F58",
+		"identifier":"E405",
+		"major":"0",
+		"minor":"0",
+		"range":"5"
+	},
+	{
+		"beacon_id":"70C61CDD-8566-4521-BB2A-CF41B9B7C073",
+		"identifier":"G305",
+		"major":"0",
+		"minor":"1",
+		"range":"5"
+	},
+  {
+    "beacon_id":"92FEC112-0AFB-43B0-8B80-14192A537E86",
+    "identifier":"G315",
+    "major":"0",
+    "minor":"2",
+		"range":"5"
+  }
+]

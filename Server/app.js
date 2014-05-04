@@ -106,6 +106,10 @@ app.get("/", function(req,res)
   	res.sendfile("./public/index.html");
 });
 
+app.get("/getBeacon", function(req,res)
+{
+		res.sendfile("./public/iBeacon.json");
+});
 
 // Server Configure
 app.set('port', process.env.PORT || 8080);
