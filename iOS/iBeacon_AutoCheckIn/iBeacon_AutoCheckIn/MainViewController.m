@@ -35,6 +35,8 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketConnected) name:kSocketConnected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDisConnect) name:kSocketDisConnect object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iBeaconDistance:) name:kBeaconDistance object:nil];
+    
     self.title=@"iBeacon AutoCheckIn";
     
     self.serverLabel.text=[NSString stringWithFormat:@"Connect to: %@",defaultServer];
@@ -57,7 +59,6 @@
 }
 -(void) viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -117,18 +118,31 @@
 
 -(void) socketConnected
 {
-    self.socketStatus.text=@"已連線";
+    self.socketStatus.text=@"Socket Connected";
+    self.socketStatus.textColor=[UIColor colorWithRed:0.000 green:0.771 blue:0.000 alpha:1.000];
     [self.timer invalidate];
     self.timer=nil;
     self.progressView.progress=1.0;
 }
 -(void) socketDisConnect
 {
-    self.socketStatus.text=@"未連線";
+    self.socketStatus.text=@"Socket DisConnected";
+    self.socketStatus.textColor=[UIColor redColor];
     [self.timer invalidate];
     self.timer=nil;
     float theInterval = 1.0 / 20.0;
     self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
+}
+-(void) iBeaconDistance:(NSNotification *) noti
+{
+    NSDictionary *dict=[noti object];
+    if([dict[@"distance"]floatValue]==-1.0)
+    {
+        self.beaconLabel.text=@"未定位";
+        return;
+    }
+    self.beaconLabel.text=[NSString stringWithFormat:@"Place:%@         %.2lfm",
+    dict[@"identifier"],[dict[@"distance"]floatValue]];
 }
 
 @end

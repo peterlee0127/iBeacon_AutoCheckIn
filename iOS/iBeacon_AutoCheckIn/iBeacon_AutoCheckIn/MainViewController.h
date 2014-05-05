@@ -19,4 +19,6 @@
 @property (nonatomic,strong) IBOutlet UILabel *stuIDLabel;
 @property (nonatomic,strong) IBOutlet UILabel *stuNameLabel;
 
+@property (nonatomic,strong) IBOutlet UILabel *beaconLabel;
+
 @end

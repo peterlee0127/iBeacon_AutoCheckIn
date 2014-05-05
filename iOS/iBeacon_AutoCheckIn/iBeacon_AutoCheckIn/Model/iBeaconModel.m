@@ -7,13 +7,15 @@
 //
 
 #import "iBeaconModel.h"
+#import "WebSocket.h"
 #import <AFNetworking.h>
 
 @interface iBeaconModel () <CLLocationManagerDelegate>
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSMutableArray *beaconArray;
-@property (nonatomic,assign) NSUInteger range;
+@property (nonatomic,assign) NSInteger range;
+@property (nonatomic,assign) NSUInteger counter;
 
 @end
 
@@ -35,6 +37,7 @@
     if(self)
     {
         [self downloadiBeaconInfo];
+        self.counter=0;
     
     }
     return self;
@@ -66,7 +69,11 @@
         NSDictionary *dict=(NSDictionary *)obj;
             
         NSUUID *uuid=[[NSUUID alloc] initWithUUIDString:dict[@"beacon_id"]];
-        CLBeaconRegion *beacon=[[CLBeaconRegion alloc] initWithProximityUUID:uuid major:[dict[@"major"] integerValue] minor:[dict[@"minor"] integerValue] identifier:dict[@"identifier"]];
+        CLBeaconRegion *beacon=[[CLBeaconRegion alloc] initWithProximityUUID:uuid
+        major:[dict[@"major"] integerValue]
+        minor:[dict[@"minor"] integerValue]
+        identifier:dict[@"identifier"]];
+        
         self.range=[dict[@"range"] integerValue];
         
         [self.locationManager startRangingBeaconsInRegion:beacon];
@@ -81,7 +88,7 @@
 #pragma mark - LocationManager Delegate
 -(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
-    
+    NSLog(@"StartMonitoring:%@",region.identifier);
     
 }
 
@@ -89,12 +96,33 @@
 {
     if(beacons.count>0)
     {
-        CLBeacon *beacon = [beacons lastObject];
-        if(beacon.accuracy>=self.range)
+        if(self.counter<1)
+        {
+            self.counter++;
             return;
-        NSLog(@"Place:%@    %.2lfm",region.identifier,beacon.accuracy);
+        }
+        else
+        {
+            self.counter=0;
+        }
         
-;
+        CLBeacon *beacon = beacons[0];
+        if(beacon.accuracy>=self.range || beacon.accuracy==-1.0)
+            self.isInRange=NO;
+        else
+            self.isInRange=YES;
+//        NSLog(@"Place:%@    %.2lfm",region.identifier,beacon.accuracy);
+        
+        if(self.isInRange)
+            [[WebSocket shareInstance] connectToServer];
+        else
+            [[WebSocket shareInstance] disconnect];
+        
+        NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:
+                            region.identifier,@"identifier",
+                            [NSNumber numberWithFloat:beacon.accuracy],@"distance"
+                            ,nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kBeaconDistance object:dict];
         
     }
 }

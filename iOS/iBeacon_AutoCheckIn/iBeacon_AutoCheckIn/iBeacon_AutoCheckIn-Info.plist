@@ -27,10 +27,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
-		<string>bluetooth-peripheral</string>
-		<string>fetch</string>
 		<string>location</string>
-		<string>remote-notification</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SocketIO.h"
 
 @interface WebSocket : NSObject
 
+@property (nonatomic,strong) SocketIO *webSocket;
 
 +(instancetype) shareInstance;
 -(void) connectToServer;

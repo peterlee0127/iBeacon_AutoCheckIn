@@ -11,6 +11,8 @@
 
 @interface iBeaconModel : NSObject
 
+@property (nonatomic,assign) BOOL isInRange;
+
 +(instancetype) shareInstance;
 
 @end

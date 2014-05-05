@@ -17,6 +17,7 @@
     "stylus": "*",
 	  "socket.io": "0.*",
     "mongoose" : "*",
-    "connect-mongo" : "*"
+    "connect-mongo" : "*",
+	"mongodb": ""
  }
 }
