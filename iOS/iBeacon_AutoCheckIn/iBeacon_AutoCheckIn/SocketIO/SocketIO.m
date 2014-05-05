@@ -1,6 +1,6 @@
 //
 //  SocketIO.m
-//  v0.4 ARC
+//  v0.5.1
 //
 //  based on 
 //  socketio-cocoa https://github.com/fpotter/socketio-cocoa
@@ -8,28 +8,27 @@
 //
 //  using
 //  https://github.com/square/SocketRocket
-//  https://github.com/stig/json-framework/
 //
 //  reusing some parts of
 //  /socket.io/socket.io.js
 //
 //  Created by Philipp Kyeck http://beta-interactive.de
 //
-//  Updated by 
-//    samlown   https://github.com/samlown
-//    kayleg    https://github.com/kayleg
-//    taiyangc  https://github.com/taiyangc
+//  With help from
+//    https://github.com/pkyeck/socket.IO-objc/blob/master/CONTRIBUTORS.md
 //
 
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
 #import "SocketIOJSONSerialization.h"
 
-#import "SocketIOTransportWebsocket.h"
-#import "SocketIOTransportXHR.h"
-
+#ifdef DEBUG
 #define DEBUG_LOGS 1
 #define DEBUG_CERTIFICATE 1
+#else
+#define DEBUG_LOGS 0
+#define DEBUG_CERTIFICATE 0
+#endif
 
 #if DEBUG_LOGS
 #define DEBUGLOG(...) NSLog(__VA_ARGS__)
@@ -38,7 +37,7 @@
 #endif
 
 static NSString* kResourceName = @"socket.io";
-static NSString* kHandshakeURL = @"%@://%@%@/%@/1/?t=%d%@";
+static NSString* kHandshakeURL = @"%@://%@%@/%@/1/?t=%.0f%@";
 static NSString* kForceDisconnectURL = @"%@://%@%@/%@/1/xhr-polling/%@?disconnect";
 
 float const defaultConnectionTimeout = 10.0f;
@@ -76,7 +75,8 @@ NSString* const SocketIOException = @"SocketIOException";
 
 @synthesize isConnected = _isConnected, 
             isConnecting = _isConnecting, 
-            useSecure = _useSecure, 
+            useSecure = _useSecure,
+            cookies = _cookies,
             delegate = _delegate,
             heartbeatTimeout = _heartbeatTimeout,
             returnAllDataFromAck = _returnAllDataFromAck;
@@ -109,7 +109,7 @@ NSString* const SocketIOException = @"SocketIOException";
             withParams:(NSDictionary *)params
          withNamespace:(NSString *)endpoint
 {
-    [self connectToHost:host onPort:port withParams:params withNamespace:@"" withConnectionTimeout:defaultConnectionTimeout];
+    [self connectToHost:host onPort:port withParams:params withNamespace:endpoint withConnectionTimeout:defaultConnectionTimeout];
 }
 
 - (void) connectToHost:(NSString *)host
@@ -135,15 +135,24 @@ NSString* const SocketIOException = @"SocketIOException";
         // do handshake via HTTP request
         NSString *protocol = _useSecure ? @"https" : @"http";
         NSString *port = _port ? [NSString stringWithFormat:@":%d", _port] : @"";
-        NSString *handshakeUrl = [NSString stringWithFormat:kHandshakeURL, protocol, _host, port, kResourceName, rand(), query];
+        NSTimeInterval time = [[NSDate date] timeIntervalSince1970] * 1000;
+        NSString *handshakeUrl = [NSString stringWithFormat:kHandshakeURL, protocol, _host, port, kResourceName, time, query];
         
         DEBUGLOG(@"Connecting to socket with URL: %@", handshakeUrl);
         query = nil;
         
         // make a request
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:handshakeUrl]
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:handshakeUrl]
                                                  cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData 
                                              timeoutInterval:connectionTimeout];
+        
+        if (_cookies != nil) {
+            DEBUGLOG(@"Adding cookie(s): %@", [_cookies description]);
+            NSDictionary *headers = [NSHTTPCookie requestHeaderFieldsWithCookies:_cookies];
+            [request setAllHTTPHeaderFields:headers];
+        }
+        
+        [request setHTTPShouldHandleCookies:YES];
         
         _handshake = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
         [_handshake scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -672,24 +681,20 @@ NSString* const SocketIOException = @"SocketIOException";
 {
     NSLog(@"ERROR: handshake failed ... %@", [error localizedDescription]);
     
+    int errorCode = [error code] == 403 ? SocketIOUnauthorized : SocketIOHandshakeFailed;
+    
     _isConnected = NO;
     _isConnecting = NO;
     
     if ([_delegate respondsToSelector:@selector(socketIO:onError:)]) {
-        NSMutableDictionary *errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSLocalizedDescriptionKey];
+        NSMutableDictionary *errorInfo = [[NSDictionary dictionaryWithObject:error
+                                                                      forKey:NSUnderlyingErrorKey] mutableCopy];
         
         NSError *err = [NSError errorWithDomain:SocketIOError
-                                           code:SocketIOHandshakeFailed
+                                           code:errorCode
                                        userInfo:errorInfo];
         
         [_delegate socketIO:self onError:err];
-    }
-    // TODO: deprecated - to be removed
-    else if ([_delegate respondsToSelector:@selector(socketIOHandshakeFailed:)]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        [_delegate socketIOHandshakeFailed:self];
-#pragma clang diagnostic pop
     }
 }
 
@@ -739,13 +744,23 @@ NSString* const SocketIOException = @"SocketIOException";
         NSArray *transports = [t componentsSeparatedByString:@","];
         DEBUGLOG(@"transports: %@", transports);
         
-        if ([transports indexOfObject:@"websocket"] != NSNotFound) {
-            DEBUGLOG(@"websocket supported -> using it now");
-            _transport = [[SocketIOTransportWebsocket alloc] initWithDelegate:self];
+        static Class webSocketTransportClass;
+        static Class xhrTransportClass;
+        
+        if (webSocketTransportClass == nil) {
+            webSocketTransportClass = NSClassFromString(@"SocketIOTransportWebsocket");
         }
-        else if ([transports indexOfObject:@"xhr-polling"] != NSNotFound) {
+        if (xhrTransportClass == nil) {
+            xhrTransportClass = NSClassFromString(@"SocketIOTransportXHR");
+        }
+        
+        if (webSocketTransportClass != nil && [transports indexOfObject:@"websocket"] != NSNotFound) {
+            DEBUGLOG(@"websocket supported -> using it now");
+            _transport = [[webSocketTransportClass alloc] initWithDelegate:self];
+        }
+        else if (xhrTransportClass != nil && [transports indexOfObject:@"xhr-polling"] != NSNotFound) {
             DEBUGLOG(@"xhr polling supported -> using it now");
-            _transport = [[SocketIOTransportXHR alloc] initWithDelegate:self];
+            _transport = [[xhrTransportClass alloc] initWithDelegate:self];
         }
         else {
             DEBUGLOG(@"no transport found that is supported :( -> fail");
@@ -767,13 +782,6 @@ NSString* const SocketIOException = @"SocketIOException";
 
         if ([_delegate respondsToSelector:@selector(socketIO:onError:)]) {
             [_delegate socketIO:self onError:error];
-        }
-        // TODO: deprecated - to be removed
-        else if ([_delegate respondsToSelector:@selector(socketIO:failedToConnectWithError:)]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            [_delegate socketIO:self failedToConnectWithError:error];
-#pragma clang diagnostic pop
         }
         
         // make sure to do call all cleanup code

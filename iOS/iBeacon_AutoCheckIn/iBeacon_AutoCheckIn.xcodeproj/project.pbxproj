@@ -414,6 +414,7 @@
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = iBeacon_AutoCheckIn;
+				PROVISIONING_PROFILE = "C0E681F9-0E6D-4BCC-8CB3-7740B07651BF";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -424,10 +425,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: peter lee (BPD3W2W7W5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = iBeacon_AutoCheckIn;
+				PROVISIONING_PROFILE = "C0E681F9-0E6D-4BCC-8CB3-7740B07651BF";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
