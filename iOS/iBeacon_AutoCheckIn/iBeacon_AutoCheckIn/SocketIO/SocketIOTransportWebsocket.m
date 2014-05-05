@@ -1,6 +1,6 @@
 //
 //  SocketIOTransportWebsocket.m
-//  v0.4 ARC
+//  v0.5.1
 //
 //  based on
 //  socketio-cocoa https://github.com/fpotter/socketio-cocoa
@@ -8,17 +8,14 @@
 //
 //  using
 //  https://github.com/square/SocketRocket
-//  https://github.com/stig/json-framework/
 //
 //  reusing some parts of
 //  /socket.io/socket.io.js
 //
 //  Created by Philipp Kyeck http://beta-interactive.de
 //
-//  Updated by
-//    samlown   https://github.com/samlown
-//    kayleg    https://github.com/kayleg
-//    taiyangc  https://github.com/taiyangc
+//  With help from
+//    https://github.com/pkyeck/socket.IO-objc/blob/master/CONTRIBUTORS.md
 //
 
 #import "SocketIOTransportWebsocket.h"
@@ -99,7 +96,9 @@ static NSString* kSecureSocketPortURL = @"wss://%@:%d/socket.io/1/websocket/%@";
 
 - (void) webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
-    [delegate onData:message];
+    if([delegate respondsToSelector:@selector(onData:)]) {
+        [delegate onData:message];
+    }
 }
 
 - (void) webSocketDidOpen:(SRWebSocket *)webSocket
@@ -111,7 +110,9 @@ static NSString* kSecureSocketPortURL = @"wss://%@:%d/socket.io/1/websocket/%@";
 {
     DEBUGLOG(@"Socket failed with error ... %@", [error localizedDescription]);
     // Assuming this resulted in a disconnect
-    [delegate onDisconnect:error];
+    if([delegate respondsToSelector:@selector(onDisconnect:)]) {
+        [delegate onDisconnect:error];
+    }
 }
 
 - (void) webSocket:(SRWebSocket *)webSocket
@@ -120,9 +121,11 @@ static NSString* kSecureSocketPortURL = @"wss://%@:%d/socket.io/1/websocket/%@";
           wasClean:(BOOL)wasClean
 {
     DEBUGLOG(@"Socket closed. %@", reason);
-    [delegate onDisconnect:[NSError errorWithDomain:SocketIOError
-                                               code:SocketIOWebSocketClosed
-                                           userInfo:nil]];
+    if([delegate respondsToSelector:@selector(onDisconnect:)]) {
+        [delegate onDisconnect:[NSError errorWithDomain:SocketIOError
+                                                   code:SocketIOWebSocketClosed
+                                               userInfo:nil]];
+    }
 }
 
 @end
