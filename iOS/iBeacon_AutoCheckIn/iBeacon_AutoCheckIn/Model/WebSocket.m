@@ -7,7 +7,6 @@
 //
 
 #import "WebSocket.h"
-#import "SocketIO.h"
 #import "SocketIOPacket.h"
 #import "UserInfoModel.h"
 #import "iBeaconModel.h"
@@ -15,7 +14,7 @@
 @interface WebSocket () <SocketIODelegate>
 
 
-@property (nonatomic,strong) SocketIO *webSocket;
+
 
 @end
 
@@ -33,6 +32,11 @@
 }
 -(void) connectToServer
 {
+    if(![iBeaconModel shareInstance].isInRange)
+        return;
+    if(self.webSocket.isConnected)
+        return;
+    
     self.webSocket=[[SocketIO alloc] initWithDelegate:self];
     [self.webSocket connectToHost:defaultServer onPort:[defaultPort integerValue]];
 }
@@ -60,9 +64,13 @@
 }
 -(void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
-    [self connectToServer];
-      [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
+    [self performSelector:@selector(connectToServer) withObject:nil afterDelay:3];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
 }
-
+-(void)socketIO:(SocketIO *)socket onError:(NSError *)error
+{
+    [self performSelector:@selector(connectToServer) withObject:nil afterDelay:3];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSocketDisConnect object:nil];
+}
 
 @end

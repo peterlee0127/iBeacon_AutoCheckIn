@@ -8,6 +8,7 @@
 
 #import "UserInfoViewController.h"
 #import "UserInfoModel.h"
+#import "WebSocket.h"
 
 @interface UserInfoViewController ()
 {
@@ -55,6 +56,8 @@
         [InfoModel saveStuId:self.stuIdTextField.text];
         [InfoModel saveStuName:self.stuNameTextField.text];
         [self dismissViewControllerAnimated:YES completion:nil];
+        [[WebSocket shareInstance] disconnect];
+        
     }
 
 
