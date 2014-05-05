@@ -205,10 +205,21 @@ io.on('connection', function(socket){
 											student.come=false;
 											student.save();
 										}
-										student.out.push(new Date());
+										var count=student.in.length-student.out.length;
+										if( count>=1 ){
+											for(var j=0;j< count ;j++)
+											{
+													var t=new Date();
+													t.setSeconds(t.getSeconds() - j*4);
+													student.out.push(t);
+													if(j==count-1)
+													{
+														socketArr.splice(index, 1);
+														socket.broadcast.emit('reloadData', { my: 'data' });
+													}
+											}
+										}									
 
-										socketArr.splice(index, 1);
-										socket.broadcast.emit('reloadData', { my: 'data' });
 
 
 								});

@@ -62,10 +62,10 @@
 									<p ng-style="come.style" ng-click="changeStudent(student.stu_id)">{{  comeColor(student.come) }}</p><br><br>
 								</td>
 								<td>
-									<div class="text" ng-repeat="time in student.in">{{ time | date:'HH:mm:ss'}}</div><br><br>
+									<div class="text" ng-repeat="intime in student.in">{{ intime | date:'HH:mm:ss'}}</div><br><br>
 								</td>
 								<td>
-									<div class="text" ng-repeat="time in student.out">{{ time | date:'HH:mm:ss'}}</div><br><br>
+									<div class="text" ng-repeat="outtime in student.out">{{ outtime | date:'HH:mm:ss'}}</div><br><br>
 								</td>
 								<td>
 									<p ng-style="lock.style" ng-click="lockStudent(student.stu_id)">{{ lockColor(student.lock) }}</p><br><br>
