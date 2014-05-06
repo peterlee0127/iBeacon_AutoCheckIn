@@ -11,8 +11,8 @@ static NSString *const defaultServer =  @"peterlee0127.no-ip.org";
 static NSString *const defaultPort = @"8080";
 
 
-static NSString *const defaultServer =  @"your server ip";
-static NSString *const defaultPort = @"your port";
+//static NSString *const defaultServer =  @"your server ip";
+//static NSString *const defaultPort = @"your port";
 
 static NSString *const defaultBeaconAPI = @"getBeacon";
 
