@@ -12,7 +12,7 @@ function mainController($scope, $http) {
 			console.log('Error: ' + data);
 		});
 
-	var reloadData=$scope.reloadData = function()
+	$scope.reloadData = function()
 	{
 		$http.get('/api/getList')
 			.success(function(data) {
@@ -62,11 +62,11 @@ function mainController($scope, $http) {
 		var post = {  "stu_id":stu_id };
 		$http.post('/api/changeStudent/' , JSON.stringify(post))
 			.success(function(data) {
-				reloadData();
+				$scope.reloadData();
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
-				reloadData();
+				$scope.reloadData();
 			});
 	};
 
@@ -74,11 +74,11 @@ function mainController($scope, $http) {
 		var post = {  "stu_id":stu_id };
 		$http.post('/api/lockStudent/' , JSON.stringify(post))
 			.success(function(data) {
-				reloadData();
+					$scope.reloadData();
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
-				reloadData();
+					$scope.reloadData();
 			});
 	};
 
@@ -86,11 +86,11 @@ function mainController($scope, $http) {
 		var post = {  "stu_id":stu_id };
 		$http.post('/api/deleteStudent/' , JSON.stringify(post))
 			.success(function(data) {
-				reloadData();
+				$scope.reloadData();
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
-				reloadData();
+				$scope.reloadData();
 			});
 	};
 
@@ -113,6 +113,6 @@ function mainController($scope, $http) {
 		});
 
 		socket.on('reloadData', function(data){
-			reloadData();
+				$scope.reloadData();
 		});
 }
