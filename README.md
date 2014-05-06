@@ -9,6 +9,28 @@ iBeacon_AutoCheckIn
 2:Server:Node.JS + Socket.IO (WebSocket)   
 3:DB:Mongoose (mongodb) NoSQL
 
+<h2>Library used</h2>
+===
+<h4>iOS</h4>
+    
+    socket.IO-objc   
+    SocketRocket   
+    AFNetworking   
+<h4>Server/Web</h4>
+    
+Node.js
+
+    express 
+    socket.io
+    mongoose
+   
+Client/Web
+
+	angular.js
+	jquery
+	bootstrap
+	socket.io
+
 
 Install
 ====
@@ -21,9 +43,16 @@ iOS
 
 Server(Nodejs)
     
-    //public/core.js	
+    //	public/core.js
+    	
 	var socket = io.connect('your server ip:port');
 	//example var socket = io.connect('192.168.1.1:8080');
+
+
+	//	app.js
+	
+	mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
+	mongoose.connect('mongodb://ip:27017/iBeaconCheckIn');
 
 
 <hr>

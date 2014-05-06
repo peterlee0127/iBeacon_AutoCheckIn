@@ -30,10 +30,9 @@ app.use(session({
 		})
 }));
 */
-mongoose.connect('mongodb://localhost:27017/db_hw');
 
-// Demo
-// mongoose.connect('mongodb://peterlee:peterlee@oceanic.mongohq.com:10037/ibeacon_Auto');
+mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
+// mongoose.connect('mongodb://example:example@oceanic.mongohq.com:10037/ibeacon_Auto');
 
 
 var Student = mongoose.model('Student',
