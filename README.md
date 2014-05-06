@@ -64,7 +64,7 @@ Server
 
 <img src="web.png" width='600'></img>
 <hr>
-<img src="phone.png" width='400'></img>
+<img src="iphone.png" width='400'></img>
 <hr>
 
 
