@@ -67,6 +67,9 @@ Server
 <img src="iphone.png" width='400'></img>
 <hr>
 
+Now my server is running on ARM (NanoPc T1)   
+<img src="arm_node.jpg" width='400'></img>
+
 
 <h2>Library used</h2>
 ===
