@@ -8,7 +8,6 @@
   "dependencies": {
     "express": "4.*",
     "express-session": "*",
-    "static-favicon": "*",
     "morgan": "*",
     "cookie-parser": "*",
     "body-parser": "*",
