@@ -96,6 +96,8 @@ function mainController($scope, $http) {
 
 
 	var socket = io.connect('http://peterlee0127.no-ip.org:8080/');
+	// var socket = io.connect('your server ip:port');
+	// example var socket = io.connect('192.168.1.1:8080');
 
 		socket.on('connect', function(data) {
 
