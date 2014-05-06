@@ -153,8 +153,6 @@ io.on('connection', function(socket){
 		{
 			if(!student)
 			{
-				console.log("user no found");
-
 				Student.create(
 				{
 						stu_id :obj.userID ,
@@ -167,7 +165,7 @@ io.on('connection', function(socket){
 						if(err)
 							console.log("err");
 						else
-						console.log("insert user successful");
+						console.log("Insert "+message.stu_name+" successful");
 				});
 
 				socket.broadcast.emit('reloadData', { my: 'data' });
