@@ -101,14 +101,14 @@ function mainController($scope, $http) {
 
 		socket.on('connect', function(data) {
 
-
+			console.log("socket connected");
 
 		});
 
 
 		socket.on('disconnect', function(data) {
 
-
+			console.log("socket disconnected");
 
 		});
 
