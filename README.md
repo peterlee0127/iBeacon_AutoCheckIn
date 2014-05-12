@@ -1,17 +1,25 @@
 iBeacon_AutoCheckIn
 ==========
 
+
+<h2>Feature功能:</h2>
+<h4>1:自動簽到</h4>
+<h4>2:自定義學號/姓名</h4>
+<h4>3:即時顯示學生狀態</h4>
+<h4>4:自動修正時間問題</h4>
+<h4>5: ...</h4>
+
 <hr>
 
+<h2>架構</h2>
 
-<h2>Feature:</h2>
-1:Client:iOS ,Web(Angular.js)   
-2:Server:Node.JS + Socket.IO (WebSocket)   
-3:DB:Mongoose (mongodb) NoSQL
+<h4>1:Client:iOS ,Web(Angular.js)</h4>
+<h4>2:Server:Node.JS + Socket.IO (WebSocket)</h4>
+<h4>3:DB:Mongoose (mongodb) NoSQL</h4>
 
 <hr>
 
-Install
+Install安裝
 ====
 iOS 
 
@@ -25,7 +33,7 @@ Server
 	
 	npm install
 
-Configure
+Configure設定
 ====
 
 iOS
@@ -48,7 +56,7 @@ Server(Nodejs)
 	mongoose.connect('mongodb://ip:27017/iBeaconCheckIn');
 
 
-Start
+Start啟動
 ===
 iOS
 
@@ -71,7 +79,7 @@ Now my server is running on ARM (NanoPc T1)
 <img src="arm_node.jpg" width='400'></img>
 
 
-<h2>Library used</h2>
+<h2>Library使用的函式庫</h2>
 ===
 <h4>iOS</h4>
     
@@ -92,3 +100,8 @@ Client/Web
 	jquery
 	bootstrap
 	socket.io
+	
+	
+	
+	
+	
