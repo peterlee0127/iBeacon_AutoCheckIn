@@ -100,12 +100,11 @@ app.post('/api/deleteStudent/', function(req, res) {
 
 });
 
-function SessionHandler(req,res,next){
+function sessionHandler(req,res,next){
 	if(req.session.user)
 		next();
 	else
 		res.redirect("login");
-
 }
 
 // index Page
@@ -118,6 +117,7 @@ app.get("/",sessionHandler, function(req,res)
 });
 
 app.get("/login",function(req,res){
+	console.log("redirect login");
 	res.sendfile("./public/login.html");
 });
 app.post("/loginAction",function(req,res){
@@ -133,7 +133,7 @@ app.post("/loginAction",function(req,res){
 
 app.get("/getBeacon", function(req,res)
 {
-		res.sendfile("./public/iBeacon.json");
+	res.sendfile("./public/iBeacon.json");
 });
 
 // Server Configure
