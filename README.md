@@ -78,9 +78,10 @@ Server
 Now my server is running on ARM (NanoPc T1)   
 <img src="arm_node.jpg" width='400'></img>
 
+<hr>
 
-<h2>Library使用的函式庫</h2>
-===
+<h2>Library used</h2>
+
 <h4>iOS</h4>
     
     socket.IO-objc   
@@ -88,7 +89,7 @@ Now my server is running on ARM (NanoPc T1)
     AFNetworking   
 <h4>Server/Web</h4>
     
-Node.js
+Node.js modules
 
     express 
     socket.io
