@@ -7,9 +7,8 @@ var app = express();
 var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
 
-
-//var session = require('express-session');
-//var MongoStore = require('connect-mongo')(session);
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -21,14 +20,14 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 
-/*
+
 app.use(session({
-		secret: "324rgrgegr",
+		secret: "324rgrfdsfm2ek3n2rgr",
 		store: new MongoStore({
 				db: "iBeaconCheckInSession",
 		})
 }));
-*/
+
 
 mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
 // mongoose.connect('mongodb://example:example@oceanic.mongohq.com:10037/ibeacon_Auto');
@@ -101,12 +100,36 @@ app.post('/api/deleteStudent/', function(req, res) {
 
 });
 
+function SessionHandler(req,res,next){
+	if(req.session.user)
+		next();
+	else
+		res.redirect("login");
+
+}
 
 // index Page
-app.get("/", function(req,res)
+app.get("/",sessionHandler, function(req,res)
 {
-  	res.sendfile("./public/index.html");
+	if(req.session.user="admin")
+	  	res.sendfile("./public/index.html");
+	else
+		res.redirect("/login");
 });
+
+app.get("/login",function(req,res){
+	res.sendfile("./public/login.html");
+});
+app.post("/loginAction",function(req,res){
+	if (req.body.hasOwnProperty('email')&&
+		req.body.email == 'admin@admin') {
+		req.session.user = 'admin';
+		res.redirect('/');
+	}else
+		res.redirect('/login');
+
+});
+
 
 app.get("/getBeacon", function(req,res)
 {
