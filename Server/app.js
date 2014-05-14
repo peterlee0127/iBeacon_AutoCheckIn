@@ -12,7 +12,6 @@ var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -101,6 +100,7 @@ app.post('/api/deleteStudent/', function(req, res) {
 });
 
 function sessionHandler(req,res,next){
+	console.log("sessionHandler called");
 	if(req.session.user)
 		next();
 	else
@@ -110,16 +110,22 @@ function sessionHandler(req,res,next){
 // index Page
 app.get("/",sessionHandler, function(req,res)
 {
-	if(req.session.user="admin")
-	  	res.sendfile("./public/index.html");
-	else
+	console.log("show index");
+	if(req.session.user="admin"){
+	  	console.log("isAdmin"); 
+		res.sendfile("./public/index.html");
+	}
+	else{
+		console.log("not defind user");
 		res.redirect("/login");
+	}
 });
 
 app.get("/login",function(req,res){
 	console.log("redirect login");
 	res.sendfile("./public/login.html");
 });
+
 app.post("/loginAction",function(req,res){
 	if (req.body.hasOwnProperty('email')&&
 		req.body.email == 'admin@admin') {
