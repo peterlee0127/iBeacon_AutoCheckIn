@@ -11,6 +11,8 @@
     "morgan": "*",
     "cookie-parser": "*",
     "body-parser": "*",
+    "method-override":"",
+    "morgan":"",
     "debug": "*",
     "ejs": "*",
     "stylus": "*",

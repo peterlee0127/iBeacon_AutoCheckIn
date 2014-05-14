@@ -1,9 +1,11 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var app = express();
+var morgan = require('morgan');
+var methodOverride = require('method-override');
 var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
 
@@ -12,9 +14,10 @@ var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser());
+app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
@@ -65,6 +68,10 @@ app.get('/api/getList' , function(req,res)
 		});
 });
 
+app.get("/getBeacon", function(req,res)
+{
+	res.sendfile("./public/iBeacon.json");
+});
 
 
 app.post('/api/changeStudent/', function(req, res) {
@@ -100,7 +107,6 @@ app.post('/api/deleteStudent/', function(req, res) {
 });
 
 function sessionHandler(req,res,next){
-	console.log("sessionHandler called");
 	if(req.session.user)
 		next();
 	else
@@ -110,10 +116,8 @@ function sessionHandler(req,res,next){
 // index Page
 app.get("/",sessionHandler, function(req,res)
 {
-	console.log("show index");
 	if(req.session.user="admin"){
-	  	console.log("isAdmin"); 
-		res.sendfile("./public/index.html");
+		res.render('index');
 	}
 	else{
 		console.log("not defind user");
@@ -122,7 +126,6 @@ app.get("/",sessionHandler, function(req,res)
 });
 
 app.get("/login",function(req,res){
-	console.log("redirect login");
 	res.sendfile("./public/login.html");
 });
 
@@ -137,10 +140,6 @@ app.post("/loginAction",function(req,res){
 });
 
 
-app.get("/getBeacon", function(req,res)
-{
-	res.sendfile("./public/iBeacon.json");
-});
 
 // Server Configure
 app.set('port', process.env.PORT || 8080);
