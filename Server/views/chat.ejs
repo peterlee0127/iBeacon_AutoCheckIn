@@ -17,9 +17,39 @@
 		   <% include header.ejs %>
 		<body ng-controller="mainController">
 			<div id="student-list" class="row">
-			<div class="col-xs-6 col-sm-offset-4">
+			<div class="col-md-12 col-md-offset-4">
 
+		   <div class="middle_container">
+<!--                    <div class="row">-->
+                        <!--chat_box-->
+                        <div class="col-lg-12 col-lg-12 col-lg-12 col-lg-4 left_box">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    chat
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </div>
+                                <div class="panel-body chat_box" id="chat_box_outer">
+                                    <ul class="chat_box_inner" id="ListenChat">
 
+                                    </ul>
+                                </div>
+                                <div class="panel-footer chat_message_input">
+                                    <div class="input-group">
+                                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="send_chat()">
+                                                Send</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--chart_box-->
+                        <div class="col-lg-12 col-lg-12 col-lg-12">
+                            <div class="chart_box"></div>
+                        </div>
+<!--                    </div>-->
+                </div>
 
 			</div>
 		</div>
