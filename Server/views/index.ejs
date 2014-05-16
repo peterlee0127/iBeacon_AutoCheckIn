@@ -38,6 +38,9 @@
 								離開時間
 								</th>
 								<th>
+								位置
+								</th>
+								<th>
 								鎖定
 								</th>
 								<th>
@@ -61,6 +64,9 @@
 								</td>
 								<td>
 									<div class="text" ng-repeat="outtime in student.out">{{ outtime | date:'HH:mm:ss'}}</div><br><br>
+								</td>
+								<td>
+									<p>location</p><br><br>
 								</td>
 								<td>
 									<p ng-style="lock.style" ng-click="lockStudent(student.stu_id)">{{ lockColor(student.lock) }}</p><br><br>
