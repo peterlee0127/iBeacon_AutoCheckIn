@@ -116,14 +116,15 @@ function sessionHandler(req,res,next){
 // index Page
 app.get("/",sessionHandler, function(req,res)
 {
-	if(req.session.user="admin"){
 		res.render('index', { UserName:req.session.user });
-	}
-	else{
-		console.log("not defind user");
-		res.redirect("/login");
-	}
 });
+
+
+app.get("/chat",sessionHandler, function(req,res)
+{
+		res.render('chat', { UserName:req.session.user });
+});
+
 
 app.get("/login",function(req,res){
 	res.sendfile("./public/login.html");
