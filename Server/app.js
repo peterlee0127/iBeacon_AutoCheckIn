@@ -117,7 +117,7 @@ function sessionHandler(req,res,next){
 app.get("/",sessionHandler, function(req,res)
 {
 	if(req.session.user="admin"){
-		res.render('index');
+		res.render('index', { UserName:req.session.user });
 	}
 	else{
 		console.log("not defind user");
