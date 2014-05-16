@@ -129,6 +129,11 @@ app.get("/login",function(req,res){
 	res.sendfile("./public/login.html");
 });
 
+app.get("/logout",function(req,res){
+	req.session.user= NaN;
+	res.redirect('/login');
+});
+
 app.post("/loginAction",function(req,res){
 	if (req.body.hasOwnProperty('email')&&
 		req.body.email == 'admin@admin') {
