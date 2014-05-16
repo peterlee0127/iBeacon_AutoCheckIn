@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "iBeaconAutoCheckIn",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,10 +11,12 @@
     "morgan": "*",
     "cookie-parser": "*",
     "body-parser": "*",
+    "method-override":"",
+    "morgan":"",
     "debug": "*",
     "ejs": "*",
     "stylus": "*",
-	  "socket.io": "0.*",
+	"socket.io": "0.*",
     "mongoose" : "*",
     "connect-mongo" : "*",
 	"mongodb": ""

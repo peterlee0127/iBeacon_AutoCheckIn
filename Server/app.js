@@ -1,34 +1,35 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var app = express();
+var morgan = require('morgan');
+var methodOverride = require('method-override');
 var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
 
-
-//var session = require('express-session');
-//var MongoStore = require('connect-mongo')(session);
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser());
+app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 
-/*
+
 app.use(session({
-		secret: "324rgrgegr",
+		secret: "324rgrfdsfm2ek3n2rgr",
 		store: new MongoStore({
 				db: "iBeaconCheckInSession",
 		})
 }));
-*/
+
 
 mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
 // mongoose.connect('mongodb://example:example@oceanic.mongohq.com:10037/ibeacon_Auto');
@@ -67,6 +68,10 @@ app.get('/api/getList' , function(req,res)
 		});
 });
 
+app.get("/getBeacon", function(req,res)
+{
+	res.sendfile("./public/iBeacon.json");
+});
 
 
 app.post('/api/changeStudent/', function(req, res) {
@@ -101,17 +106,46 @@ app.post('/api/deleteStudent/', function(req, res) {
 
 });
 
+function sessionHandler(req,res,next){
+	if(req.session.user)
+		next();
+	else
+		res.redirect("login");
+}
 
 // index Page
-app.get("/", function(req,res)
+app.get("/",sessionHandler, function(req,res)
 {
-  	res.sendfile("./public/index.html");
+		res.render('index', { UserName:req.session.user });
 });
 
-app.get("/getBeacon", function(req,res)
+
+app.get("/chat",sessionHandler, function(req,res)
 {
-		res.sendfile("./public/iBeacon.json");
+		res.render('chat', { UserName:req.session.user });
 });
+
+
+app.get("/login",function(req,res){
+	res.sendfile("./public/login.html");
+});
+
+app.get("/logout",function(req,res){
+	req.session.user= NaN;
+	res.redirect('/login');
+});
+
+app.post("/loginAction",function(req,res){
+	if (req.body.hasOwnProperty('email')&&
+		req.body.email == 'admin@admin') {
+		req.session.user = 'admin';
+		res.redirect('/');
+	}else
+		res.redirect('/login');
+
+});
+
+
 
 // Server Configure
 app.set('port', process.env.PORT || 8080);
