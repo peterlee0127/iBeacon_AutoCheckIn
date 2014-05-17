@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BCEF106932544C8195141BB9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 366D643A10A24F19A47E4CF5 /* libPods.a */; };
+		D01742DE19270BA9002A8286 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01742DC19270BA9002A8286 /* ChatViewController.m */; };
+		D01742DF19270BA9002A8286 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01742DD19270BA9002A8286 /* ChatViewController.xib */; };
 		D05EB2251916B77F0050CF56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05EB2241916B77F0050CF56 /* Images.xcassets */; };
 		D05EB2291916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D05EB2261916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist */; };
 		D05EB22A1916B7920050CF56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D05EB2281916B7920050CF56 /* main.m */; };
@@ -33,6 +35,9 @@
 /* Begin PBXFileReference section */
 		366D643A10A24F19A47E4CF5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D01742DB19270BA9002A8286 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = SOURCE_ROOT; };
+		D01742DC19270BA9002A8286 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = SOURCE_ROOT; };
+		D01742DD19270BA9002A8286 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = SOURCE_ROOT; };
 		D05EB2241916B77F0050CF56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iBeacon_AutoCheckIn/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		D05EB2261916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "iBeacon_AutoCheckIn-Info.plist"; path = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D05EB2271916B7920050CF56 /* iBeacon_AutoCheckIn-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iBeacon_AutoCheckIn-Prefix.pch"; path = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -165,6 +170,9 @@
 				D05EB2311916B7B50050CF56 /* UserInfoViewController.h */,
 				D05EB2321916B7B50050CF56 /* UserInfoViewController.m */,
 				D05EB2331916B7B50050CF56 /* UserInfoViewController.xib */,
+				D01742DB19270BA9002A8286 /* ChatViewController.h */,
+				D01742DC19270BA9002A8286 /* ChatViewController.m */,
+				D01742DD19270BA9002A8286 /* ChatViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -259,6 +267,7 @@
 			files = (
 				D05EB2251916B77F0050CF56 /* Images.xcassets in Resources */,
 				D05EB2291916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist in Resources */,
+				D01742DF19270BA9002A8286 /* ChatViewController.xib in Resources */,
 				D05EB2371916B7B50050CF56 /* UserInfoViewController.xib in Resources */,
 				D05EB22D1916B79D0050CF56 /* InfoPlist.strings in Resources */,
 				D05EB2351916B7B50050CF56 /* MainViewController.xib in Resources */,
@@ -305,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01742DE19270BA9002A8286 /* ChatViewController.m in Sources */,
 				D05EB2501916B7D60050CF56 /* SocketIOTransportXHR.m in Sources */,
 				D05EB23E1916B7C80050CF56 /* iBeaconModel.m in Sources */,
 				D05EB2341916B7B50050CF56 /* MainViewController.m in Sources */,

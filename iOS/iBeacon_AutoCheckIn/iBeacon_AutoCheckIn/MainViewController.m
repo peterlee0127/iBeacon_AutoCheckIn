@@ -11,6 +11,7 @@
 #import "UserInfoViewController.h"
 #import "UserInfoModel.h"
 #import "WebSocket.h"
+#import "ChatViewController.h"
 
 
 @interface MainViewController ()
@@ -43,7 +44,9 @@
     self.serverLabel.adjustsFontSizeToFitWidth=YES;
     
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"設定" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingVC)];
- 
+
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"發問" style:UIBarButtonItemStylePlain target:self action:@selector(showChatVC)];
+    
     float theInterval = 1.0 / 50.0;
    self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view from its nib.
@@ -113,6 +116,13 @@
     
     UserInfoViewController *infoVC=[[UserInfoViewController alloc] initWithNibName:@"UserInfoViewController" bundle:nil];
     [self presentViewController:infoVC animated:YES completion:nil];
+}
+
+-(void) showChatVC
+{
+    ChatViewController *chatVC=[[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+    [self.navigationController pushViewController:chatVC animated:YES];
+
 }
 #pragma mark - SocketIO Status
 

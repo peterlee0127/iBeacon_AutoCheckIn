@@ -95,7 +95,7 @@ function mainController($scope, $http) {
 	};
 
 
-	var socket = io.connect(':8080');
+     socket = io.connect(':8080');
 	// var socket = io.connect('your server ip:port');
 	// example var socket = io.connect('192.168.1.1:8080');
 
@@ -113,15 +113,10 @@ function mainController($scope, $http) {
 				$scope.reloadData();
 		});
 
-		socket.on('distance', function(data){
-
-
+		socket.on('UserDistance', function(data){
+			 document.getElementById(data.stu_id).innerHTML="位置："+data.identifier+'<br></br>'+"距離:"+data.distance ;
 		});
 
-		socket.on('chat',function(data){
-
-
-	 });
 
 	socket.on('listen_chat',function(data) {
 	var e = $('<li class="other_chat">'+
@@ -129,7 +124,7 @@ function mainController($scope, $http) {
 					'<div class="chat_id">'+
 						'<strong class="primary-font chat_name">'+data.stu_id+'</strong>'+
 							'<small class="pull-right text-muted">'+
-								'<span class="glyphicon glyphicon-time"></span>'+since+
+								'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
 							'</small>'+
 						'</div>'+
 					'<p>'+data.message+'</p>'+
@@ -140,32 +135,34 @@ function mainController($scope, $http) {
 	objDiv.scrollTop = objDiv.scrollHeight;
 });
 
-function getDateTime() {
-    var now     = new Date();
-    var year    = now.getFullYear();
-    var month   = now.getMonth()+1;
-    var day     = now.getDate();
-    var hour    = now.getHours();
-    var minute  = now.getMinutes();
-    var second  = now.getSeconds();
-    if(month.toString().length == 1) {
-        month = '0'+month;
-    }
-    if(day.toString().length == 1) {
-        day = '0'+day;
-    }
-    if(hour.toString().length == 1) {
-        hour = '0'+hour;
-    }
-    if(minute.toString().length == 1) {
-        minute = '0'+minute;
-    }
-    if(second.toString().length == 1) {
-        second = '0'+second;
-    }
-    var dateTime = hour+':'+minute+':'+second;
-    return dateTime;
+
+
+
 }
 
-
+function getDateTime() {
+		var now     = new Date();
+		var year    = now.getFullYear();
+		var month   = now.getMonth()+1;
+		var day     = now.getDate();
+		var hour    = now.getHours();
+		var minute  = now.getMinutes();
+		var second  = now.getSeconds();
+		if(month.toString().length == 1) {
+				month = '0'+month;
+		}
+		if(day.toString().length == 1) {
+				day = '0'+day;
+		}
+		if(hour.toString().length == 1) {
+				hour = '0'+hour;
+		}
+		if(minute.toString().length == 1) {
+				minute = '0'+minute;
+		}
+		if(second.toString().length == 1) {
+				second = '0'+second;
+		}
+		var dateTime = hour+':'+minute+':'+second;
+		return dateTime;
 }

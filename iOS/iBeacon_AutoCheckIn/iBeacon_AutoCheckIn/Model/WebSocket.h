@@ -12,6 +12,8 @@
 @interface WebSocket : NSObject
 
 @property (nonatomic,strong) SocketIO *webSocket;
+@property (nonatomic,strong) NSMutableArray *messageArray;
+
 
 +(instancetype) shareInstance;
 -(void) connectToServer;

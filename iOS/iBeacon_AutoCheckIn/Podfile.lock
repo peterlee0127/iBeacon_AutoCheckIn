@@ -18,14 +18,20 @@ PODS:
   - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - JSMessagesViewController (4.0.4):
+    - JSQSystemSoundPlayer
+  - JSQSystemSoundPlayer (1.5.0)
   - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - JSMessagesViewController
   - SocketRocket
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
+  JSMessagesViewController: 6b59dec2b679ee6a8c6d9c9f1d5d9748abf4c05c
+  JSQSystemSoundPlayer: 6dbac8dcc33e3add6facb3e59451a0249aece17d
   SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
 
 COCOAPODS: 0.32.1
