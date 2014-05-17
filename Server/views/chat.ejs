@@ -11,10 +11,10 @@
 						#student-list { margin-bottom:30px; padding-top:20px;}
 						#student-form  { margin-bottom:50px; }
 				</style>
-
+				<% include header.ejs %>
 				<script src="core.js"></script>
 		</head>
-		   <% include header.ejs %>
+
 		<body ng-controller="mainController">
 			<div id="student-list" class="row">
 			<div class="col-md-12 col-md-offset-4">
@@ -53,7 +53,32 @@
 
 			</div>
 		</div>
+  <script >
+            function send_chat(){
+						var text = $('#btn-input').val();
 
+                socket.emit('chat', { 'kStuId':'admin', 'message': text});
+
+
+                var e = $('<li class="my_chat">'+
+                            '<div class="chat-body clearfix">'+
+                                '<div class="chat_id">'+
+                                '<small class=" text-muted">'+
+                                    '<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
+                                    '</small>'+
+                                    '<strong class="pull-right primary-font">Me</strong>'+
+                                '</div>'+
+                                '<p>'+text+'</p>'+
+                            '</div>'+
+                        '</li>');
+                $('#ListenChat').append(e);
+					$('#btn-input:text').val('');
+				   $("#btn-input:text").focus();
+				var objDiv = document.getElementById("chat_box_outer");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }
+
+        </script>
 </body>
 
 </html>

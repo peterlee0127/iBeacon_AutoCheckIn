@@ -166,6 +166,15 @@ var io = require('socket.io').listen(server);
 io.on('connection', function(socket){
 
 
+	socket.on('chat', function(obj){//stu_id, message, class_id
+		socket.broadcast.emit('listen_chat', obj);
+	});
+
+	socket.on('distance', function(obj){
+		socket.broadcast.emit('UserDistance',obj);
+
+	});
+
 	socket.on('addUser',function(message){
 
 		for(var i=0;i<socketArr.length;i++){

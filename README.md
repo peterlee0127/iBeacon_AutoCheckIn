@@ -87,6 +87,7 @@ Now my server is running on ARM (NanoPc T1)
     socket.IO-objc   
     SocketRocket   
     AFNetworking   
+    JSMessagesViewController
 <h4>Server/Web</h4>
     
 Node.js modules
