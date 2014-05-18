@@ -81,7 +81,8 @@
     }];
     [self.locationManager startUpdatingLocation];
     
- 
+    [self.locationManager startUpdatingHeading];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 
