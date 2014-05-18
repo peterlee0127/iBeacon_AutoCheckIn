@@ -40,7 +40,7 @@
     userName = [plistModel getStuName];
     
     webSocket =[WebSocket shareInstance];
-    self.messages  =webSocket.messageArray;
+    self.messages = webSocket.messageArray;
     
     self.dataSource=self;
     self.delegate=self;
@@ -140,7 +140,7 @@
     
     
     
-    //    [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
+       [self.messages addObject:[[JSMessage alloc] initWithText:text sender:sender date:date]];
     
     [self finishSend];
     [self scrollToBottomAnimated:YES];

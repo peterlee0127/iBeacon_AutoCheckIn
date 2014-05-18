@@ -7,7 +7,7 @@
 //
 
 
-static NSString *const defaultServer =  @"192.168.1.102";
+static NSString *const defaultServer =  @"192.168.1.109";
 static NSString *const defaultPort = @"8080";
 
 

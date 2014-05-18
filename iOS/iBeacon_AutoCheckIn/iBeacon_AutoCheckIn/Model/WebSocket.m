@@ -39,6 +39,7 @@
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendChatMessage:) name:kUserSendChat object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendUserLocation:) name:kBeaconDistance object:nil];
+        self.messageArray=[[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -89,7 +90,7 @@
     [self.webSocket sendEvent:@"chat" withData:dict];
     
     JSMessage *message =[[JSMessage alloc] initWithText:temp[kmessage] sender:temp[kStuId] date:[NSDate date]];
-    [self.messageArray addObject:message];
+//    [self.messageArray addObject:message];
 }
 -(void) sendUserLocation:(NSNotification *) noti
 {
