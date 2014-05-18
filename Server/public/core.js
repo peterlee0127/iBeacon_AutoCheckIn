@@ -114,6 +114,9 @@ function mainController($scope, $http) {
 		});
 
 		socket.on('UserDistance', function(data){
+			if(!document.getElementById(data.stu_id))
+				return;
+
 			 document.getElementById(data.stu_id).innerHTML="位置："+data.identifier+'<br></br>'+"距離:"+data.distance ;
 		});
 
