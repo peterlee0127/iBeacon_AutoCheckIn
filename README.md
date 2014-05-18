@@ -72,7 +72,7 @@ Server
 <h1>Screen Shot</h1>
 
 <h2>Web</h2>
-<img src="web.png" width='600'></img>
+<img src="web-main.png" width='600'></img>
 <hr>
 
 <h2>Chat Room</h2>
