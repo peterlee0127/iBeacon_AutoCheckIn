@@ -76,7 +76,7 @@ Server
 <hr>
 
 <h2>Chat Room</h2>
-<img src="chat.png" width='600'></img>
+<img src="chatroom.png" width='600'></img>
 <hr>
 
 <h2>iOS</h2>
