@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="panel-footer chat_message_input">
                                     <div class="input-group">
-                                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="請在此輸入訊息...">
                                         <span class="input-group-btn">
                                             <button class="btn btn-warning btn-sm" id="btn-chat" onclick="send_chat()">
                                                 Send</button>
@@ -60,17 +60,17 @@
                 socket.emit('chat', { 'kStuId':'admin', 'message': text});
 
 
-                var e = $('<li class="my_chat">'+
-                            '<div class="chat-body clearfix">'+
+                var e = $('<div class="my_chat">'+
+                            '<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:15px;">'+
                                 '<div class="chat_id">'+
-                                '<small class=" text-muted">'+
+                                '<small class=" text-muted" style="margin-left:10px">'+
                                     '<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
                                     '</small>'+
-                                    '<strong class="pull-right primary-font">Me</strong>'+
+                                    '<strong class="pull-right primary-font" style="margin-right:10px">Me</strong>'+
                                 '</div>'+
-                                '<p>'+text+'</p>'+
+                                '<pi style="margin-left:10px">'+text+'</p>'+
                             '</div>'+
-                        '</li>');
+                        '</div><br>');
                 $('#ListenChat').append(e);
 					$('#btn-input:text').val('');
 				   $("#btn-input:text").focus();
