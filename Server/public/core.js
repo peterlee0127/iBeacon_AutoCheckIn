@@ -137,9 +137,7 @@ function mainController($scope, $http) {
 	var objDiv = document.getElementById("chat_box_outer");
 	objDiv.scrollTop = objDiv.scrollHeight;
 	$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
-});
-
-
+	});
 
 
 }
