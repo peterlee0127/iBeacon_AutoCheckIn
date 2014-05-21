@@ -1,0 +1,25 @@
+<html ng-app="PeopleList">
+<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+
+				<title>iBeacon AutoCheckIn-iBeaconinf</title>
+				<% include require.ejs %>
+				<style>
+						html { overflow-y:scroll; }
+						body { padding-top:50px; }
+						#student-list { margin-bottom:30px; padding-top:20px;}
+						#student-form  { margin-bottom:50px; }
+				</style>
+				<% include header.ejs %>
+				<script src="core.js"></script>
+</head>
+
+<body ng-controller="mainController" data-ng-init="getBeacon()">
+<br><br>
+{{ beacon }}
+
+</div>
+</body>
+
+</html>

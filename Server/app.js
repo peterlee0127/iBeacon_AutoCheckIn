@@ -114,16 +114,24 @@ function sessionHandler(req,res,next){
 }
 
 // index Page
-app.get("/",sessionHandler, function(req,res)
-{
+app.get("/",sessionHandler, function(req,res){
 		res.render('index', { UserName:req.session.user });
 });
 
 
-app.get("/chat",sessionHandler, function(req,res)
-{
+app.get("/chat",sessionHandler, function(req,res){
 		res.render('chat', { UserName:req.session.user });
 });
+
+app.get('/iBeaconInf',sessionHandler, function(req,res){
+	res.render('iBeaconInf.ejs', { UserName:req.session.user });
+});
+
+
+app.get('/ViewRowData',sessionHandler, function(req,res){
+	res.render('ViewRowData.ejs', { UserName:req.session.user });
+});
+
 
 
 app.get("/login",function(req,res){
