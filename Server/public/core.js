@@ -23,6 +23,28 @@ function mainController($scope, $http) {
 			});
 	}
 
+	$scope.getBeacon = function(){
+		$http.get('/getBeacon')
+			.success(function(data) {
+				$scope.beacon = data;
+			})
+			.error(function(data) {
+					console.log('Error: ' + data);
+			});
+	}
+
+	$scope.getRawData =function(){
+		$http.get('/api/getList')
+			.success(function(data) {
+				$scope.list = data;
+			})
+			.error(function(data) {
+					console.log('Error: ' + data);
+			});
+
+	}
+
+
 	$scope.lock = {};
 	$scope.come = {};
 	$scope.turnGreen = function (){
