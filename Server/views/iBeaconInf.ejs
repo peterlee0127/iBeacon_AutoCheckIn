@@ -12,16 +12,17 @@
 						#student-form  { margin-bottom:50px; }
 				</style>
 				<% include header.ejs %>
-				<script src="core.js"></script>
+				<script src="config.js"></script>
 </head>
 
 <body ng-controller="SystemConfController">
 <br><br>
 
-<table class="table table-striped">
+<div class="table-responsive">
+<table class="table table-bordered table-hover">
 	<thead>
 		<tr>
-			<th class="col-md-1">#</th>
+			<th class="col-sm-1">#</th>
 			<th class="col-md-2">Beacon Identifier</th>
 			<th class="col-md-2">Beacon ID (UDID)</th>
 			<th class="col-sm-1">Major</th>
@@ -53,6 +54,7 @@
 			</tr>
 	</tbody>
 </table>
+</div>
 
 	<button type="button" class="btn btn-primary" ng-click="">更新</button>
 

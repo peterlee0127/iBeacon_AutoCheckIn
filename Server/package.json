@@ -17,7 +17,7 @@
     "ejs": "*",
     "stylus": "*",
 	"socket.io": "0.*",
-    "mongoose" : "*",
+    "mongoose" : "3.8",
     "connect-mongo" : "*",
 	"mongodb": ""
  }

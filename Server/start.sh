@@ -2,4 +2,4 @@
 
 export NODE_ENV=production
 
-node app.js
+nodemon app.js
