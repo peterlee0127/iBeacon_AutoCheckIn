@@ -1,4 +1,4 @@
-<html ng-app="PeopleList">
+<html ng-app="SystemConf">
 <head>
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +15,46 @@
 				<script src="core.js"></script>
 </head>
 
-<body ng-controller="mainController" data-ng-init="getBeacon()">
+<body ng-controller="SystemConfController">
 <br><br>
-{{ beacon }}
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th class="col-md-1">#</th>
+			<th class="col-md-2">Beacon Identifier</th>
+			<th class="col-md-2">Beacon ID (UDID)</th>
+			<th class="col-sm-1">Major</th>
+			<th class="col-sm-1">Minor</th>
+			<th class="col-sm-1">Range (Unit:Meter公尺)</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr ng-repeat="beacon in beaconConf">
+					<td>
+						{{$index}}
+					</td>
+					<td>
+					  <input class="form-control" value='{{ beacon.identifier }}' placeholder="Beacon Identifier">
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.beacon_id }}' placeholder="Beacon ID (UDID)">
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.major }}' placeholder="Major">
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.minor }}' placeholder="Minor">
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.range }}' placeholder="Range (Unit:Meter公尺)">
+					</td>
+
+			</tr>
+	</tbody>
+</table>
+
+	<button type="button" class="btn btn-primary" ng-click="">更新</button>
 
 </div>
 </body>
