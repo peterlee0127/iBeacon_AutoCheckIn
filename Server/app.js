@@ -123,8 +123,8 @@ app.get("/chat",sessionHandler, function(req,res){
 		res.render('chat', { UserName:req.session.user });
 });
 
-app.get('/iBeaconInf',sessionHandler, function(req,res){
-	res.render('iBeaconInf.ejs', { UserName:req.session.user });
+app.get('/iBeaconConf',sessionHandler, function(req,res){
+	res.render('iBeaconConf', { UserName:req.session.user });
 });
 
 

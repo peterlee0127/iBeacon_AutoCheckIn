@@ -1,4 +1,4 @@
-<html ng-app="PeopleList">
+<html ng-app="SystemConf">
 <head>
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +12,10 @@
 						#student-form  { margin-bottom:50px; }
 				</style>
 				<% include header.ejs %>
-				<script src="core.js"></script>
+				<script src="config.js"></script>
 </head>
 
-<body ng-controller="mainController" data-ng-init="getRawData()">
+<body ng-controller="SystemConfController">
 <br><br>
 {{ list }}
 

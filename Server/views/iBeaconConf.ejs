@@ -1,0 +1,65 @@
+<html ng-app="SystemConf">
+<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+
+				<title>iBeacon AutoCheckIn-iBeaconinf</title>
+				<% include require.ejs %>
+				<style>
+						html { overflow-y:scroll; }
+						body { padding-top:50px; }
+						#student-list { margin-bottom:30px; padding-top:20px;}
+						#student-form  { margin-bottom:50px; }
+				</style>
+				<% include header.ejs %>
+				<script src="uuidCheck.js"></script>
+				<script src="config.js"></script>
+</head>
+
+<body ng-controller="SystemConfController">
+<br><br>
+
+<div class="table-responsive">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th class="col-sm-1">#</th>
+			<th class="col-md-2">Beacon Identifier</th>
+			<th class="col-md-2">Beacon ID (UDID)</th>
+			<th class="col-sm-1">Major</th>
+			<th class="col-sm-1">Minor</th>
+			<th class="col-sm-1">Range (Unit:Meter公尺)</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr ng-repeat="beacon in beaconConf">
+					<td>
+						{{$index}}
+					</td>
+					<td>
+					  <input class="form-control" value='{{ beacon.identifier }}' placeholder="Beacon Identifier">
+					</td>
+					<td>
+						<input type="text" class="form-control" value='{{ beacon.beacon_id }}' ng-pattern="/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/" placeholder="Beacon ID (UDID)" required/>
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.major }}' placeholder="Major">
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.minor }}' placeholder="Minor">
+					</td>
+					<td>
+						<input class="form-control" value='{{ beacon.range }}' placeholder="Range (Unit:Meter公尺)">
+					</td>
+
+			</tr>
+	</tbody>
+</table>
+</div>
+
+	<button type="button" class="btn btn-primary" ng-click="">更新</button>
+
+</div>
+</body>
+
+</html>
