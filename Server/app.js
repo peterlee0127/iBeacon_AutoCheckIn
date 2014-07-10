@@ -14,7 +14,10 @@ var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+      extended: true
+}));
+app.use(bodyParser.json())
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(methodOverride());
