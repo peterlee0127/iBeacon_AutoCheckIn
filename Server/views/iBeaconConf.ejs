@@ -12,7 +12,6 @@
 						#student-form  { margin-bottom:50px; }
 				</style>
 				<% include header.ejs %>
-				<script src="uuid.js"></script>
 				<script src="uuidCheck.js"></script>
 				<script src="config.js"></script>
 </head>
@@ -41,7 +40,7 @@
 					  <input class="form-control" value='{{ beacon.identifier }}' placeholder="Beacon Identifier">
 					</td>
 					<td>
-						<input class="form-control" value='{{ beacon.beacon_id }}' placeholder="Beacon ID (UDID)">
+						<input type="text" class="form-control" value='{{ beacon.beacon_id }}' ng-pattern="/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/" placeholder="Beacon ID (UDID)" required/>
 					</td>
 					<td>
 						<input class="form-control" value='{{ beacon.major }}' placeholder="Major">
