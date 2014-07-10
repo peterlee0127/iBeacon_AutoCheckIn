@@ -2,17 +2,16 @@ iBeacon_AutoCheckIn
 ==========
 
 
-<h2>Feature功能:</h2>
-<h4>1:自動簽到</h4>
-<h4>2:自定義學號/姓名</h4>
-<h4>3:即時顯示學生狀態</h4>
-<h4>4:自動修正時間問題</h4>
-<h4>5:即時問答/聊天</h4>
-<h4>6: ...</h4>
+<h2>Feature:</h2>
+<h4>1: AutoCheckIn</h4>
+<h4>2: Name,ID</h4>
+<h4>3: Real time display</h4>
+<h4>4: Real time chat</h4>
+<h4>5: ...</h4>
 
 <hr>
 
-<h2>架構</h2>
+<h2>Architecture</h2>
 
 <h4>1:Client:iOS ,Web(Angular.js)</h4>
 <h4>2:Server:Node.JS + Socket.IO (WebSocket)</h4>
@@ -20,7 +19,7 @@ iBeacon_AutoCheckIn
 
 <hr>
 
-Install安裝
+Install
 ====
 iOS 
 
@@ -34,7 +33,7 @@ Server
 	
 	npm install
 
-Configure設定
+Configure
 ====
 
 iOS
@@ -57,7 +56,7 @@ Server(Nodejs)
 	mongoose.connect('mongodb://ip:27017/iBeaconCheckIn');
 
 
-Start啟動
+Start
 ===
 iOS
 
