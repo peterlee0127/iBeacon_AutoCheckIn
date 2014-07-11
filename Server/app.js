@@ -196,7 +196,6 @@ io.on('connection', function(socket){
 				}
 		}
 
-
 		var obj=new socketObj(socket.id,message.userID);
 		socketArr.push(obj);
 
