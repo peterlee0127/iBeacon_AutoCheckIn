@@ -86,6 +86,8 @@ Now my server is running on ARM (NanoPc T1)
 <img src="arm_node.jpg" width='400'></img>
 
 <hr>
+<img src="flow.jpg" width=800></img>
+<hr>
 
 <h2>Library used</h2>
 
