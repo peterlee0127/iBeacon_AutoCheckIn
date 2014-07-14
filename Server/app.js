@@ -27,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 
 
 app.use(session({
+		resave:true,
+		saveUninitialized:true,
 		secret: "324rgrfdsfm2ek3n2rgr",
 		store: new MongoStore({
 				db: "iBeaconCheckInSession",
