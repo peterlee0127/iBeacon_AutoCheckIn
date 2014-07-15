@@ -82,9 +82,11 @@ Server
 <img src="iphone.png" width='400'></img>
 <hr>
 
-Now my server is running on ARM (NanoPc T1)   
+<h4>Now my server is running on ARM (NanoPc T1)</h4>   
 <img src="arm_node.jpg" width='400'></img>
+<img src="iBeaconHardware.jpg" width='400'></img>
 
+<a href="http://redbearlab.com/blemini/">RedBear BLE Mini</a>
 <hr>
 <img src="flow.jpg" width=800></img>
 <hr>
