@@ -50,13 +50,11 @@
     
     float theInterval = 1.0 / 50.0;
    self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
-  
-    /*
+   
     if(![self canEvaluatePolicy])
         [iBeaconModel shareInstance].TouchIDAuth = YES;
     else
         [self evaluatePolicy];
-     */
     // Do any additional setup after loading the view from its nib.
 }
 - (void)evaluatePolicy

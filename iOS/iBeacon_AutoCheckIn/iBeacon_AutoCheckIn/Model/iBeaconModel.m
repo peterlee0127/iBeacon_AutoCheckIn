@@ -80,10 +80,10 @@
         [self.locationManager startRangingBeaconsInRegion:beacon];
         
     }];
-//    [self.locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
     
-//    [self.locationManager startUpdatingHeading];
-//    [self.locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingHeading];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 
