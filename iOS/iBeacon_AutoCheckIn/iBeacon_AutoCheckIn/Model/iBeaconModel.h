@@ -12,6 +12,7 @@
 @interface iBeaconModel : NSObject
 
 @property (nonatomic,assign) BOOL isInRange;
+@property (nonatomic,assign) BOOL TouchIDAuth;
 
 +(instancetype) shareInstance;
 
