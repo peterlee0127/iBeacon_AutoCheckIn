@@ -49,8 +49,6 @@
         return;
     if(self.webSocket.isConnected)
         return;
-    if(![iBeaconModel shareInstance].TouchIDAuth)
-        return;
     
     self.webSocket=[[SocketIO alloc] initWithDelegate:self];
     [self.webSocket connectToHost:defaultServer onPort:[defaultPort integerValue]];
