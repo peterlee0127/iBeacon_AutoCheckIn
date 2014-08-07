@@ -38,7 +38,6 @@
     {
         [self downloadiBeaconInfo];
         self.counter=0;
-        self.TouchIDAuth = NO;
     
     }
     return self;
