@@ -12,7 +12,8 @@
 #import "UserInfoModel.h"
 #import "WebSocket.h"
 #import "ChatViewController.h"
-
+#import "iBeaconModel.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 
 @interface MainViewController ()
 
@@ -50,6 +51,59 @@
     float theInterval = 1.0 / 50.0;
    self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view from its nib.
+
+    if(![self canEvaluatePolicy])
+        [iBeaconModel shareInstance].TouchIDAuth = YES;
+    else
+        [self evaluatePolicy];
+// Do any additional setup after loading the view from its nib.
+}
+-(IBAction) touchIDAuth:(id)sender
+{
+    if(![self canEvaluatePolicy])
+    {
+        [iBeaconModel shareInstance].TouchIDAuth = YES;
+    }
+    else
+    {
+        [self evaluatePolicy];
+    }
+}
+- (void)evaluatePolicy
+{
+    LAContext *context = [[LAContext alloc] init];
+    __block  NSString *msg;
+    
+    // show the authentication UI with our reason string
+    [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"利用指紋來解鎖" reply:
+     ^(BOOL success, NSError *authenticationError) {
+         if (success) {
+             msg = @"EVALUATE_POLICY_SUCCESS";
+             [iBeaconModel shareInstance].TouchIDAuth = YES;
+            [[WebSocket shareInstance] connectToServer];
+         } else {
+             msg = @"EVALUATE_POLICY_WITH_ERROR";
+             [iBeaconModel shareInstance].TouchIDAuth = NO;
+                 [[WebSocket shareInstance] disconnect];
+         }
+         NSLog(@"%@",msg);
+     }];
+    
+}
+- (BOOL)canEvaluatePolicy
+{
+    LAContext *context = [[LAContext alloc] init];
+    NSError *error;
+    BOOL success;
+    
+    // test if we can evaluate the policy, this test will tell us if Touch ID is available and enrolled
+    success = [context canEvaluatePolicy: LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
+    if (success) {
+        return YES;
+    } else {
+        return NO;
+    }
+    
 }
 - (void)progressViewAnimation
 {
