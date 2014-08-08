@@ -21,42 +21,42 @@ iBeacon_AutoCheckIn
 
 Install
 ====
-iOS 
+iOS
 
     // in iBeacon_AutoCheckIn/iOS/iBeacon_AutoCheckIn
-    
+
     pod install
 
 Server
 
 	//in iBeacon_AutoCheckIn/Server
-	
+
 	npm install
 
 Configure
 ====
 
 <h3>Default Admin Account</h3>
-   
+
     account:admin@admin
     password:admin
 
 iOS
 
     //Config.h  
-    static NSString *const defaultServer =  @"your server ip";   
+    static NSString *const defaultServer =  @"your server ip";
     static NSString *const defaultPort = @"your port";
 
 Server(Nodejs)
-    
+
     //	public/core.js
-    	
+
 	var socket = io.connect('your server ip:port');
 	//example var socket = io.connect('192.168.1.1:8080');
 
 
 	//	app.js
-	
+
 	mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
 	mongoose.connect('mongodb://ip:27017/iBeaconCheckIn');
 
@@ -84,10 +84,11 @@ Server
 <hr>
 
 <h2>iOS</h2>
+<img src="touchID.jpg" width='400'></img>
 <img src="iphone.png" width='400'></img>
 <hr>
 
-<h4>Now my server is running on ARM (NanoPc T1)</h4>   
+<h4>Now my server is running on ARM (NanoPc T1)</h4>
 <img src="arm_node.jpg" width='400'></img>
 <img src="iBeaconHardware.jpg" width='400'></img>
 
@@ -99,27 +100,27 @@ Server
 <h2>Library used</h2>
 
 <h4>iOS</h4>
-    
-    socket.IO-objc   
-    SocketRocket   
-    AFNetworking   
+
+    socket.IO-objc
+    SocketRocket
+    AFNetworking
     JSMessagesViewController
 <h4>Server/Web</h4>
-    
+
 Node.js modules
 
-    express 
+    express
     socket.io
     mongoose
-   
+
 Client/Web
 
 	angular.js
 	jquery
 	bootstrap
 	socket.io
-	
-	
+
+
 
 <hr>
 The MIT License (MIT)
@@ -143,6 +144,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-	
-	
-	
