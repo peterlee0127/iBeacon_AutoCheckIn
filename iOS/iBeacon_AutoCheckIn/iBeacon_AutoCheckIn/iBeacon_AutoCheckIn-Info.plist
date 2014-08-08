@@ -24,9 +24,14 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>use for iBeacon</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>use for iBeacon</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
+		<string>external-accessory</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
