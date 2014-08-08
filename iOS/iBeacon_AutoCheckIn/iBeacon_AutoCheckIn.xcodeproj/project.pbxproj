@@ -11,7 +11,6 @@
 		D01742DE19270BA9002A8286 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01742DC19270BA9002A8286 /* ChatViewController.m */; };
 		D01742DF19270BA9002A8286 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01742DD19270BA9002A8286 /* ChatViewController.xib */; };
 		D05EB2251916B77F0050CF56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05EB2241916B77F0050CF56 /* Images.xcassets */; };
-		D05EB2291916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D05EB2261916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist */; };
 		D05EB22A1916B7920050CF56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D05EB2281916B7920050CF56 /* main.m */; };
 		D05EB22D1916B79D0050CF56 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D05EB22B1916B79D0050CF56 /* InfoPlist.strings */; };
 		D05EB2341916B7B50050CF56 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D05EB22F1916B7B50050CF56 /* MainViewController.m */; };
@@ -231,7 +230,7 @@
 		D08FB73B190D5A76002DA3C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Peterlee;
 				TargetAttributes = {
 					D08FB742190D5A76002DA3C8 = {
@@ -267,7 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D05EB2251916B77F0050CF56 /* Images.xcassets in Resources */,
-				D05EB2291916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist in Resources */,
 				D01742DF19270BA9002A8286 /* ChatViewController.xib in Resources */,
 				D05EB2371916B7B50050CF56 /* UserInfoViewController.xib in Resources */,
 				D05EB22D1916B79D0050CF56 /* InfoPlist.strings in Resources */,

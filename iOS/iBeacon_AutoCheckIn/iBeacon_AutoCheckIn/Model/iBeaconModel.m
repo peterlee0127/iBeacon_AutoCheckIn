@@ -38,7 +38,8 @@
     {
         [self downloadiBeaconInfo];
         self.counter=0;
-    
+        self.locationManager=[[CLLocationManager alloc] init];
+        self.locationManager.delegate=self;
     }
     return self;
 }
@@ -62,8 +63,8 @@
 }
 -(void) startMonitoring
 {
-    self.locationManager=[[CLLocationManager alloc] init];
-    self.locationManager.delegate=self;
+    [self.locationManager requestAlwaysAuthorization];
+    [self.locationManager requestWhenInUseAuthorization];
     
     [self.beaconArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict=(NSDictionary *)obj;
@@ -73,20 +74,21 @@
         major:[dict[@"major"] integerValue]
         minor:[dict[@"minor"] integerValue]
         identifier:dict[@"identifier"]];
-        
+        beacon.notifyEntryStateOnDisplay = YES;
+        beacon.notifyOnEntry = YES;
+        beacon.notifyOnExit = YES;
         self.range=[dict[@"range"] integerValue];
         
         [self.locationManager startRangingBeaconsInRegion:beacon];
-        
     }];
-    [self.locationManager startUpdatingLocation];
-    
-    [self.locationManager startUpdatingHeading];
-    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 
-#pragma mark - LocationManager Delegate
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    
+}
+
 -(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
     NSLog(@"StartMonitoring:%@",region.identifier);
