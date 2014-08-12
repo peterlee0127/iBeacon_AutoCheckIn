@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
       extended: true
 }));
 app.use(bodyParser.json())
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
