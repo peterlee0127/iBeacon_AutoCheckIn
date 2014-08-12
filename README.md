@@ -83,6 +83,7 @@ Server
 
 ```
 ./start
+//Remember to Start your mongodb.
 ```
 
 <hr>
