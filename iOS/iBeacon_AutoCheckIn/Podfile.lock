@@ -1,37 +1,39 @@
 PODS:
-  - AFNetworking (2.2.3):
+  - AFNetworking (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.3):
+  - AFNetworking/NSURLConnection (2.3.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.3):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.3)
-  - AFNetworking/Security (2.2.3)
-  - AFNetworking/Serialization (2.2.3)
-  - AFNetworking/UIKit (2.2.3):
+  - AFNetworking/NSURLSession (2.3.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.3.1)
+  - AFNetworking/Security (2.3.1)
+  - AFNetworking/Serialization (2.3.1)
+  - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - JSMessagesViewController (4.0.4):
     - JSQSystemSoundPlayer
-  - JSQSystemSoundPlayer (1.5.0)
+  - JSQSystemSoundPlayer (1.5.2)
   - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.0)
+  - AFNetworking
   - JSMessagesViewController
   - SocketRocket
 
 SPEC CHECKSUMS:
-  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  JSMessagesViewController: 6b59dec2b679ee6a8c6d9c9f1d5d9748abf4c05c
-  JSQSystemSoundPlayer: 6dbac8dcc33e3add6facb3e59451a0249aece17d
-  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
+  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
+  JSMessagesViewController: 1083fdb9043e652a86b29bdfef526a9caef9f40e
+  JSQSystemSoundPlayer: c24914bc96ff5365b5d28b59d7ecffd60d1c5587
+  SocketRocket: 79a68ae186063c65e1fe6f638b1ae2927aa5f304
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1
