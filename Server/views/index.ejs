@@ -23,28 +23,28 @@
 				<thead>
 				    <tr>
 				        <th>
-				        學號
+				        Stu_id
 				        </th>
 								<th>
-								姓名
+								Name
 								</th>
 								<th>
-								出席
+								Arrived
 								</th>
 								<th>
-								出席時間
+								Arrived Time
 								</th>
 								<th>
-								離開時間
+								Leave Time
 								</th>
 								<th>
-								位置
+								Location
 								</th>
 								<th>
-								鎖定
+								Lock
 								</th>
 								<th>
-									刪除
+								Delete
 								</th>
 				    </tr>
 				</thead>
@@ -66,13 +66,13 @@
 									<div class="text" ng-repeat="outtime in student.out">{{ outtime | date:'HH:mm:ss'}}</div><br><br>
 								</td>
 								<td>
-									<p><div id="{{student.stu_id}}">未知</div></p><br><br>
+									<p><div id="{{student.stu_id}}">unknown</div></p><br><br>
 								</td>
 								<td>
 									<p ng-style="lock.style" ng-click="lockStudent(student.stu_id)">{{ lockColor(student.lock) }}</p><br><br>
 								</td>
 								<td>
-									<div class="delete" ng-click="deleteStudent(student.stu_id)">刪除</div><br><br>
+									<div class="delete" ng-click="deleteStudent(student.stu_id)">Delete</div><br><br>
 								</td>
 				    </tr>
 				</tbody>
