@@ -8,18 +8,21 @@ var morgan = require('morgan');
 var methodOverride = require('method-override');
 var debug = require('debug')('my-application');
 var mongoose = require('mongoose');
+var crypto = require('crypto');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({
-      extended: true
-}));
-app.use(bodyParser.json())
-//app.use(morgan('dev'));
-app.use(cookieParser());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+
+// app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,6 +61,12 @@ var Student = mongoose.model('Student',
 	'in': [{ type:Date}],
 	'out': [{type:Date}]
 
+});
+
+var iBeaconAdmin = mongoose.model('iBeaconAdmin',
+{
+  'account':String,
+  'password':String
 });
 
 //API
@@ -137,10 +146,16 @@ app.get('/ViewRowData',sessionHandler, function(req,res){
 	res.render('ViewRowData.ejs', { UserName:req.session.user });
 });
 
-
-
 app.get("/login",function(req,res){
+	if(req.session.user)
+		req.session.user= NaN;
 	res.sendfile("./public/login.html");
+});
+
+app.get("/register",function(req,res){
+	if(req.session.user)
+		req.session.user= NaN;
+  res.sendfile("./public/register.html");
 });
 
 app.get("/logout",function(req,res){
@@ -148,14 +163,64 @@ app.get("/logout",function(req,res){
 	res.redirect('/login');
 });
 
-app.post("/loginAction",function(req,res){
-	if (req.body.hasOwnProperty('email')&&
-		req.body.email == 'admin@admin') {
-		req.session.user = 'admin';
-		res.redirect('/');
-	}else
-		res.redirect('/login');
+app.post("/registerAction",function(req,res){
 
+  iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+  {
+    	if(!admin){
+        var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
+        var text = req.body.password;
+        var crypted = cipher.update(text,'utf8','hex');
+        crypted += cipher.final('hex');
+
+        iBeaconAdmin.create(
+        {
+            account : req.body.email ,
+            password : crypted
+
+        },function(err,admin){
+            if(err)
+            {
+              console.log("add admin@admin err");
+              res.redirect('/register');
+            }
+            else
+            {
+              console.log("add admin@admin successful");
+              res.redirect('/login');
+            }
+            return;
+        });
+    }
+		else{
+    	console.log("Account has been used by another people");
+			res.redirect("/");
+		}
+  });
+});
+
+app.post("/loginAction",function(req,res){
+    iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+    {
+        if(!admin){
+          console.log("login user not found");
+          res.redirect('/login');
+          return;
+        }
+
+        var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
+        var text = req.body.password;
+        var crypted = cipher.update(text,'utf8','hex');
+        crypted += cipher.final('hex');
+        console.log(admin.password+" "+crypted);
+        if(admin.password==crypted)
+        {
+          req.session.user = req.body.email;
+          res.redirect('/');
+        }
+        else
+          res.redirect('/login');
+    });
 });
 
 
