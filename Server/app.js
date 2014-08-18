@@ -189,12 +189,11 @@ app.post("/registerAction",function(req,res){
               console.log("add admin@admin successful");
               res.redirect('/login');
             }
-            return;
         });
     }
 		else{
     	console.log("Account has been used by another people");
-			res.redirect("/");
+			res.redirect("/login");
 		}
   });
 });
@@ -203,7 +202,7 @@ app.post("/loginAction",function(req,res){
     iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
     {
         if(!admin){
-          console.log("login user not found");
+          console.log("User not found");
           res.redirect('/login');
           return;
         }
