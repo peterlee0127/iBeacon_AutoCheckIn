@@ -38,22 +38,22 @@ function mainController($scope, $http) {
 	$scope.lockColor = function(lock){
 		if(lock){
 			$scope.turnRed();
-			return "鎖定";
+			return "Locked";
 		}
 		else{
 			$scope.turnGreen();
-			return "未鎖定";
+			return "unLocked";
 		}
 	}
 
 	$scope.comeColor = function(come){
 		if(!come){
 		  $scope.turnRed();
-			return "沒到";
+			return "not arrived";
 		}
 		else{
 			$scope.turnGreen();
-			return "有到";
+			return "arrived";
 		}
 	}
 
@@ -94,7 +94,6 @@ function mainController($scope, $http) {
 			});
 	};
 
-
      socket = io.connect(':8080');
 	// var socket = io.connect('your server ip:port');
 	// example var socket = io.connect('192.168.1.1:8080');
@@ -116,7 +115,7 @@ function mainController($scope, $http) {
 			if(!document.getElementById(data.stu_id))
 				return;
 
-			 document.getElementById(data.stu_id).innerHTML="位置："+data.identifier+'<br></br>'+"距離:"+data.distance ;
+			 document.getElementById(data.stu_id).innerHTML="Location："+data.identifier+'<br></br>'+"Distance:"+data.distance ;
 		});
 
 
