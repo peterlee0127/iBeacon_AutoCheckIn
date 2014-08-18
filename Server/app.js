@@ -147,10 +147,14 @@ app.get('/ViewRowData',sessionHandler, function(req,res){
 });
 
 app.get("/login",function(req,res){
+	if(req.session.user)
+		req.session.user= NaN;
 	res.sendfile("./public/login.html");
 });
 
 app.get("/register",function(req,res){
+	if(req.session.user)
+		req.session.user= NaN;
   res.sendfile("./public/register.html");
 });
 
@@ -160,10 +164,10 @@ app.get("/logout",function(req,res){
 });
 
 app.post("/registerAction",function(req,res){
-  console.log(req.body.email + " "+ req.body.password);
+
   iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
   {
-      if(!admin){
+    	if(!admin){
         var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
         var text = req.body.password;
         var crypted = cipher.update(text,'utf8','hex');
@@ -187,14 +191,15 @@ app.post("/registerAction",function(req,res){
             }
             return;
         });
-
     }
-    console.log("Account has been used by another people");
+		else{
+    	console.log("Account has been used by another people");
+			res.redirect("/");
+		}
   });
 });
 
 app.post("/loginAction",function(req,res){
-    console.log("login:"+req.body.email+" "+req.body.password);
     iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
     {
         if(!admin){
