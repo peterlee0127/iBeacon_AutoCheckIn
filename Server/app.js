@@ -42,7 +42,6 @@ app.use(session({
 mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
 // mongoose.connect('mongodb://example:example@oceanic.mongohq.com:10037/ibeacon_Auto');
 
-
 var Student = mongoose.model('Student',
 {
   'stu_id':String,
@@ -186,7 +185,7 @@ app.post("/registerAction",function(req,res){
             }
             else
             {
-              console.log("add admin@admin successful");
+              console.log("add "+req.body.email+" is successful");
               res.redirect('/login');
             }
         });
