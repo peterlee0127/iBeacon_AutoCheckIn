@@ -104,7 +104,6 @@ function mainController($scope, $http) {
 
 		});
 
-
 		socket.on('disconnect', function(data) {
 
 		});
@@ -121,24 +120,23 @@ function mainController($scope, $http) {
 		});
 
 
-	socket.on('listen_chat',function(data) {
-	var e = $('<div class="other_chat">'+
-				'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">'+
-					'<div class="chat_id">'+
-						'<strong class="primary-font chat_name" style="margin-left:10px">'+data.stu_id+'</strong>'+
-							'<small class="pull-right text-muted" style="margin-right:10px">'+
-								'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
-							'</small>'+
-						'</div>'+
-					'<p style="margin-left:10px">'+data.message+'</p>'+
-				'</div>'+
-			'</div><br>');
-	$('#ListenChat').append(e);
-	var objDiv = document.getElementById("chat_box_outer");
-	objDiv.scrollTop = objDiv.scrollHeight;
-	$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
-	});
-
+		socket.on('listen_chat',function(data) {
+		var e = $('<div class="other_chat">'+
+					'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">'+
+						'<div class="chat_id">'+
+							'<strong class="primary-font chat_name" style="margin-left:10px">'+data.stu_id+'</strong>'+
+								'<small class="pull-right text-muted" style="margin-right:10px">'+
+									'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
+								'</small>'+
+							'</div>'+
+						'<p style="margin-left:10px">'+data.message+'</p>'+
+					'</div>'+
+				'</div><br>');
+		$('#ListenChat').append(e);
+		var objDiv = document.getElementById("chat_box_outer");
+		objDiv.scrollTop = objDiv.scrollHeight;
+		$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
+		});
 
 }
 
