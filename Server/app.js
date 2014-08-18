@@ -64,6 +64,7 @@ var Student = mongoose.model('Student',
 
 var iBeaconAdmin = mongoose.model('iBeaconAdmin',
 {
+	'UserName':String,
   'account':String,
   'password':String
 });
@@ -174,6 +175,7 @@ app.post("/registerAction",function(req,res){
 
         iBeaconAdmin.create(
         {
+					  UserName : req.body.name,
             account : req.body.email ,
             password : crypted
 
@@ -213,7 +215,7 @@ app.post("/loginAction",function(req,res){
         console.log(admin.password+" "+crypted);
         if(admin.password==crypted)
         {
-          req.session.user = req.body.email;
+          req.session.user = admin.UserName;
           res.redirect('/');
         }
         else
