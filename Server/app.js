@@ -65,10 +65,10 @@ var iBeaconAdmin = mongoose.model('iBeaconAdmin',
     'password'	:String
 });
 var Question = mongoose.model('question',{
-	'UserName'	 :String,
-	'date'		 :Date,
-	'dateString' :String,
-	'content'	 :String
+	'UserName'	 	:String,
+	'date'		 		:Date,
+	'dateString' 	:String,
+	'content'	 		:String
 })
 
 //API
@@ -208,7 +208,7 @@ app.post("/loginAction",function(req,res){
         var text = req.body.password;
         var crypted = cipher.update(text,'utf8','hex');
         crypted += cipher.final('hex');
-        console.log(admin.password+" "+crypted);
+        // console.log(admin.password+" "+crypted);
         if(admin.password==crypted)
         {
        	  req.session.user = admin.UserName;
@@ -267,13 +267,13 @@ function getDateTime() {
 var io = require('socket.io').listen(server);
 io.on('connection', function(socket){
 
-
 	socket.on('chat', function(obj){//stu_id, message, class_id
 		Question.create(
 		{
 			'UserName'		: obj.kStuId,
-			'dateString' : getDateTime(),
-			'content'			: obj.message
+			'dateString'	: getDateTime(),
+			'content'			: obj.message,
+			'date' 				: Date()
 		},function(err,question){
 				if(err)
 				{
