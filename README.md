@@ -40,13 +40,6 @@ npm install
 Configure
 =========
 
-<h3>Default Admin Account</h3>
-
-```
-account:admin@admin
-password:admin
-```
-
 iOS
 
 ```
