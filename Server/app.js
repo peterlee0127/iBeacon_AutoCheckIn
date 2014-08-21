@@ -136,6 +136,8 @@ function sessionHandler(req,res,next){
 		res.redirect("/login");
 }
 
+//
+// O
 // index Page
 app.get("/",sessionHandler, function(req,res){
 		res.render('index', { UserName:req.session.user });
@@ -292,7 +294,7 @@ io.on('connection', function(socket){
 				}
 				else
 				{
-					console.log("saveChat"+question);
+					//console.log("saveChat"+question);
 				}
 		});
 

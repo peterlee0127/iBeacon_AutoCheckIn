@@ -24,25 +24,7 @@
 			<div class="col-md-12 col-md-offset-4">
 
 		   <div class="middle_container">
-				<!--
-						<tr class="chattr" ng-repeat="chat in chats">
-							<td> {{ chat.content }}</td>
 
-							var e = $('<div class="my_chat">'+
-													'<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:15px;">'+
-															'<div class="chat_id">'+
-															'<small class=" text-muted" style="margin-left:10px">'+
-																	'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
-																	'</small>'+
-																	'<strong class="pull-right primary-font" style="margin-right:10px">Me</strong>'+
-															'</div>'+
-															'<pi style="margin-left:10px">'+text+'</p>'+
-													'</div>'+
-											'</div><br>');
-							$('#ListenChat').append(e);
-
-						</tr>
-					-->
                         <div class="col-lg-12 col-lg-12 col-lg-12 col-lg-4 left_box">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
@@ -50,8 +32,18 @@
                                     <span class="glyphicon glyphicon-comment"></span>
                                 </div>
                                 <div class="panel-body chat_box" id="chat_box_outer">
-                                    <ul class="chat_box_inner" id="ListenChat">
-
+                                    <ul class="chat_box_inner" id="ListenChat" ng-repeat="chat in chats">
+																					<div class="other_chat">
+																							<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">
+																								<div class="chat_id">
+																									<strong class="primary-font chat_name" style="margin-left:10px">{{chat.UserName}}</strong>
+																										<small class="pull-right text-muted" style="margin-right:10px">
+																											<span class="glyphicon glyphicon-time"></span>{{chat.dateString}}
+																										</small>
+																									</div>
+																								<p style="margin-left:10px">{{chat.content }}</p>
+																							</div>
+																						</div><br>
                                     </ul>
                                 </div>
                                 <div class="panel-footer chat_message_input">
