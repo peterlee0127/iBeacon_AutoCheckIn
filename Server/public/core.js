@@ -1,16 +1,18 @@
 var PeopleList = angular.module('PeopleList', []);
 
 function mainController($scope, $http) {
-	$scope.formData = {};
+	// $scope.formData = {};
 
 	// when landing on the page
-	$http.get('/api/getList')
-		.success(function(data) {
-			$scope.students = data;
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
+	$scope.getList = function(){
+		$http.get('/api/getList')
+			.success(function(data) {
+				$scope.students = data;
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+			});
+  }
 
 	$scope.reloadData = function()
 	{

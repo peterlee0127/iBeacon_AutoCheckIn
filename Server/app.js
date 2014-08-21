@@ -15,7 +15,6 @@ var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
@@ -47,30 +46,32 @@ var Student = mongoose.model('Student',
   'stu_id':String,
 	'name':String,
 	'come':{
-			type:Boolean,
-			default:false,
-		    required:true
+		type:Boolean,
+		default:false,
+		required:true
 	},
 	'lock':{
-			type:Boolean,
-			default:false,
-		    required:true
+		type:Boolean,
+		default:false,
+		required:true
 	},
-
-	'in': [{ type:Date}],
-	'out': [{type:Date}]
-
+	'in'	: [{ type:Date}],
+	'out'	: [{type:Date}]
 });
-
 var iBeaconAdmin = mongoose.model('iBeaconAdmin',
 {
-	'UserName':String,
-  'account':String,
-  'password':String
+	'UserName'	:String,
+    'account'	:String,
+    'password'	:String
 });
+var Question = mongoose.model('question',{
+	'UserName'	 :String,
+	'date'		 :Date,
+	'dateString' :String,
+	'content'	 :String
+})
 
 //API
-
 app.get('/api/getList' , function(req,res)
 {
 		Student.find(function (err,student)
@@ -84,12 +85,11 @@ app.get('/api/getList' , function(req,res)
 
 app.get("/getBeacon", function(req,res)
 {
-	res.sendfile("./public/iBeacon.json");
+		res.sendfile("./public/iBeacon.json");
 });
 
 
 app.post('/api/changeStudent/', function(req, res) {
-
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
@@ -100,7 +100,6 @@ app.post('/api/changeStudent/', function(req, res) {
 });
 
 app.post('/api/lockStudent/', function(req, res) {
-
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.lock=!student.lock;  //when change from Web , lock the come status
@@ -111,7 +110,6 @@ app.post('/api/lockStudent/', function(req, res) {
 });
 
 app.post('/api/deleteStudent/', function(req, res) {
-
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.remove();
@@ -146,6 +144,10 @@ app.get('/ViewRowData',sessionHandler, function(req,res){
 	res.render('ViewRowData.ejs', { UserName:req.session.user });
 });
 
+app.post('/redirect',function(req,res){
+	res.render('redirect',  { par:req.body.par });
+});
+
 app.get("/login",function(req,res){
 	if(req.session.user)
 		req.session.user= NaN;
@@ -164,7 +166,6 @@ app.get("/logout",function(req,res){
 });
 
 app.post("/registerAction",function(req,res){
-
   iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
   {
     	if(!admin){
@@ -180,21 +181,17 @@ app.post("/registerAction",function(req,res){
             password : crypted
 
         },function(err,admin){
-            if(err)
-            {
-              console.log("add admin@admin err");
-              res.redirect('/register');
-            }
-            else
-            {
-              console.log("add "+req.body.email+" is successful");
-              res.redirect('/login');
-            }
+            if(err){
+           	 	res.render('result', {  title:"Error",result:"Register Fail",to:'/register'    });
+		   			}
+            else  {
+							req.session.user = admin.UserName;
+         	 		res.render('result', {  title:"Register Success",result:"Hello "+req.body.name,to:'/'  });
+	   				}
         });
     }
 		else{
-    	console.log("Account has been used by another people");
-			res.redirect("/login");
+			res.render('result', {  title:"Error",result: "Account has been used",to:'/register'  });
 		}
   });
 });
@@ -203,8 +200,7 @@ app.post("/loginAction",function(req,res){
     iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
     {
         if(!admin){
-          console.log("User not found");
-          res.redirect('/login');
+		  	 	res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
           return;
         }
 
@@ -215,11 +211,12 @@ app.post("/loginAction",function(req,res){
         console.log(admin.password+" "+crypted);
         if(admin.password==crypted)
         {
-          req.session.user = admin.UserName;
-          res.redirect('/');
-        }
-        else
-          res.redirect('/login');
+       	  req.session.user = admin.UserName;
+       	  res.render('result',{  title:"Login Success",result: "Hello "+admin.UserName,to:'/'  });
+	   		}
+        else{
+	    		res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
+			}
     });
 });
 
@@ -239,22 +236,63 @@ function socketObj(socketID,userID){
 		this.userID=userID;
 };
 
+function getDateTime() {
+		var now     = new Date();
+		var year    = now.getFullYear();
+		var month   = now.getMonth()+1;
+		var day     = now.getDate();
+		var hour    = now.getHours();
+		var minute  = now.getMinutes();
+		var second  = now.getSeconds();
+		if(month.toString().length == 1) {
+				month = '0'+month;
+		}
+		if(day.toString().length == 1) {
+				day = '0'+day;
+		}
+		if(hour.toString().length == 1) {
+				hour = '0'+hour;
+		}
+		if(minute.toString().length == 1) {
+				minute = '0'+minute;
+		}
+		if(second.toString().length == 1) {
+				second = '0'+second;
+		}
+		var dateTime = hour+':'+minute+':'+second;
+		return dateTime;
+}
+
 // Socket.IO configure
 var io = require('socket.io').listen(server);
 io.on('connection', function(socket){
 
 
 	socket.on('chat', function(obj){//stu_id, message, class_id
+		Question.create(
+		{
+			'UserName'		: obj.kStuId,
+			'dateString' : getDateTime(),
+			'content'			: obj.message
+		},function(err,question){
+				if(err)
+				{
+
+				}
+				else
+				{
+					console.log(question);
+				}
+		});
+
 		socket.broadcast.emit('listen_chat', obj);
 	});
 
 	socket.on('distance', function(obj){
 		socket.broadcast.emit('UserDistance',obj);
-
 	});
 
 	socket.on('addUser',function(message){
-
 		for(var i=0;i<socketArr.length;i++){
 				var Obj=socketArr[i];
 				if(message.userID==Obj.userID)	{
@@ -294,7 +332,7 @@ io.on('connection', function(socket){
 				{
 					student.come=true;
 					student.save();
-			 }
+			 	}
 				student.in.push(new Date());
 				socket.broadcast.emit('reloadData', { my: 'data' });
 		});
