@@ -3,7 +3,6 @@ var PeopleList = angular.module('PeopleList', []);
 function mainController($scope, $http) {
 	// $scope.formData = {};
 
-	// when landing on the page
 	$scope.getList = function(){
 		$http.get('/api/getList')
 			.success(function(data) {
@@ -13,6 +12,16 @@ function mainController($scope, $http) {
 				console.log('Error: ' + data);
 			});
   }
+
+	$scope.getChat = function(){
+		$http.get('/api/getChat')
+			.success(function(data) {
+				$scope.chats = data;
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+			});
+	}
 
 	$scope.reloadData = function()
 	{
@@ -150,19 +159,19 @@ function getDateTime() {
 		var minute  = now.getMinutes();
 		var second  = now.getSeconds();
 		if(month.toString().length == 1) {
-				month = '0'+month;
+				month = ' '+month;
 		}
 		if(day.toString().length == 1) {
-				day = '0'+day;
+				day = ' '+day;
 		}
 		if(hour.toString().length == 1) {
-				hour = '0'+hour;
+				hour = ' '+hour;
 		}
 		if(minute.toString().length == 1) {
-				minute = '0'+minute;
+				minute = ' '+minute;
 		}
 		if(second.toString().length == 1) {
-				second = '0'+second;
+				second = ' '+second;
 		}
 		var dateTime = month+"/"+day+" "+hour+':'+minute+':'+second;
 		return dateTime;

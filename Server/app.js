@@ -72,7 +72,7 @@ var Question = mongoose.model('question',{
 })
 
 //API
-app.get('/api/getList' , function(req,res)
+app.get('/api/getList',sessionHandler, function(req,res)
 {
 		Student.find(function (err,student)
 		{
@@ -83,13 +83,24 @@ app.get('/api/getList' , function(req,res)
 		});
 });
 
+app.get('/api/getChat',sessionHandler,function(req,res){
+	//
+	Question.find(function (err,question)
+	{
+			if(err)
+				res.send(err);
+			else
+				res.json(question);
+	});
+})
+
 app.get("/getBeacon", function(req,res)
 {
 		res.sendfile("./public/iBeacon.json");
 });
 
 
-app.post('/api/changeStudent/', function(req, res) {
+app.post('/api/changeStudent/',sessionHandler, function(req, res) {
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
@@ -99,7 +110,7 @@ app.post('/api/changeStudent/', function(req, res) {
 
 });
 
-app.post('/api/lockStudent/', function(req, res) {
+app.post('/api/lockStudent/', sessionHandler, function(req, res) {
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.lock=!student.lock;  //when change from Web , lock the come status
@@ -109,7 +120,7 @@ app.post('/api/lockStudent/', function(req, res) {
 
 });
 
-app.post('/api/deleteStudent/', function(req, res) {
+app.post('/api/deleteStudent/',sessionHandler, function(req, res) {
 	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.remove();
@@ -122,7 +133,7 @@ function sessionHandler(req,res,next){
 	if(req.session.user)
 		next();
 	else
-		res.redirect("login");
+		res.redirect("/login");
 }
 
 // index Page
@@ -245,19 +256,19 @@ function getDateTime() {
 		var minute  = now.getMinutes();
 		var second  = now.getSeconds();
 		if(month.toString().length == 1) {
-				month = '0'+month;
+				month = ' '+month;
 		}
 		if(day.toString().length == 1) {
-				day = '0'+day;
+				day = ' '+day;
 		}
 		if(hour.toString().length == 1) {
-				hour = '0'+hour;
+				hour = ' '+hour;
 		}
 		if(minute.toString().length == 1) {
-				minute = '0'+minute;
+				minute = ' '+minute;
 		}
 		if(second.toString().length == 1) {
-				second = '0'+second;
+				second = ' '+second;
 		}
 		var dateTime = month+"/"+day+" "+hour+':'+minute+':'+second;
 		return dateTime;
@@ -281,7 +292,7 @@ io.on('connection', function(socket){
 				}
 				else
 				{
-					console.log(question);
+					console.log("saveChat"+question);
 				}
 		});
 

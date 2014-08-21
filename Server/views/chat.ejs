@@ -3,7 +3,7 @@
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 
-				<title>iBeacon AutoCheckIn-Chat</title>
+				<title>iBeacon AutoCheckIn-Chat-<%= UserName %></title>
 				<% include require.ejs %>
 				<style>
 						html { overflow-y:scroll; }
@@ -13,15 +13,36 @@
 				</style>
 				<% include header.ejs %>
 				<script src="core.js"></script>
+				<div id="User" style="visibility:hidden"><%= UserName %></div>
 		</head>
 
-		<body ng-controller="mainController">
-			<div id="student-list" class="row">
+		<body ng-controller="mainController"  data-ng-init="getChat()">
+
+
+
+			<div id="chat-list" class="row">
 			<div class="col-md-12 col-md-offset-4">
 
 		   <div class="middle_container">
-<!--                    <div class="row">-->
-                        <!--chat_box-->
+				<!--
+						<tr class="chattr" ng-repeat="chat in chats">
+							<td> {{ chat.content }}</td>
+
+							var e = $('<div class="my_chat">'+
+													'<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:15px;">'+
+															'<div class="chat_id">'+
+															'<small class=" text-muted" style="margin-left:10px">'+
+																	'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
+																	'</small>'+
+																	'<strong class="pull-right primary-font" style="margin-right:10px">Me</strong>'+
+															'</div>'+
+															'<pi style="margin-left:10px">'+text+'</p>'+
+													'</div>'+
+											'</div><br>');
+							$('#ListenChat').append(e);
+
+						</tr>
+					-->
                         <div class="col-lg-12 col-lg-12 col-lg-12 col-lg-4 left_box">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
@@ -44,21 +65,20 @@
                                 </div>
                             </div>
                         </div>
-                        <!--chart_box-->
                         <div class="col-lg-12 col-lg-12 col-lg-12">
                             <div class="chart_box"></div>
                         </div>
-<!--                    </div>-->
-                </div>
+          </div>
 
 			</div>
 		</div>
+
+
   <script >
             function send_chat(){
 						var text = $('#btn-input').val();
-
-                socket.emit('chat', { 'kStuId':'admin', 'message': text});
-
+								var user = document.getElementById("User");
+                socket.emit('chat', { 'kStuId':	user.innerHTML, 'message': text});
 
                 var e = $('<div class="my_chat">'+
                             '<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:15px;">'+
@@ -74,7 +94,8 @@
                 $('#ListenChat').append(e);
 					$('#btn-input:text').val('');
 				   $("#btn-input:text").focus();
-				var objDiv = document.getElementById("chat_box_outer");
+
+								var objDiv = document.getElementById("chat_box_outer");
                 objDiv.scrollTop = objDiv.scrollHeight;
             }
 
