@@ -72,8 +72,7 @@ var Question = mongoose.model('question',{
 })
 
 //API
-app.get('/api/getList',sessionHandler, function(req,res)
-{
+app.get('/api/getList',sessionHandler, function(req,res){
 		Student.find(function (err,student)
 		{
 				if(err)
@@ -84,7 +83,6 @@ app.get('/api/getList',sessionHandler, function(req,res)
 });
 
 app.get('/api/getChat',sessionHandler,function(req,res){
-	//
 	Question.find(function (err,question)
 	{
 			if(err)
@@ -135,14 +133,10 @@ function sessionHandler(req,res,next){
 	else
 		res.redirect("/login");
 }
-
-//
-// O
 // index Page
 app.get("/",sessionHandler, function(req,res){
 		res.render('index', { UserName:req.session.user });
 });
-
 
 app.get("/chat",sessionHandler, function(req,res){
 		res.render('chat', { UserName:req.session.user });
@@ -152,13 +146,8 @@ app.get('/iBeaconConf',sessionHandler, function(req,res){
 	res.render('iBeaconConf', { UserName:req.session.user });
 });
 
-
 app.get('/ViewRowData',sessionHandler, function(req,res){
 	res.render('ViewRowData.ejs', { UserName:req.session.user });
-});
-
-app.post('/redirect',function(req,res){
-	res.render('redirect',  { par:req.body.par });
 });
 
 app.get("/login",function(req,res){
@@ -221,12 +210,10 @@ app.post("/loginAction",function(req,res){
         var text = req.body.password;
         var crypted = cipher.update(text,'utf8','hex');
         crypted += cipher.final('hex');
-        // console.log(admin.password+" "+crypted);
-        if(admin.password==crypted)
-        {
+        if(admin.password==crypted){
        	  req.session.user = admin.UserName;
        	  res.render('result',{  title:"Login Success",result: "Hello "+admin.UserName,to:'/'  });
-	   		}
+	   	}
         else{
 	    		res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
 			}

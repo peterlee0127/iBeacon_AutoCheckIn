@@ -21,7 +21,7 @@
 
 
 			<div id="chat-list" class="row">
-			<div class="col-md-12 col-md-offset-4">
+			<div class="col-md-12">
 
 		   <div class="middle_container">
 
@@ -31,20 +31,20 @@
                                     Question
                                     <span class="glyphicon glyphicon-comment"></span>
                                 </div>
-                                <div class="panel-body chat_box" id="chat_box_outer">
-                                    <ul class="chat_box_inner" id="ListenChat" ng-repeat="chat in chats">
-																					<div class="other_chat">
-																							<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">
-																								<div class="chat_id">
-																									<strong class="primary-font chat_name" style="margin-left:10px">{{chat.UserName}}</strong>
-																										<small class="pull-right text-muted" style="margin-right:10px">
-																											<span class="glyphicon glyphicon-time"></span>{{chat.dateString}}
-																										</small>
-																									</div>
-																								<p style="margin-left:10px">{{chat.content }}</p>
-																							</div>
-																						</div><br>
-                                    </ul>
+                                <div class="panel-body chat_box" id="chat_box_outer" style="overflow-y: scroll; height:500px;">
+																			<ul class="chat_box_inner" id="ListenChat" ng-repeat="chat in chats">
+																								<div class="other_chat">
+																										<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">
+																											<div class="chat_id">
+																												<strong class="primary-font chat_name" style="margin-left:10px">{{chat.UserName}}</strong>
+																													<small class="pull-right text-muted" style="margin-right:10px">
+																														<span class="glyphicon glyphicon-time"></span>{{chat.dateString}}
+																													</small>
+																												</div>
+																											<p style="margin-left:10px">{{chat.content }}</p>
+																										</div>
+																									</div><br>
+																		</ul>
                                 </div>
                                 <div class="panel-footer chat_message_input">
                                     <div class="input-group">
@@ -83,9 +83,9 @@
                                 '<pi style="margin-left:10px">'+text+'</p>'+
                             '</div>'+
                         '</div><br>');
-                $('#ListenChat').append(e);
-					$('#btn-input:text').val('');
-				   $("#btn-input:text").focus();
+                $('#chat_box_outer').append(e);
+								$('#btn-input:text').val('');
+				   			$("#btn-input:text").focus();
 
 								var objDiv = document.getElementById("chat_box_outer");
                 objDiv.scrollTop = objDiv.scrollHeight;
