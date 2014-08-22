@@ -69,8 +69,8 @@
   <script >
             function send_chat(){
 						var text = $('#btn-input').val();
-								var user = document.getElementById("User");
-                socket.emit('chat', { 'kStuId':	user.innerHTML, 'message': text});
+								var user = $('#User').val();
+                socket.emit('chat', { 'kStuId':	user, 'message': text});
 
                 var e = $('<div class="my_chat">'+
                             '<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:15px;">'+

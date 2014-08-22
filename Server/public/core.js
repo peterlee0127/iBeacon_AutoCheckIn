@@ -142,7 +142,7 @@ function mainController($scope, $http) {
 						'<p style="margin-left:10px">'+data.message+'</p>'+
 					'</div>'+
 				'</div><br>');
-		$('#ListenChat').append(e);
+		$('#chat_box_outer').append(e);
 		var objDiv = document.getElementById("chat_box_outer");
 		objDiv.scrollTop = objDiv.scrollHeight;
 		$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
