@@ -3,7 +3,6 @@ var PeopleList = angular.module('PeopleList', []);
 function mainController($scope, $http) {
 	// $scope.formData = {};
 
-	// when landing on the page
 	$scope.getList = function(){
 		$http.get('/api/getList')
 			.success(function(data) {
@@ -13,6 +12,16 @@ function mainController($scope, $http) {
 				console.log('Error: ' + data);
 			});
   }
+
+	$scope.getChat = function(){
+		$http.get('/api/getChat')
+			.success(function(data) {
+				$scope.chats = data;
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+			});
+	}
 
 	$scope.reloadData = function()
 	{
@@ -123,9 +132,9 @@ function mainController($scope, $http) {
 
 		socket.on('listen_chat',function(data) {
 		var e = $('<div class="other_chat">'+
-					'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">'+
+					'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:10px;">'+
 						'<div class="chat_id">'+
-							'<strong class="primary-font chat_name" style="margin-left:10px">'+data.stu_id+'</strong>'+
+							'<strong class="primary-font chat_name" style="margin-left:10px">'+data.kStuId+'</strong>'+
 								'<small class="pull-right text-muted" style="margin-right:10px">'+
 									'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
 								'</small>'+
@@ -133,7 +142,7 @@ function mainController($scope, $http) {
 						'<p style="margin-left:10px">'+data.message+'</p>'+
 					'</div>'+
 				'</div><br>');
-		$('#ListenChat').append(e);
+		$('#chat_box_outer').append(e);
 		var objDiv = document.getElementById("chat_box_outer");
 		objDiv.scrollTop = objDiv.scrollHeight;
 		$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
@@ -150,10 +159,10 @@ function getDateTime() {
 		var minute  = now.getMinutes();
 		var second  = now.getSeconds();
 		if(month.toString().length == 1) {
-				month = '0'+month;
+				month = ' '+month;
 		}
 		if(day.toString().length == 1) {
-				day = '0'+day;
+				day = ' '+day;
 		}
 		if(hour.toString().length == 1) {
 				hour = '0'+hour;

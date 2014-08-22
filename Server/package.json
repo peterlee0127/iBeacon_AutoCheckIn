@@ -16,7 +16,7 @@
     "debug": "*",
     "ejs": "*",
     "stylus": "*",
-	  "socket.io": "0.*",
+	  "socket.io": "0.9.16",
     "mongoose" : "3.8.13",
     "connect-mongo" : "*",
    	"mongodb": "",
