@@ -134,7 +134,7 @@ function mainController($scope, $http) {
 		var e = $('<div class="other_chat">'+
 					'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">'+
 						'<div class="chat_id">'+
-							'<strong class="primary-font chat_name" style="margin-left:10px">'+data.stu_id+'</strong>'+
+							'<strong class="primary-font chat_name" style="margin-left:10px">'+data.kStuId+'</strong>'+
 								'<small class="pull-right text-muted" style="margin-right:10px">'+
 									'<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
 								'</small>'+
