@@ -132,7 +132,7 @@ function mainController($scope, $http) {
 
 		socket.on('listen_chat',function(data) {
 		var e = $('<div class="other_chat">'+
-					'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:15px;">'+
+					'<div class="chat-body clearfix" style="background-color:#7fffd4;border-radius:10px;">'+
 						'<div class="chat_id">'+
 							'<strong class="primary-font chat_name" style="margin-left:10px">'+data.kStuId+'</strong>'+
 								'<small class="pull-right text-muted" style="margin-right:10px">'+
@@ -165,13 +165,13 @@ function getDateTime() {
 				day = ' '+day;
 		}
 		if(hour.toString().length == 1) {
-				hour = ' '+hour;
+				hour = '0'+hour;
 		}
 		if(minute.toString().length == 1) {
-				minute = ' '+minute;
+				minute = '0'+minute;
 		}
 		if(second.toString().length == 1) {
-				second = ' '+second;
+				second = '0'+second;
 		}
 		var dateTime = month+"/"+day+" "+hour+':'+minute+':'+second;
 		return dateTime;

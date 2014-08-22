@@ -251,13 +251,13 @@ function getDateTime() {
 				day = ' '+day;
 		}
 		if(hour.toString().length == 1) {
-				hour = ' '+hour;
+				hour = '0'+hour;
 		}
 		if(minute.toString().length == 1) {
-				minute = ' '+minute;
+				minute = '0'+minute;
 		}
 		if(second.toString().length == 1) {
-				second = ' '+second;
+				second = '0'+second;
 		}
 		var dateTime = month+"/"+day+" "+hour+':'+minute+':'+second;
 		return dateTime;
