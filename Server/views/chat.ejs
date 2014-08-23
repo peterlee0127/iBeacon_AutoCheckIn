@@ -22,7 +22,6 @@
 
 			<div id="chat-list" class="row">
 			<div class="col-md-12 col-md-offset-4">
-
 		   <div class="middle_container">
 
                         <div class="col-lg-12 col-lg-12 col-lg-12 col-lg-4 left_box">
@@ -60,38 +59,36 @@
                         <div class="col-lg-12 col-lg-12 col-lg-12">
                             <div class="chart_box"></div>
                         </div>
-          </div>
 
-			</div>
-		</div>
+          </div> <!--middle_container-->
+			</div> <!--col-md-12-->
+		</div>  <!-- chat-list-->
 
-
-  <script >
+	<script>
             function send_chat(){
 						var text = $('#btn-input').val();
 						if(text=='')
 							return;
+						var UserName = document.getElementById("User").innerHTML;
+            socket.emit('chat', { 'kStuId':	UserName, 'message': text});
 
-								var UserName = document.getElementById("User").innerHTML;
-                socket.emit('chat', { 'kStuId':	UserName, 'message': text});
-
-                var e = $('<div class="my_chat">'+
-                            '<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:10px;">'+
-                                '<div class="chat_id">'+
-                                '<small class=" text-muted" style="margin-left:10px">'+
-                                    '<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
-                                    '</small>'+
-                                    '<strong class="pull-right primary-font" style="margin-right:10px">Me</strong>'+
-                                '</div>'+
-                                '<pi style="margin-left:10px">'+text+'</p>'+
+            var e = $('<div class="my_chat">'+
+                        '<div class="chat-body clearfix" style="background-color:#00bfff;border-radius:10px;">'+
+                            '<div class="chat_id">'+
+                            '<small class=" text-muted" style="margin-left:10px">'+
+                                '<span class="glyphicon glyphicon-time"></span>'+getDateTime()+
+                              '</small>'+
+                                '<strong class="pull-right primary-font" style="margin-right:10px">Me</strong>'+
                             '</div>'+
-                        '</div><br>');
-                $('#chat_box_outer').append(e);
-								$('#btn-input:text').val('');
-				   			$("#btn-input:text").focus();
+                            '<pi style="margin-left:10px">'+text+'</p>'+
+                        '</div>'+
+                    '</div><br>');
+            $('#chat_box_outer').append(e);
+						$('#btn-input:text').val('');
+		   			$("#btn-input:text").focus();
 
-								var objDiv = document.getElementById("chat_box_outer");
-                objDiv.scrollTop = objDiv.scrollHeight;
+						var objDiv = document.getElementById("chat_box_outer");
+            objDiv.scrollTop = objDiv.scrollHeight;
             }
 
         </script>

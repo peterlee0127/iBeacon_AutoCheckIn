@@ -60,8 +60,8 @@ var Student = mongoose.model('Student',
 });
 var iBeaconAdmin = mongoose.model('iBeaconAdmin',
 {
-	'UserName'	:String,
-    'account'	:String,
+		'UserName'	:String,
+    'account'		:String,
     'password'	:String
 });
 var Question = mongoose.model('question',{
@@ -95,6 +95,20 @@ app.get('/api/getChat',sessionHandler,function(req,res){
 app.get("/getBeacon", function(req,res)
 {
 		res.sendfile("./public/iBeacon.json");
+});
+
+app.get("/removeAllData",sessionHandler, function(req,res){
+
+	Student.remove({}, function(err) {
+	   console.log('collection student removed')
+	});
+	iBeaconAdmin.remove({}, function(err) {
+		console.log('collection admin removed')
+	});
+	Question.remove({}, function(err) {
+		console.log('collection Question removed')
+	});
+	res.render('result', {  title:"Waiting....",result:"All data is clean",to:'/logout'    });
 });
 
 
