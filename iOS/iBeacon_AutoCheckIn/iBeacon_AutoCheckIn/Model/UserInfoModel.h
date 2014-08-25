@@ -22,6 +22,8 @@
 -(void) saveStuId:(NSString *) stuId;
 -(NSString *) getStuId;
 
+-(void) saveServer:(NSString *) serverAddr;
+-(NSString *) getServerAddr;
 
 
 @end

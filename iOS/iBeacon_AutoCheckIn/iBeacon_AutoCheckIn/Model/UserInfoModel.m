@@ -51,6 +51,7 @@
         self.infoDict=[[NSMutableDictionary alloc] init];
         self.infoDict[kStuName]=@"";
         self.infoDict[kStuId]=@"";
+        self.infoDict[kServerAddr] = defaultServer;
         [self saveData];
     
     }
@@ -79,7 +80,14 @@
 {
     return self.infoDict[kStuId];
 }
-
+-(void) saveServer:(NSString *) serverAddr{
+    self.infoDict[kServerAddr]=serverAddr;
+    [self saveData];
+}
+-(NSString *) getServerAddr{
+    
+    return self.infoDict[kServerAddr];
+}
 
 -(void) saveData
 {

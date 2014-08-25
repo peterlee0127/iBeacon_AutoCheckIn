@@ -68,11 +68,11 @@
     
     if(!webSocket.webSocket.isConnected)
     {
-        self.title =@"提問(未連線)";
+        self.title =@"Chat(not Connected)";
     }
     else
     {
-        self.title = @"提問(已連線)";
+        self.title = @"Chat(Connected)";
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -81,11 +81,11 @@
 {
     if(!webSocket.webSocket.isConnected)
     {
-        self.title =@"提問(未連線)";
+        self.title =@"Chat(not Connected)";
     }
     else
     {
-        self.title = @"提問(已連線)";
+        self.title = @"Chat(Connected)";
     }
 }
 
@@ -122,7 +122,7 @@
     //"你不在 指定的教室喔 無法連線" message:@"請到教室"
     if(!webSocket.webSocket.isConnected)
     {
-        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"你不在 指定的教室喔 無法連線" message:@"請到教室" delegate:nil cancelButtonTitle:@"確定" otherButtonTitles:nil, nil];
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"You are not in the classroom" message:@"Please come to the classroom" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         return;
     }

@@ -63,8 +63,8 @@
 }
 -(void) startMonitoring
 {
-    [self.locationManager requestAlwaysAuthorization];
-    [self.locationManager requestWhenInUseAuthorization];
+//    [self.locationManager requestAlwaysAuthorization];
+//    [self.locationManager requestWhenInUseAuthorization];
     
     [self.beaconArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict=(NSDictionary *)obj;

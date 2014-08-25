@@ -49,11 +49,15 @@
         return;
     if(self.webSocket.isConnected)
         return;
-    if(![iBeaconModel shareInstance].TouchIDAuth)
+    if([[[UserInfoModel shareInstance] getStuId] isEqualToString:@""])
         return;
+    if([[[UserInfoModel shareInstance] getStuName] isEqualToString:@""])
+        return;
+//    if(![iBeaconModel shareInstance].TouchIDAuth)
+//        return;
     
     self.webSocket=[[SocketIO alloc] initWithDelegate:self];
-    [self.webSocket connectToHost:defaultServer onPort:[defaultPort integerValue]];
+    [self.webSocket connectToHost:[[UserInfoModel shareInstance] getServerAddr] onPort:[defaultPort integerValue]];
 }
 -(void) disconnect
 {
