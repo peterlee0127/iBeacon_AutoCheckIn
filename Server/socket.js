@@ -1,4 +1,3 @@
-var app = require('./app.js');
 var model = require('./model.js');
 var socketArr=[];
 

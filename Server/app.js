@@ -205,4 +205,4 @@ var server = app.listen(app.get('port'), function() {
 
 var io = require('socket.io');
 io = io.listen(server);
-require('./socket')(io);
+require('./socket.js')(io);
