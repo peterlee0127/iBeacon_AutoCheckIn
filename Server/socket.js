@@ -146,6 +146,12 @@ module.exports =  function(io){
                       }
                     }
 
+                    for(var i=0;i<studnet.out.length;i++)
+                    {
+                          if( (student.out[i].getTime()-student.in[i].getTime() )<10){
+                              console.log("in/out is too close");
+                          }
+                    }
 
 
                 });
