@@ -9,7 +9,7 @@ var methodOverride = require('method-override');
 var debug = require('debug')('my-application');
 var crypto = require('crypto');
 
-var model = require('./model.js');  
+var model = require('./model.js');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -70,13 +70,10 @@ app.get("/getBeacon", function(req,res)
 app.get("/removeAllData",sessionHandler, function(req,res){
 
 	model.Student.remove({}, function(err) {
-	   console.log('collection student removed')
 	});
 	model.iBeaconAdmin.remove({}, function(err) {
-		console.log('collection admin removed')
 	});
 	model.Question.remove({}, function(err) {
-		console.log('collection Question removed')
 	});
 	res.render('result', {  title:"Waiting....",result:"All data is clean",to:'/logout'    });
 });
@@ -259,16 +256,13 @@ io.on('connection', function(socket){
 			'content'			: obj.message,
 			'date' 				: Date()
 		},function(err,question){
-				if(err)
-				{
+				if(err){
 
 				}
-				else
-				{
+				else{
 					//console.log("saveChat"+question);
 				}
 		});
-
 		socket.broadcast.emit('listen_chat', obj);
 	});
 
