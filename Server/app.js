@@ -1,12 +1,10 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
-var debug = require('debug')('my-application');
 var crypto = require('crypto');
 
 var model = require('./model.js');
@@ -17,11 +15,8 @@ var MongoStore = require('connect-mongo')(session);
 // view engine setup
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
 app.use(bodyParser.json());
-// parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
 // app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
@@ -37,8 +32,6 @@ app.use(session({
 				db: "iBeaconCheckInSession",
 		})
 }));
-
-
 
 
 //API
