@@ -1,6 +1,6 @@
-var PeopleList = angular.module('PeopleList', []);
-
-function mainController($scope, $http) {
+angular.module('PeopleList', [])
+.controller('mainController', ['$scope','$http', function($scope,$http) {
+// ($scope, $http) {
 	// $scope.formData = {};
 
 	$scope.getList = function(){
@@ -142,13 +142,13 @@ function mainController($scope, $http) {
 						'<p style="margin-left:10px">'+data.message+'</p>'+
 					'</div>'+
 				'</div><br>');
-		$('#chat_box_outer').append(e);
-		var objDiv = document.getElementById("chat_box_outer");
-		objDiv.scrollTop = objDiv.scrollHeight;
-		$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
+			$('#chat_box_outer').append(e);
+			var objDiv = document.getElementById("chat_box_outer");
+			objDiv.scrollTop = objDiv.scrollHeight;
+			$('html, body').animate({scrollTop:objDiv.scrollHeight}, 'slow');
 		});
 
-}
+}]);
 
 function getDateTime() {
 		var now     = new Date();
