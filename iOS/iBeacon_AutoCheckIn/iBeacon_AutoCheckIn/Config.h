@@ -19,6 +19,7 @@ static NSString *const defaultBeaconAPI = @"getBeacon";
 
 static NSString *const kStuName = @"kStuName";
 static NSString *const kStuId = @"kStuId";
+static NSString *const kServerAddr = @"kServerAddr";
 static NSString *const ktarget = @"ktarget";
 static NSString *const kmessage= @"message";
 

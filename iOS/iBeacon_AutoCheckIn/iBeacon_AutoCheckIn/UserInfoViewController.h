@@ -13,6 +13,6 @@
 
 @property (nonatomic,strong) IBOutlet UITextField *stuIdTextField;
 @property (nonatomic,strong) IBOutlet UITextField *stuNameTextField;
-
+@property (nonatomic,strong) IBOutlet UITextField *serverTextField;
 
 @end

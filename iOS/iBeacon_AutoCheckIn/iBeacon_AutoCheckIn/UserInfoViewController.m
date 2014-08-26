@@ -37,6 +37,7 @@
 
     self.stuIdTextField.text=[InfoModel getStuId];
     self.stuNameTextField.text=[InfoModel getStuName];
+    self.serverTextField.text =  [InfoModel getServerAddr];
     
     self.stuIdTextField.delegate=self;
     self.stuIdTextField.backgroundColor=[UIColor whiteColor];
@@ -51,10 +52,11 @@
 -(IBAction) saveUserInfo:(id) sender
 {
   
-    if(![self.stuIdTextField.text isEqualToString:@""] && ![self.stuNameTextField.text isEqualToString:@""])
+    if(![self.stuIdTextField.text isEqualToString:@""] && ![self.stuNameTextField.text isEqualToString:@""] && ![self.serverTextField.text isEqualToString:@""])
     {
         [InfoModel saveStuId:self.stuIdTextField.text];
         [InfoModel saveStuName:self.stuNameTextField.text];
+        [InfoModel saveServer:self.serverTextField.text];
         [self dismissViewControllerAnimated:YES completion:nil];
         [[WebSocket shareInstance] disconnect];
         
@@ -85,6 +87,7 @@
     } completion:nil];
     [self.stuIdTextField resignFirstResponder];
     [self.stuNameTextField resignFirstResponder];
+    [self.serverTextField resignFirstResponder];
 }
 
 

@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 var debug = require('debug')('my-application');
-var mongoose = require('mongoose');
 var crypto = require('crypto');
+
+var model = require('./model.js');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -38,42 +39,11 @@ app.use(session({
 }));
 
 
-mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
-// mongoose.connect('mongodb://example:example@oceanic.mongohq.com:10037/ibeacon_Auto');
 
-var Student = mongoose.model('Student',
-{
-  'stu_id':String,
-	'name':String,
-	'come':{
-		type:Boolean,
-		default:false,
-		required:true
-	},
-	'lock':{
-		type:Boolean,
-		default:false,
-		required:true
-	},
-	'in'	: [{ type:Date}],
-	'out'	: [{type:Date}]
-});
-var iBeaconAdmin = mongoose.model('iBeaconAdmin',
-{
-		'UserName'	:String,
-    'account'		:String,
-    'password'	:String
-});
-var Question = mongoose.model('question',{
-	'UserName'	 	:String,
-	'date'		 		:Date,
-	'dateString' 	:String,
-	'content'	 		:String
-})
 
 //API
 app.get('/api/getList',sessionHandler, function(req,res){
-		Student.find(function (err,student)
+		model.Student.find(function (err,student)
 		{
 				if(err)
 				  res.send(err);
@@ -83,7 +53,7 @@ app.get('/api/getList',sessionHandler, function(req,res){
 });
 
 app.get('/api/getChat',sessionHandler,function(req,res){
-	Question.find(function (err,question)
+	model.Question.find(function (err,question)
 	{
 			if(err)
 				res.send(err);
@@ -99,21 +69,18 @@ app.get("/getBeacon", function(req,res)
 
 app.get("/removeAllData",sessionHandler, function(req,res){
 
-	Student.remove({}, function(err) {
-	   console.log('collection student removed')
+	model.Student.remove({}, function(err) {
 	});
-	iBeaconAdmin.remove({}, function(err) {
-		console.log('collection admin removed')
+	model.iBeaconAdmin.remove({}, function(err) {
 	});
-	Question.remove({}, function(err) {
-		console.log('collection Question removed')
+	model.Question.remove({}, function(err) {
 	});
 	res.render('result', {  title:"Waiting....",result:"All data is clean",to:'/logout'    });
 });
 
 
 app.post('/api/changeStudent/',sessionHandler, function(req, res) {
-	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
 			student.save();
@@ -123,7 +90,7 @@ app.post('/api/changeStudent/',sessionHandler, function(req, res) {
 });
 
 app.post('/api/lockStudent/', sessionHandler, function(req, res) {
-	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.lock=!student.lock;  //when change from Web , lock the come status
 			student.save();
@@ -133,7 +100,7 @@ app.post('/api/lockStudent/', sessionHandler, function(req, res) {
 });
 
 app.post('/api/deleteStudent/',sessionHandler, function(req, res) {
-	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.remove();
 			res.end("ok");
@@ -182,7 +149,7 @@ app.get("/logout",function(req,res){
 });
 
 app.post("/registerAction",function(req,res){
-  iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+  model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
   {
     	if(!admin){
         var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
@@ -190,7 +157,7 @@ app.post("/registerAction",function(req,res){
         var crypted = cipher.update(text,'utf8','hex');
         crypted += cipher.final('hex');
 
-        iBeaconAdmin.create(
+        model.iBeaconAdmin.create(
         {
 					  UserName : req.body.name,
             account : req.body.email ,
@@ -213,7 +180,7 @@ app.post("/registerAction",function(req,res){
 });
 
 app.post("/loginAction",function(req,res){
-    iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+    model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
     {
         if(!admin){
 		  	 	res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
@@ -243,163 +210,6 @@ var server = app.listen(app.get('port'), function() {
 	console.log("Server is listening on port:" + server.address().port);
 });
 
-var socketArr=[];
-
-function socketObj(socketID,userID){
-		this.socketID=socketID;
-		this.userID=userID;
-};
-
-function getDateTime() {
-		var now     = new Date();
-		var year    = now.getFullYear();
-		var month   = now.getMonth()+1;
-		var day     = now.getDate();
-		var hour    = now.getHours();
-		var minute  = now.getMinutes();
-		var second  = now.getSeconds();
-		if(month.toString().length == 1) {
-				month = ' '+month;
-		}
-		if(day.toString().length == 1) {
-				day = ' '+day;
-		}
-		if(hour.toString().length == 1) {
-				hour = '0'+hour;
-		}
-		if(minute.toString().length == 1) {
-				minute = '0'+minute;
-		}
-		if(second.toString().length == 1) {
-				second = '0'+second;
-		}
-		var dateTime = month+"/"+day+" "+hour+':'+minute+':'+second;
-		return dateTime;
-}
-
-// Socket.IO configure
-var io = require('socket.io').listen(server);
-io.on('connection', function(socket){
-
-	socket.on('chat', function(obj){//stu_id, message, class_id
-		Question.create(
-		{
-			'UserName'		: obj.kStuId,
-			'dateString'	: getDateTime(),
-			'content'			: obj.message,
-			'date' 				: Date()
-		},function(err,question){
-				if(err)
-				{
-
-				}
-				else
-				{
-					//console.log("saveChat"+question);
-				}
-		});
-
-		socket.broadcast.emit('listen_chat', obj);
-	});
-
-	socket.on('distance', function(obj){
-		socket.broadcast.emit('UserDistance',obj);
-	});
-
-	socket.on('addUser',function(message){
-		for(var i=0;i<socketArr.length;i++){
-				var Obj=socketArr[i];
-				if(message.userID==Obj.userID)	{
-					console.log(Obj.userID+":is exist");
-					return;
-				}
-		}
-
-		var obj=new socketObj(socket.id,message.userID);
-		socketArr.push(obj);
-
-		console.log("add userID:"+obj.userID);
-
-		Student.findOne( {  stu_id:obj.userID },function(err,student)
-		{
-			if(!student)
-			{
-				Student.create(
-				{
-						stu_id :obj.userID ,
-						name : message.stu_name,
-						come : true,
-						lock : false,
-						in: new Date()
-
-				},function(err,todo){
-						if(err)
-							console.log("err");
-						else
-						console.log("Insert "+message.stu_name+" successful");
-				});
-
-				socket.broadcast.emit('reloadData', { my: 'data' });
-				return;
-			}
-				if(!student.lock)
-				{
-					student.come=true;
-					student.save();
-			 	}
-				student.in.push(new Date());
-				socket.broadcast.emit('reloadData', { my: 'data' });
-		});
-
-	});
-
-	  socket.on('disconnect', function () {
-
-				for(var i=0;i<socketArr.length;i++){
-						var Obj=socketArr[i];
-
-						if(socket.id==Obj.socketID)
-						{
-								console.log("user leave:"+Obj.userID);
-								var index=i;
-
-								Student.findOne( {  stu_id:Obj.userID },function(err,student)
-								{
-										if(!student)
-										{
-											console.log("user no found");
-											return;
-										}
-
-										if(!student.lock)
-										{
-											student.come=false;
-											student.save();
-										}
-										var count=student.in.length-student.out.length;
-										if( count>=1 ){
-											for(var j=0;j< count ;j++)
-											{
-													var t=new Date();
-													t.setSeconds(t.getSeconds() - j*4);
-													student.out.push(t);
-													if(j==count-1)
-													{
-														socketArr.splice(index, 1);
-														socket.broadcast.emit('reloadData', { my: 'data' });
-													}
-											}
-										}
-
-
-
-								});
-
-						}
-
-				}
-
-  	});
-
-
-});
+var io = require('socket.io');
+io = io.listen(server);
+require('./socket')(io);

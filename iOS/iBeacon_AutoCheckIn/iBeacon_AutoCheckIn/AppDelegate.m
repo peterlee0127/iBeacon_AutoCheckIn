@@ -9,12 +9,15 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "iBeaconModel.h"
+#import "UserInfoModel.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [UserInfoModel shareInstance];
+    
     MainViewController *mainVC=[[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:mainVC];
     

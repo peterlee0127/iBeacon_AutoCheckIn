@@ -13,7 +13,7 @@
 #import "WebSocket.h"
 #import "ChatViewController.h"
 #import "iBeaconModel.h"
-#import <LocalAuthentication/LocalAuthentication.h>
+//#import <LocalAuthentication/LocalAuthentication.h>
 
 @interface MainViewController ()
 
@@ -39,25 +39,28 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socketDisConnect) name:kSocketDisConnect object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iBeaconDistance:) name:kBeaconDistance object:nil];
     
-    self.title=@"iBeacon AutoCheckIn";
+    self.title=@"BLE AutoCheckIn";
     
     self.serverLabel.text=[NSString stringWithFormat:@"Connect to: %@",defaultServer];
     self.serverLabel.adjustsFontSizeToFitWidth=YES;
     
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"設定" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingVC)];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Setting" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingVC)];
 
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"發問" style:UIBarButtonItemStylePlain target:self action:@selector(showChatVC)];
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Chat" style:UIBarButtonItemStylePlain target:self action:@selector(showChatVC)];
     
     float theInterval = 1.0 / 50.0;
    self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view from its nib.
-
+    /*
     if(![self canEvaluatePolicy])
         [iBeaconModel shareInstance].TouchIDAuth = YES;
     else
         [self evaluatePolicy];
-// Do any additional setup after loading the view from its nib.
+
+     */
+     // Do any additional setup after loading the view from its nib.
 }
+/*
 -(IBAction) touchIDAuth:(id)sender
 {
     if(![self canEvaluatePolicy])
@@ -69,6 +72,7 @@
         [self evaluatePolicy];
     }
 }
+
 - (void)evaluatePolicy
 {
     LAContext *context = [[LAContext alloc] init];
@@ -103,8 +107,9 @@
     } else {
         return NO;
     }
-    
+ 
 }
+ */
 - (void)progressViewAnimation
 {
     if (self.progressView.progress != 1.0){
@@ -141,6 +146,7 @@
         
         self.stuIDLabel.text=[model getStuId];
         self.stuNameLabel.text=[model getStuName];
+        self.serverLabel.text = [model getServerAddr];
     }
     else
     {

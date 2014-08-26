@@ -38,8 +38,8 @@
 		D01742DC19270BA9002A8286 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = SOURCE_ROOT; };
 		D01742DD19270BA9002A8286 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = SOURCE_ROOT; };
 		D05EB2241916B77F0050CF56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iBeacon_AutoCheckIn/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		D05EB2261916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "iBeacon_AutoCheckIn-Info.plist"; path = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Info.plist"; sourceTree = SOURCE_ROOT; };
-		D05EB2271916B7920050CF56 /* iBeacon_AutoCheckIn-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iBeacon_AutoCheckIn-Prefix.pch"; path = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		D05EB2261916B7920050CF56 /* BLE_AutoCheckIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BLE_AutoCheckIn-Info.plist"; path = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D05EB2271916B7920050CF56 /* BLE_AutoCheckIn-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BLE_AutoCheckIn-Prefix.pch"; path = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		D05EB2281916B7920050CF56 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = iBeacon_AutoCheckIn/main.m; sourceTree = SOURCE_ROOT; };
 		D05EB22C1916B79D0050CF56 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = iBeacon_AutoCheckIn/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		D05EB22E1916B7B50050CF56 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = iBeacon_AutoCheckIn/MainViewController.h; sourceTree = SOURCE_ROOT; };
@@ -68,7 +68,7 @@
 		D05EB2511916B7ED0050CF56 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = iBeacon_AutoCheckIn/Config.h; sourceTree = SOURCE_ROOT; };
 		D05EB2521916B8440050CF56 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iBeacon_AutoCheckIn/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		D05EB2531916B8440050CF56 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = iBeacon_AutoCheckIn/AppDelegate.m; sourceTree = SOURCE_ROOT; };
-		D08FB743190D5A76002DA3C8 /* iBeacon_AutoCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeacon_AutoCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08FB743190D5A76002DA3C8 /* BLE_AutoCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLE_AutoCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08FB746190D5A76002DA3C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D08FB748190D5A76002DA3C8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D08FB74A190D5A76002DA3C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -93,7 +93,7 @@
 		D08FB73A190D5A76002DA3C8 = {
 			isa = PBXGroup;
 			children = (
-				D08FB74C190D5A76002DA3C8 /* iBeacon_AutoCheckIn */,
+				D08FB74C190D5A76002DA3C8 /* BLE_AutoCheckIn */,
 				D08FB745190D5A76002DA3C8 /* Frameworks */,
 				D08FB744190D5A76002DA3C8 /* Products */,
 				8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */,
@@ -103,7 +103,7 @@
 		D08FB744190D5A76002DA3C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D08FB743190D5A76002DA3C8 /* iBeacon_AutoCheckIn.app */,
+				D08FB743190D5A76002DA3C8 /* BLE_AutoCheckIn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,7 +120,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D08FB74C190D5A76002DA3C8 /* iBeacon_AutoCheckIn */ = {
+		D08FB74C190D5A76002DA3C8 /* BLE_AutoCheckIn */ = {
 			isa = PBXGroup;
 			children = (
 				D0FD86AE19151C2100E04B7E /* Library */,
@@ -130,15 +130,15 @@
 				D0CCB1DF190E2A26004F8137 /* ViewController */,
 				D08FB74D190D5A76002DA3C8 /* Supporting Files */,
 			);
-			name = iBeacon_AutoCheckIn;
+			name = BLE_AutoCheckIn;
 			path = DB_Project;
 			sourceTree = "<group>";
 		};
 		D08FB74D190D5A76002DA3C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D05EB2261916B7920050CF56 /* iBeacon_AutoCheckIn-Info.plist */,
-				D05EB2271916B7920050CF56 /* iBeacon_AutoCheckIn-Prefix.pch */,
+				D05EB2261916B7920050CF56 /* BLE_AutoCheckIn-Info.plist */,
+				D05EB2271916B7920050CF56 /* BLE_AutoCheckIn-Prefix.pch */,
 				D05EB2511916B7ED0050CF56 /* Config.h */,
 				D05EB2281916B7920050CF56 /* main.m */,
 				D05EB22B1916B79D0050CF56 /* InfoPlist.strings */,
@@ -205,9 +205,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D08FB742190D5A76002DA3C8 /* iBeacon_AutoCheckIn */ = {
+		D08FB742190D5A76002DA3C8 /* BLE_AutoCheckIn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "iBeacon_AutoCheckIn" */;
+			buildConfigurationList = D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "BLE_AutoCheckIn" */;
 			buildPhases = (
 				B991E8D73469463D8F652CCB /* Check Pods Manifest.lock */,
 				D08FB73F190D5A76002DA3C8 /* Sources */,
@@ -219,9 +219,9 @@
 			);
 			dependencies = (
 			);
-			name = iBeacon_AutoCheckIn;
+			name = BLE_AutoCheckIn;
 			productName = DB_Project;
-			productReference = D08FB743190D5A76002DA3C8 /* iBeacon_AutoCheckIn.app */;
+			productReference = D08FB743190D5A76002DA3C8 /* BLE_AutoCheckIn.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -237,13 +237,13 @@
 						DevelopmentTeam = AWP2538424;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
 				};
 			};
-			buildConfigurationList = D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "iBeacon_AutoCheckIn" */;
+			buildConfigurationList = D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "BLE_AutoCheckIn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -255,7 +255,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D08FB742190D5A76002DA3C8 /* iBeacon_AutoCheckIn */,
+				D08FB742190D5A76002DA3C8 /* BLE_AutoCheckIn */,
 			);
 		};
 /* End PBXProject section */
@@ -424,9 +424,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Prefix.pch";
-				INFOPLIST_FILE = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Info.plist";
-				PRODUCT_NAME = iBeacon_AutoCheckIn;
+				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
+				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
+				PRODUCT_NAME = BLE_AutoCheckIn;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -441,9 +441,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Prefix.pch";
-				INFOPLIST_FILE = "iBeacon_AutoCheckIn/iBeacon_AutoCheckIn-Info.plist";
-				PRODUCT_NAME = iBeacon_AutoCheckIn;
+				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
+				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
+				PRODUCT_NAME = BLE_AutoCheckIn;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -452,7 +452,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "iBeacon_AutoCheckIn" */ = {
+		D08FB73E190D5A76002DA3C8 /* Build configuration list for PBXProject "BLE_AutoCheckIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D08FB76D190D5A76002DA3C8 /* Debug */,
@@ -461,7 +461,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "iBeacon_AutoCheckIn" */ = {
+		D08FB76F190D5A76002DA3C8 /* Build configuration list for PBXNativeTarget "BLE_AutoCheckIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D08FB770190D5A76002DA3C8 /* Debug */,
