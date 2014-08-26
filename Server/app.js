@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 var debug = require('debug')('my-application');
-var mongoose = require('mongoose');
 var crypto = require('crypto');
+
+var model = require('./model.js');  
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -38,42 +39,11 @@ app.use(session({
 }));
 
 
-mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
-// mongoose.connect('mongodb://example:example@oceanic.mongohq.com:10037/ibeacon_Auto');
 
-var Student = mongoose.model('Student',
-{
-  'stu_id':String,
-	'name':String,
-	'come':{
-		type:Boolean,
-		default:false,
-		required:true
-	},
-	'lock':{
-		type:Boolean,
-		default:false,
-		required:true
-	},
-	'in'	: [{ type:Date}],
-	'out'	: [{type:Date}]
-});
-var iBeaconAdmin = mongoose.model('iBeaconAdmin',
-{
-		'UserName'	:String,
-    'account'		:String,
-    'password'	:String
-});
-var Question = mongoose.model('question',{
-	'UserName'	 	:String,
-	'date'		 		:Date,
-	'dateString' 	:String,
-	'content'	 		:String
-})
 
 //API
 app.get('/api/getList',sessionHandler, function(req,res){
-		Student.find(function (err,student)
+		model.Student.find(function (err,student)
 		{
 				if(err)
 				  res.send(err);
@@ -83,7 +53,7 @@ app.get('/api/getList',sessionHandler, function(req,res){
 });
 
 app.get('/api/getChat',sessionHandler,function(req,res){
-	Question.find(function (err,question)
+	model.Question.find(function (err,question)
 	{
 			if(err)
 				res.send(err);
@@ -99,13 +69,13 @@ app.get("/getBeacon", function(req,res)
 
 app.get("/removeAllData",sessionHandler, function(req,res){
 
-	Student.remove({}, function(err) {
+	model.Student.remove({}, function(err) {
 	   console.log('collection student removed')
 	});
-	iBeaconAdmin.remove({}, function(err) {
+	model.iBeaconAdmin.remove({}, function(err) {
 		console.log('collection admin removed')
 	});
-	Question.remove({}, function(err) {
+	model.Question.remove({}, function(err) {
 		console.log('collection Question removed')
 	});
 	res.render('result', {  title:"Waiting....",result:"All data is clean",to:'/logout'    });
@@ -113,7 +83,7 @@ app.get("/removeAllData",sessionHandler, function(req,res){
 
 
 app.post('/api/changeStudent/',sessionHandler, function(req, res) {
-	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.come=!student.come;
 			student.save();
@@ -123,7 +93,7 @@ app.post('/api/changeStudent/',sessionHandler, function(req, res) {
 });
 
 app.post('/api/lockStudent/', sessionHandler, function(req, res) {
-	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.lock=!student.lock;  //when change from Web , lock the come status
 			student.save();
@@ -133,7 +103,7 @@ app.post('/api/lockStudent/', sessionHandler, function(req, res) {
 });
 
 app.post('/api/deleteStudent/',sessionHandler, function(req, res) {
-	Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 			student.remove();
 			res.end("ok");
@@ -182,7 +152,7 @@ app.get("/logout",function(req,res){
 });
 
 app.post("/registerAction",function(req,res){
-  iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+  model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
   {
     	if(!admin){
         var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
@@ -190,7 +160,7 @@ app.post("/registerAction",function(req,res){
         var crypted = cipher.update(text,'utf8','hex');
         crypted += cipher.final('hex');
 
-        iBeaconAdmin.create(
+        model.iBeaconAdmin.create(
         {
 					  UserName : req.body.name,
             account : req.body.email ,
@@ -213,7 +183,7 @@ app.post("/registerAction",function(req,res){
 });
 
 app.post("/loginAction",function(req,res){
-    iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+    model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
     {
         if(!admin){
 		  	 	res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
@@ -282,7 +252,7 @@ var io = require('socket.io').listen(server);
 io.on('connection', function(socket){
 
 	socket.on('chat', function(obj){//stu_id, message, class_id
-		Question.create(
+		model.Question.create(
 		{
 			'UserName'		: obj.kStuId,
 			'dateString'	: getDateTime(),
@@ -320,11 +290,11 @@ io.on('connection', function(socket){
 
 		console.log("add userID:"+obj.userID);
 
-		Student.findOne( {  stu_id:obj.userID },function(err,student)
+		model.Student.findOne( {  stu_id:obj.userID },function(err,student)
 		{
 			if(!student)
 			{
-				Student.create(
+				model.Student.create(
 				{
 						stu_id :obj.userID ,
 						name : message.stu_name,
@@ -363,7 +333,7 @@ io.on('connection', function(socket){
 								console.log("user leave:"+Obj.userID);
 								var index=i;
 
-								Student.findOne( {  stu_id:Obj.userID },function(err,student)
+								model.Student.findOne( {  stu_id:Obj.userID },function(err,student)
 								{
 										if(!student)
 										{
