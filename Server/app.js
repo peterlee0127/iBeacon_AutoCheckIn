@@ -111,12 +111,11 @@ app.post('/api/deleteStudent/',sessionHandler, function(req, res) {
 });
 
 app.post('/api/deleteRecord/',sessionHandler ,function(req,res){
-
 	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
-		  var index = req.body.index;
-			student.inTime.remove(student.inTime[imdex]);
-			student.outTime.remove(student.outTime[index]);
+		  var i= req.body.index;
+			student.inTime.remove(student.inTime[i]);
+			student.outTime.remove(student.outTime[i]);
 			studne.save();
 			res.end("ok");
 	});
