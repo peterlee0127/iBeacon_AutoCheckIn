@@ -1,15 +1,14 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
-var debug = require('debug')('my-application');
-var crypto = require('crypto');
 
 var model = require('./model.js');
+var encrypt = require('./encrypt.js');
+var beaconConfig = require('./beacon.js');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -17,18 +16,13 @@ var MongoStore = require('connect-mongo')(session);
 // view engine setup
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
 app.use(bodyParser.json());
-// parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
 // app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
-
-
 app.use(session({
 		resave:true,
 		saveUninitialized:true,
@@ -37,8 +31,6 @@ app.use(session({
 				db: "iBeaconCheckInSession",
 		})
 }));
-
-
 
 
 //API
@@ -52,6 +44,22 @@ app.get('/api/getList',sessionHandler, function(req,res){
 		});
 });
 
+app.get("/getBeacon", function(req,res){
+	model.iBeacon.find( function (err,beacon)
+	{
+		if(beacon.length==0){
+				console.log("no anyBeaconConfigure,will read from file");
+				var result = beaconConfig.readBeaconFromJSON();
+				res.send(result);
+				return;
+		}
+		if(err)
+				res.send(err);
+		else
+				res.send(beacon);
+	});
+});
+
 app.get('/api/getChat',sessionHandler,function(req,res){
 	model.Question.find(function (err,question)
 	{
@@ -62,20 +70,16 @@ app.get('/api/getChat',sessionHandler,function(req,res){
 	});
 })
 
-app.get("/getBeacon", function(req,res)
-{
-		res.sendfile("./public/iBeacon.json");
-});
 
-app.get("/removeAllData",sessionHandler, function(req,res){
+app.get("/api/removeAllData",sessionHandler, function(req,res){
 
 	model.Student.remove({}, function(err) {
 	});
-	model.iBeaconAdmin.remove({}, function(err) {
+	model.User.remove({}, function(err) {
 	});
 	model.Question.remove({}, function(err) {
 	});
-	res.render('result', {  title:"Waiting....",result:"All data is clean",to:'/logout'    });
+	res.render('result', {  title:"Please Wait....",result:"All data is clean",to:'/logout'    });
 });
 
 
@@ -149,15 +153,13 @@ app.get("/logout",function(req,res){
 });
 
 app.post("/registerAction",function(req,res){
-  model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+  model.User.findOne( {  account:req.body.email },function(err,admin)
   {
     	if(!admin){
-        var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
-        var text = req.body.password;
-        var crypted = cipher.update(text,'utf8','hex');
-        crypted += cipher.final('hex');
+    		//encrypt
+				var crypted =	encrypt.encrypt(req.body.password);
 
-        model.iBeaconAdmin.create(
+        model.User.create(
         {
 					  UserName : req.body.name,
             account : req.body.email ,
@@ -180,17 +182,13 @@ app.post("/registerAction",function(req,res){
 });
 
 app.post("/loginAction",function(req,res){
-    model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
+    model.User.findOne( {  account:req.body.email },function(err,admin)
     {
         if(!admin){
 		  	 	res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
           return;
         }
-
-        var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
-        var text = req.body.password;
-        var crypted = cipher.update(text,'utf8','hex');
-        crypted += cipher.final('hex');
+				var crypted =	encrypt.encrypt(req.body.password);
         if(admin.password==crypted){
        	  req.session.user = admin.UserName;
        	  res.render('result',{  title:"Login Success",result: "Hello "+admin.UserName,to:'/'  });
@@ -212,4 +210,4 @@ var server = app.listen(app.get('port'), function() {
 
 var io = require('socket.io');
 io = io.listen(server);
-require('./socket')(io);
+require('./socket.js')(io);

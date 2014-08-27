@@ -18,15 +18,26 @@ exports.Student = mongoose.model('Student',
 		default:false,
 		required:true
 	},
-	'in'	: [{ type:Date}],
-	'out'	: [{type:Date}]
+	'inTime'	: [{ type:Date}],
+	'outTime'	: [{type:Date}]
 });
-exports.iBeaconAdmin = mongoose.model('iBeaconAdmin',
+
+exports.User = mongoose.model('User',
 {
-	'UserName'	:String,
-    'account'	:String,
+	  'UserName'	:String,
+    'account'	  :String,
     'password'	:String
 });
+
+exports.iBeacon = mongoose.model('iBeacon',
+{
+    'beacon_id'	  :String,
+    'identifier'	:String,
+    'major'	      :Number,
+    'minor'       :Number,
+    'range'       :Number
+});
+
 exports.Question = mongoose.model('question',{
 		'UserName'	 	:String,
 		'date'		 	:Date,

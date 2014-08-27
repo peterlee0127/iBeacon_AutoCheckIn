@@ -1,4 +1,3 @@
-var app = require('./app.js');
 var model = require('./model.js');
 var socketArr=[];
 
@@ -86,7 +85,7 @@ module.exports =  function(io){
             name : message.stu_name,
             come : true,
             lock : false,
-            in: new Date()
+            inTime: new Date()
 
         },function(err,todo){
             if(err)
@@ -103,7 +102,7 @@ module.exports =  function(io){
           student.come=true;
           student.save();
          }
-        student.in.push(new Date());
+        student.inTime.push(new Date());
         socket.broadcast.emit('reloadData', { my: 'data' });
     });
 
@@ -132,13 +131,13 @@ module.exports =  function(io){
                       student.come=false;
                       student.save();
                     }
-                    var count=student.in.length-student.out.length;
+                    var count=student.inTime.length-student.outTime.length;
                     if( count>=1 ){
                       for(var j=0;j< count ;j++)
                       {
                           var t=new Date();
                           t.setSeconds(t.getSeconds() - j*4);
-                          student.out.push(t);
+                          student.outTime.push(t);
                           if(j==count-1)
                           {
                             socketArr.splice(index, 1);
@@ -147,6 +146,16 @@ module.exports =  function(io){
                       }
                     }
 
+                    for(var i=0;i<student.outTime.length;i++)
+                    {
+                          if( (student.outTime[i].getTime()-student.inTime[i].getTime() )<5*1000){
+                              // less then 5s will remove.
+                              student.inTime.remove(student.inTime[i]);
+                              student.outTime.remove(student.outTime[i]);
+                              student.save();
+
+                          }
+                    }
 
 
                 });
@@ -154,7 +163,7 @@ module.exports =  function(io){
             }
 
         }
-
+          socket.broadcast.emit('reloadData', { my: 'data' });
     });
 
 
