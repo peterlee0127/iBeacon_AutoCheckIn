@@ -6,18 +6,18 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 
-var model = require('./model.js');
-var encrypt = require('./encrypt.js');
-var beaconConfig = require('./beacon.js');
+var model = require('./model/model.js');
+var encrypt = require('./model/encrypt.js');
+var beaconConfig = require('./model/beacon.js');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 // app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
@@ -210,4 +210,4 @@ var server = app.listen(app.get('port'), function() {
 
 var io = require('socket.io');
 io = io.listen(server);
-require('./socket.js')(io);
+require('./model/socket.js')(io);
