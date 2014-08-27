@@ -85,7 +85,7 @@ module.exports =  function(io){
             name : message.stu_name,
             come : true,
             lock : false,
-            in: new Date()
+            inTime: new Date()
 
         },function(err,todo){
             if(err)
@@ -102,7 +102,7 @@ module.exports =  function(io){
           student.come=true;
           student.save();
          }
-        student.in.push(new Date());
+        student.inTime.push(new Date());
         socket.broadcast.emit('reloadData', { my: 'data' });
     });
 
@@ -137,7 +137,7 @@ module.exports =  function(io){
                       {
                           var t=new Date();
                           t.setSeconds(t.getSeconds() - j*4);
-                          student.out.push(t);
+                          student.outTime.push(t);
                           if(j==count-1)
                           {
                             socketArr.splice(index, 1);
@@ -150,8 +150,8 @@ module.exports =  function(io){
                     {
                           if( (student.out[i].getTime()-student.in[i].getTime() )<10*1000){
                               console.log("in/out is too close");
-                              student.in[i].remove(Obj.userID);
-                              student.out[i].remove(Obj.userID);
+                              student.inTime.remove(Obj.userID);
+                              student.outTime.remove(Obj.userID);
                               student.save();
 
                           }

@@ -18,8 +18,8 @@ exports.Student = mongoose.model('Student',
 		default:false,
 		required:true
 	},
-	'in'	: [{ type:Date}],
-	'out'	: [{type:Date}]
+	'inTime'	: [{ type:Date}],
+	'outTime'	: [{type:Date}]
 });
 exports.iBeaconAdmin = mongoose.model('iBeaconAdmin',
 {
