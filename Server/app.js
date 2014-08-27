@@ -114,8 +114,10 @@ app.post('/api/deleteRecord/',sessionHandler ,function(req,res){
 	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 		  var i= req.body.index;
-			student.inTime.remove(student.inTime[i]);
-			student.outTime.remove(student.outTime[i]);
+			if(student.inTime[i])
+					student.inTime.remove(student.inTime[i]);
+			if(student.outTime[i])
+					student.outTime.remove(student.outTime[i]);
 			studne.save();
 			res.end("ok");
 	});
