@@ -5,9 +5,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
-var crypto = require('crypto');
 
 var model = require('./model.js');
+var encrypt = require('./encrypt.js');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -145,10 +145,8 @@ app.post("/registerAction",function(req,res){
   model.iBeaconAdmin.findOne( {  account:req.body.email },function(err,admin)
   {
     	if(!admin){
-        var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
-        var text = req.body.password;
-        var crypted = cipher.update(text,'utf8','hex');
-        crypted += cipher.final('hex');
+    		//encrypt
+				var crypted =	encrypt.encrypt(req.body.password);
 
         model.iBeaconAdmin.create(
         {
@@ -179,11 +177,7 @@ app.post("/loginAction",function(req,res){
 		  	 	res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
           return;
         }
-
-        var cipher = crypto.createCipher('aes-256-cbc','InmbuvP6Z8');
-        var text = req.body.password;
-        var crypted = cipher.update(text,'utf8','hex');
-        crypted += cipher.final('hex');
+				var crypted =	encrypt.encrypt(req.body.password);
         if(admin.password==crypted){
        	  req.session.user = admin.UserName;
        	  res.render('result',{  title:"Login Success",result: "Hello "+admin.UserName,to:'/'  });

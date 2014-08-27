@@ -149,7 +149,7 @@ module.exports =  function(io){
                     for(var i=0;i<student.outTime.length;i++)
                     {
                           if( (student.outTime[i].getTime()-student.inTime[i].getTime() )<5*1000){
-//                              console.log("in/out is too close");
+                              // less then 5s will remove.
                               student.inTime.remove(student.inTime[i]);
                               student.outTime.remove(student.outTime[i]);
                               student.save();
@@ -163,7 +163,7 @@ module.exports =  function(io){
             }
 
         }
-
+          socket.broadcast.emit('reloadData', { my: 'data' });
     });
 
 

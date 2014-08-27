@@ -23,8 +23,8 @@ exports.Student = mongoose.model('Student',
 });
 exports.iBeaconAdmin = mongoose.model('iBeaconAdmin',
 {
-	'UserName'	:String,
-    'account'	:String,
+	  'UserName'	:String,
+    'account'	  :String,
     'password'	:String
 });
 exports.Question = mongoose.model('question',{
