@@ -105,6 +105,7 @@ angular.module('PeopleList', [])
 
 	$scope.deleteRecord = function(stu_id,index) {
 		var post = {  "stu_id":stu_id,'index':index };
+		console.log(post);
 		$http.post('/api/deleteRecord/' , JSON.stringify(post))
 			.success(function(data) {
 				$scope.reloadData();
