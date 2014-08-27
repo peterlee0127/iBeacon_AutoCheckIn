@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var crypto = require('crypto');
 
 
 mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
@@ -44,3 +43,12 @@ exports.Question = mongoose.model('question',{
 		'dateString' 	:String,
 		'content'	 	:String
 })
+
+exports.removeAllData = function(){
+  this.Student.remove({}, function(err) {
+  });
+  this.User.remove({}, function(err) {
+  });
+  this.Question.remove({}, function(err) {
+  });
+}

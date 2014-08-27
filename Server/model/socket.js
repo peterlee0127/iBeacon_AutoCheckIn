@@ -1,4 +1,4 @@
-var model = require('./model.js');
+var model = require('./dbModel.js');
 var socketArr=[];
 
 function socketObj(socketID,userID){

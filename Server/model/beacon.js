@@ -1,5 +1,5 @@
 var fs = require('fs');
-var model = require('./model.js');
+var model = require('./dbModel.js');
 
 exports.readBeaconFromJSON=function readBeaconFromJSON(){
   var data = fs.readFileSync('./public/iBeacon.json','utf8')

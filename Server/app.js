@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 
-var model = require('./model/model.js');
+var model = require('./model/dbModel.js');
 var encrypt = require('./model/encrypt.js');
 var beaconConfig = require('./model/beacon.js');
 
@@ -35,8 +35,7 @@ app.use(session({
 
 //API
 app.get('/api/getList',sessionHandler, function(req,res){
-		model.Student.find(function (err,student)
-		{
+		model.Student.find(function (err,student)	{
 				if(err)
 				  res.send(err);
 				else
@@ -61,8 +60,7 @@ app.get("/getBeacon", function(req,res){
 });
 
 app.get('/api/getChat',sessionHandler,function(req,res){
-	model.Question.find(function (err,question)
-	{
+	model.Question.find(function (err,question){
 			if(err)
 				res.send(err);
 			else
@@ -72,20 +70,13 @@ app.get('/api/getChat',sessionHandler,function(req,res){
 
 
 app.get("/api/removeAllData",sessionHandler, function(req,res){
-
-	model.Student.remove({}, function(err) {
-	});
-	model.User.remove({}, function(err) {
-	});
-	model.Question.remove({}, function(err) {
-	});
+	model.removeAllData();
 	res.render('result', {  title:"Please Wait....",result:"All data is clean",to:'/logout'    });
 });
 
 
 app.post('/api/changeStudent/',sessionHandler, function(req, res) {
-	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
-	{
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)	{
 			student.come=!student.come;
 			student.save();
 			res.end("ok");
@@ -94,8 +85,7 @@ app.post('/api/changeStudent/',sessionHandler, function(req, res) {
 });
 
 app.post('/api/lockStudent/', sessionHandler, function(req, res) {
-	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
-	{
+	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)	{
 			student.lock=!student.lock;  //when change from Web , lock the come status
 			student.save();
 			res.end("ok");
@@ -136,14 +126,16 @@ app.get('/ViewRowData',sessionHandler, function(req,res){
 });
 
 app.get("/login",function(req,res){
-	if(req.session.user)
+	if(req.session.user){
 		req.session.user= NaN;
+	}
 	res.sendfile("./public/login.html");
 });
 
 app.get("/register",function(req,res){
-	if(req.session.user)
+	if(req.session.user){
 		req.session.user= NaN;
+	}
   res.sendfile("./public/register.html");
 });
 
@@ -160,7 +152,7 @@ app.post("/registerAction",function(req,res){
 				var crypted =	encrypt.encrypt(req.body.password);
 
         model.User.create(
-        {
+  			{
 					  UserName : req.body.name,
             account : req.body.email ,
             password : crypted
@@ -182,20 +174,20 @@ app.post("/registerAction",function(req,res){
 });
 
 app.post("/loginAction",function(req,res){
-    model.User.findOne( {  account:req.body.email },function(err,admin)
-    {
-        if(!admin){
-		  	 	res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
+    model.User.findOne( {  account:req.body.email },function(err,admin)  {
+      if(!admin){
+		  	 	res.render('result', { title:"Error",result: "Login Fail,User not found",to:'/login' });
           return;
-        }
-				var crypted =	encrypt.encrypt(req.body.password);
-        if(admin.password==crypted){
+      }
+			var crypted =	encrypt.encrypt(req.body.password);
+      if(admin.password==crypted){
        	  req.session.user = admin.UserName;
        	  res.render('result',{  title:"Login Success",result: "Hello "+admin.UserName,to:'/'  });
 	   	}
-        else{
+      else{
 	    		res.render('result', { title:"Error",result: "Login Fail",to:'/login' });
 			}
+
     });
 });
 
