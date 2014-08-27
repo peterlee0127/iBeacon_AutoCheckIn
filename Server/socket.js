@@ -150,8 +150,8 @@ module.exports =  function(io){
                     {
                           if( (student.out[i].getTime()-student.in[i].getTime() )<10*1000){
                               console.log("in/out is too close");
-							                student.out[i].remove();
-							                student.in[i].remove();
+							                student.out.pull({ _id:  student._id });
+							                student.in.pull({ _id:  student._id });
 
                           }
                     }
