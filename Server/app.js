@@ -114,6 +114,7 @@ app.post('/api/deleteRecord/',sessionHandler ,function(req,res){
 	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
 	{
 		  var i= req.body.index;
+			console.log(i);
 			if(student.inTime[i])
 					student.inTime.remove(student.inTime[i]);
 			if(student.outTime[i])
