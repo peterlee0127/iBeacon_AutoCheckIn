@@ -131,7 +131,7 @@ module.exports =  function(io){
                       student.come=false;
                       student.save();
                     }
-                    var count=student.in.length-student.out.length;
+                    var count=student.inTime.length-student.outTime.length;
                     if( count>=1 ){
                       for(var j=0;j< count ;j++)
                       {
@@ -146,9 +146,9 @@ module.exports =  function(io){
                       }
                     }
 
-                    for(var i=0;i<student.out.length;i++)
+                    for(var i=0;i<student.outTime.length;i++)
                     {
-                          if( (student.out[i].getTime()-student.in[i].getTime() )<10*1000){
+                          if( (student.outTime[i].getTime()-student.inTime[i].getTime() )<10*1000){
                               console.log("in/out is too close");
                               student.inTime.remove(Obj.userID);
                               student.outTime.remove(Obj.userID);
