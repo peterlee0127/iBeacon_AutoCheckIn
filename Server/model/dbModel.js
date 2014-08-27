@@ -3,10 +3,9 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
 
-exports.Student = mongoose.model('Student',
-{
-  'stu_id':String,
-	'name':String,
+exports.Student = mongoose.model('Student',{
+  'stu_id' :String,
+	'name'   :String,
 	'come':{
 		type:Boolean,
 		default:false,
@@ -21,15 +20,13 @@ exports.Student = mongoose.model('Student',
 	'outTime'	: [{type:Date}]
 });
 
-exports.User = mongoose.model('User',
-{
+exports.User = mongoose.model('User',{
 	  'UserName'	:String,
     'account'	  :String,
     'password'	:String
 });
 
-exports.iBeacon = mongoose.model('iBeacon',
-{
+exports.iBeacon = mongoose.model('iBeacon',{
     'beacon_id'	  :String,
     'identifier'	:String,
     'major'	      :Number,

@@ -47,7 +47,7 @@ app.get("/getBeacon", function(req,res){
 	model.iBeacon.find( function (err,beacon)
 	{
 		if(beacon.length==0){
-				console.log("no anyBeaconConfigure,will read from file");
+				console.log("no anyBeacon,will read from file");
 				var result = beaconConfig.readBeaconFromJSON();
 				res.send(result);
 				return;
