@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
+var helmet = require('helmet');
 
 var model = require('./model/dbModel.js');
 var encrypt = require('./model/encrypt.js');
@@ -18,6 +19,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+
+app.use(helmet.xssFilter());
+app.use(helmet.xframe());
+app.use(helmet.nosniff());
+app.use(helmet.ienoopen());
+app.disable('x-powered-by');
+
 // app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
@@ -110,11 +118,11 @@ function sessionHandler(req,res,next){
 }
 // index Page
 app.get("/",sessionHandler, function(req,res){
-		res.render('index', { UserName:req.session.user });
+		res.render('index', {  title:'iBeacon AutoCheckIn-List',UserName:req.session.user });
 });
 
 app.get("/chat",sessionHandler, function(req,res){
-		res.render('chat', { UserName:req.session.user });
+		res.render('chat', { title:'iBeacon AutoCheckIn-Chat',UserName:req.session.user });
 });
 
 app.get('/iBeaconConf',sessionHandler, function(req,res){

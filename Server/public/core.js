@@ -1,7 +1,5 @@
 angular.module('PeopleList', [])
 .controller('mainController', ['$scope','$http', function($scope,$http) {
-// ($scope, $http) {
-	// $scope.formData = {};
 
 	$scope.getList = function(){
 		$http.get('/api/getList')
