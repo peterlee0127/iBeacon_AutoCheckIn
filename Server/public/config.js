@@ -31,9 +31,7 @@ angular.module('SystemConf', [])
 					});
 			}
 
-
-
-			$scope.getRawData = function(){
+			$scope.getAllData = function(){
 				$scope.getChat();
 				$scope.getList();
 				$scope.getBeacon()
