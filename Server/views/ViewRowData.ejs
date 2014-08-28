@@ -3,7 +3,7 @@
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 
-				<title>iBeacon AutoCheckIn-Chat</title>
+				<title><%= title%></title>
 				<% include require.ejs %>
 				<style>
 						html { overflow-y:scroll; }
@@ -15,11 +15,17 @@
 				<script src="config.js"></script>
 </head>
 
-<body ng-controller="SystemConfController">
-<br><br>
+<body ng-controller="SystemConfController" data-ng-init="getAllData()">
+<br>
+<h3>StudentList</h3>
 {{ list }}
-
-
+<hr>
+<h3>Chat history</h3>
+{{ chats }}
+<hr>
+<h3>Beacon</h3>
+{{ beaconConf }}
+<hr>
 </body>
 
 </html>
