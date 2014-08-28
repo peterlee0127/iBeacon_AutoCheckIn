@@ -102,7 +102,7 @@ angular.module('PeopleList', [])
 				$scope.reloadData();
 			});
 	};
-	
+
      socket = io.connect(':8080');
 	// var socket = io.connect('your server ip:port');
 
@@ -146,6 +146,7 @@ angular.module('PeopleList', [])
 		});
 
 }]);
+
 
 function getDateTime() {
 		var now     = new Date();

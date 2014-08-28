@@ -1,39 +1,44 @@
-var SystemConf = angular.module('SystemConf', []);
+angular.module('SystemConf', [])
+.controller('SystemConfController', ['$scope','$http', function($scope,$http) {
 
-function SystemConfController($scope, $http){
-	$scope.formData = {};
+			$scope.getList = function(){
+				$http.get('/api/getList')
+					.success(function(data) {
+						$scope.list = data;
+					})
+					.error(function(data) {
+						console.log('Error: ' + data);
+					});
+			}
 
-	// when landing on the page
-	$http.get('/getBeacon')
-		.success(function(data) {
-			$scope.beaconConf = data;
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
+			$scope.getChat = function(){
+				$http.get('/api/getChat')
+					.success(function(data) {
+					$scope.chats = data;
+					})
+					.error(function(data) {
+						console.log('Error: ' + data);
+					});
+			}
 
-
-
-	$scope.getBeacon = function(){
-		$http.get('/getBeacon')
-			.success(function(data) {
-				$scope.beaconConf = data;
-			})
-			.error(function(data) {
-					console.log('Error: ' + data);
-			});
-	}
-
-	$scope.getRawData =function(){
-		$http.get('/api/getList')
-			.success(function(data) {
-				$scope.list = data;
-			})
-			.error(function(data) {
-					console.log('Error: ' + data);
-			});
-
-	}
+			$scope.getBeacon = function(){
+				$http.get('/getBeacon')
+					.success(function(data) {
+						$scope.beaconConf = data;
+					})
+					.error(function(data) {
+						console.log('Error: ' + data);
+					});
+			}
 
 
-}
+
+			$scope.getRawData = function(){
+				$scope.getChat();
+				$scope.getList();
+				$scope.getBeacon()
+
+			}
+
+
+}]);

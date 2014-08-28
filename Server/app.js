@@ -41,16 +41,6 @@ app.use(session({
 }));
 
 
-//API
-app.get('/api/getList',sessionHandler, function(req,res){
-		model.Student.find(function (err,student)	{
-				if(err)
-				  res.send(err);
-				else
-					res.json(student);
-		});
-});
-
 app.get("/getBeacon", function(req,res){
 	model.iBeacon.find( function (err,beacon)
 	{
@@ -65,6 +55,16 @@ app.get("/getBeacon", function(req,res){
 		else
 				res.send(beacon);
 	});
+});
+
+//API
+app.get('/api/getList',sessionHandler, function(req,res){
+		model.Student.find(function (err,student)	{
+				if(err)
+				  res.send(err);
+				else
+					res.json(student);
+		});
 });
 
 app.get('/api/getChat',sessionHandler,function(req,res){
@@ -117,6 +117,7 @@ function sessionHandler(req,res,next){
 	else
 		res.redirect("/login");
 }
+
 // index Page
 app.get("/",sessionHandler, function(req,res){
 		res.render('index', {  title:'iBeacon AutoCheckIn-List',UserName:req.session.user });
@@ -131,7 +132,7 @@ app.get('/iBeaconConf',sessionHandler, function(req,res){
 });
 
 app.get('/ViewRowData',sessionHandler, function(req,res){
-	res.render('ViewRowData.ejs', { UserName:req.session.user });
+	res.render('ViewRowData.ejs', { title:'iBeacon AutoCheckIn-ViewRowData',UserName:req.session.user });
 });
 
 app.get("/login",function(req,res){
