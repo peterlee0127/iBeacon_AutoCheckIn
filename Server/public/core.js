@@ -1,7 +1,5 @@
 angular.module('PeopleList', [])
 .controller('mainController', ['$scope','$http', function($scope,$http) {
-// ($scope, $http) {
-	// $scope.formData = {};
 
 	$scope.getList = function(){
 		$http.get('/api/getList')
@@ -104,10 +102,9 @@ angular.module('PeopleList', [])
 				$scope.reloadData();
 			});
 	};
-
+	
      socket = io.connect(':8080');
 	// var socket = io.connect('your server ip:port');
-	// example var socket = io.connect('192.168.1.1:8080');
 
 		socket.on('connect', function(data) {
 

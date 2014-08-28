@@ -8,7 +8,8 @@
   "dependencies": {
     "express": "4.*",
     "express-session": "*",
-    "morgan": "*",
+    "helmet":"",
+	"morgan": "*",
     "cookie-parser": "*",
     "body-parser": "*",
     "method-override":"",

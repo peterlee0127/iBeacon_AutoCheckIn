@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
-var crypto = require('crypto');
 
 
 mongoose.connect('mongodb://localhost:27017/iBeaconCheckIn');
 
-exports.Student = mongoose.model('Student',
-{
-  'stu_id':String,
-	'name':String,
+exports.Student = mongoose.model('Student',{
+  'stu_id' :String,
+	'name'   :String,
 	'come':{
 		type:Boolean,
 		default:false,
@@ -22,15 +20,13 @@ exports.Student = mongoose.model('Student',
 	'outTime'	: [{type:Date}]
 });
 
-exports.User = mongoose.model('User',
-{
+exports.User = mongoose.model('User',{
 	  'UserName'	:String,
     'account'	  :String,
     'password'	:String
 });
 
-exports.iBeacon = mongoose.model('iBeacon',
-{
+exports.iBeacon = mongoose.model('iBeacon',{
     'beacon_id'	  :String,
     'identifier'	:String,
     'major'	      :Number,
@@ -44,3 +40,12 @@ exports.Question = mongoose.model('question',{
 		'dateString' 	:String,
 		'content'	 	:String
 })
+
+exports.removeAllData = function(){
+  this.Student.remove({}, function(err) {
+  });
+  this.User.remove({}, function(err) {
+  });
+  this.Question.remove({}, function(err) {
+  });
+}
