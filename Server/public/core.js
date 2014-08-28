@@ -102,20 +102,7 @@ angular.module('PeopleList', [])
 				$scope.reloadData();
 			});
 	};
-
-	$scope.deleteRecord = function(stu_id,index) {
-		console.log(stu_id+"  "+index);
-		var post = {  "stu_id":stu_id,'index':index };
-		$http.post('/api/deleteRecord/' , JSON.stringify(post))
-			.success(function(data) {
-				$scope.reloadData();
-			})
-			.error(function(data) {
-				console.log('Error: ' + data);
-				$scope.reloadData();
-			});
-	};
-
+	
      socket = io.connect(':8080');
 	// var socket = io.connect('your server ip:port');
 

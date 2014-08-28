@@ -110,22 +110,6 @@ app.post('/api/deleteStudent/',sessionHandler, function(req, res) {
 
 });
 
-app.post('/api/deleteRecord/',sessionHandler ,function(req,res){
-	model.Student.findOne( {  stu_id:req.body.stu_id },function(err,student)
-	{
-		  var i= req.body.index;
-			console.log(req.body.stu_id);
-			console.log(i);
-			/*
-			if(student.inTime[i]!=null)
-					student.inTime.remove(student.inTime[i]);
-			if(student.outTime[i]!=null)
-					student.outTime.remove(student.outTime[i]);
-			studne.save();
-		   */
-			res.end("ok");
-	});
-});
 
 function sessionHandler(req,res,next){
 	if(req.session.user)

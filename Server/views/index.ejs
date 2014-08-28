@@ -60,10 +60,10 @@
 									<p ng-style="come.style" ng-click="changeStudent(student.stu_id)">{{  comeColor(student.come) }}</p><br><br>
 								</td>
 								<td>
-									<div class="text" ng-repeat="intime in student.inTime" ng-click="deleteRecord(student.stu_id,$index)">{{ intime | date:'HH:mm:ss' }}</div><br><br>
+									<div class="text" ng-repeat="intime in student.inTime">{{ intime | date:'HH:mm:ss' }}</div><br><br>
 								</td>
 								<td>
-									<div class="text" ng-repeat="outtime in student.outTime" ng-click="deleteRecord(student.stu_id,$index)">{{ outtime | date:'HH:mm:ss' }}</div><br><br>
+									<div class="text" ng-repeat="outtime in student.outTime">{{ outtime | date:'HH:mm:ss' }}</div><br><br>
 								</td>
 								<td>
 									<p><div id="{{student.stu_id}}">unknown</div></p><br><br>
