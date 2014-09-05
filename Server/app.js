@@ -24,6 +24,7 @@ app.use(helmet.xssFilter());
 app.use(helmet.xframe());
 app.use(helmet.nosniff());
 app.use(helmet.ienoopen());
+app.use(helmet.nocache());
 app.disable('x-powered-by');
 
 // app.use(morgan('dev'));
@@ -32,9 +33,10 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 app.use(session({
+		secret: "324rgrfdsfm2ek3n2rgr",
+		cookie: { httpOnly: true },
 		resave:true,
 		saveUninitialized:true,
-		secret: "324rgrfdsfm2ek3n2rgr",
 		store: new MongoStore({
 				db: "iBeaconCheckInSession",
 		})
