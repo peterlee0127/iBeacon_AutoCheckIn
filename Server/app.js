@@ -1,11 +1,13 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 var helmet = require('helmet');
+var csrf    = require('csurf')
 
 var model = require('./model/dbModel.js');
 var encrypt = require('./model/encrypt.js');
@@ -20,27 +22,40 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 
-app.use(helmet.xssFilter());
-app.use(helmet.xframe());
-app.use(helmet.nosniff());
-app.use(helmet.ienoopen());
-app.disable('x-powered-by');
-
 // app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 app.use(session({
+		secret: "324rgrfdsfm2ek3n2rgr",
+		cookie: { httpOnly: true },
 		resave:true,
 		saveUninitialized:true,
-		secret: "324rgrfdsfm2ek3n2rgr",
 		store: new MongoStore({
 				db: "iBeaconCheckInSession",
 		})
 }));
 
+app.use(helmet.xssFilter());
+app.use(helmet.xframe());
+app.use(helmet.nosniff());
+app.use(helmet.ienoopen());
+app.use(helmet.nocache());
+app.disable('x-powered-by');
+var csrfValue = function(req) {
+  var token = (req.body && req.body._csrf)
+    || (req.query && req.query._csrf)
+    || (req.headers['x-csrf-token'])
+    || (req.headers['x-xsrf-token']);
+  return token;
+};
+app.use(csrf({value: csrfValue}));
 
+app.use(function(req, res, next) {
+  res.cookie('XSRF-TOKEN', req.session._csrf);
+  next();
+});
 app.get("/getBeacon", function(req,res){
 	model.iBeacon.find( function (err,beacon)
 	{
@@ -139,14 +154,14 @@ app.get("/login",function(req,res){
 	if(req.session.user){
 		req.session.user= NaN;
 	}
-	res.sendfile("./public/login.html");
+	res.render("login", { _csrf: req.csrfToken()  });
 });
 
 app.get("/register",function(req,res){
 	if(req.session.user){
 		req.session.user= NaN;
 	}
-  res.sendfile("./public/register.html");
+	res.render("register", { _csrf: req.csrfToken()  });
 });
 
 app.get("/logout",function(req,res){

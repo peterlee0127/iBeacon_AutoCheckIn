@@ -46,9 +46,9 @@
     self.delegate=self;
     
     
-    self.title = @"提問(連線中)";
+    self.title = @"Chat-Connecting";
     
-    self.messageInputView.textView.placeHolder = @"請在此輸入訊息";
+    self.messageInputView.textView.placeHolder = @"Input Text Here";
     
     self.sender = userName;
     
