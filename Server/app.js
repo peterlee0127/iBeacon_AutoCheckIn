@@ -43,31 +43,19 @@ app.use(helmet.nosniff());
 app.use(helmet.ienoopen());
 app.use(helmet.nocache());
 app.disable('x-powered-by');
-
 var csrfValue = function(req) {
-	var token = (req.body && req.body._csrf)
-		|| (req.query && req.query._csrf)
-		|| (req.headers['x-csrf-token'])
-		|| (req.headers['x-xsrf-token']);
-	return token;
+  var token = (req.body && req.body._csrf)
+    || (req.query && req.query._csrf)
+    || (req.headers['x-csrf-token'])
+    || (req.headers['x-xsrf-token']);
+  return token;
 };
-app.use(csrf({ value: csrfValue}) );
+app.use(csrf({value: csrfValue}));
 
 app.use(function(req, res, next) {
-	res.cookie('XSRF-TOKEN', req.session._csrf);
-	next();
+  res.cookie('XSRF-TOKEN', req.session._csrf);
+  next();
 });
-
-
-// error handler
-app.use(function (err, req, res, next) {
-  if (err.code !== 'EBADCSRFTOKEN') return next(err)
-  // handle CSRF token errors here
-  res.status(403)
-  res.send('session has expired or form tampered with')
-})
-
-
 app.get("/getBeacon", function(req,res){
 	model.iBeacon.find( function (err,beacon)
 	{
@@ -166,14 +154,14 @@ app.get("/login",function(req,res){
 	if(req.session.user){
 		req.session.user= NaN;
 	}
-	res.sendfile("./public/login.html");
+	res.render("login", { _csrf: req.csrfToken()  });
 });
 
 app.get("/register",function(req,res){
 	if(req.session.user){
 		req.session.user= NaN;
 	}
-  res.sendfile("./public/register.html");
+	res.render("register", { _csrf: req.csrfToken()  });
 });
 
 app.get("/logout",function(req,res){
