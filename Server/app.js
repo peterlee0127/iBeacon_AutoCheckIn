@@ -1,11 +1,13 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 var helmet = require('helmet');
+var csrf    = require('csurf')
 
 var model = require('./model/dbModel.js');
 var encrypt = require('./model/encrypt.js');
@@ -19,13 +21,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
-
-app.use(helmet.xssFilter());
-app.use(helmet.xframe());
-app.use(helmet.nosniff());
-app.use(helmet.ienoopen());
-app.use(helmet.nocache());
-app.disable('x-powered-by');
 
 // app.use(morgan('dev'));
 app.use(methodOverride());
@@ -41,6 +36,36 @@ app.use(session({
 				db: "iBeaconCheckInSession",
 		})
 }));
+
+app.use(helmet.xssFilter());
+app.use(helmet.xframe());
+app.use(helmet.nosniff());
+app.use(helmet.ienoopen());
+app.use(helmet.nocache());
+app.disable('x-powered-by');
+
+var csrfValue = function(req) {
+	var token = (req.body && req.body._csrf)
+		|| (req.query && req.query._csrf)
+		|| (req.headers['x-csrf-token'])
+		|| (req.headers['x-xsrf-token']);
+	return token;
+};
+app.use(csrf({ value: csrfValue}) );
+
+app.use(function(req, res, next) {
+	res.cookie('XSRF-TOKEN', req.session._csrf);
+	next();
+});
+
+
+// error handler
+app.use(function (err, req, res, next) {
+  if (err.code !== 'EBADCSRFTOKEN') return next(err)
+  // handle CSRF token errors here
+  res.status(403)
+  res.send('session has expired or form tampered with')
+})
 
 
 app.get("/getBeacon", function(req,res){
