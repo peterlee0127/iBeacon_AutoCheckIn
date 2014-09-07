@@ -46,7 +46,7 @@
     
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Setting" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingVC)];
 
-        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Chat" style:UIBarButtonItemStylePlain target:self action:@selector(showChatVC)];
+//    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Chat" style:UIBarButtonItemStylePlain target:self action:@selector(showChatVC)];
     
     float theInterval = 1.0 / 50.0;
    self.timer= [NSTimer scheduledTimerWithTimeInterval:theInterval target:self selector:@selector(progressViewAnimation) userInfo:nil repeats:YES];
