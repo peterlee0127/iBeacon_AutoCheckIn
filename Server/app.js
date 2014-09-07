@@ -53,9 +53,11 @@ var csrfValue = function(req) {
 app.use(csrf({value: csrfValue}));
 
 app.use(function(req, res, next) {
-  res.cookie('XSRF-TOKEN', req.session._csrf);
+  res.cookie('XSRF-TOKEN', req.csrfToken());
   next();
 });
+
+
 app.get("/getBeacon", function(req,res){
 	model.iBeacon.find( function (err,beacon)
 	{
