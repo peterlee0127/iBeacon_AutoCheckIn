@@ -427,7 +427,7 @@
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = BLE_AutoCheckIn;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fdcd43eb-d01a-4430-badf-3afe7e61f0d5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -444,7 +444,7 @@
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = BLE_AutoCheckIn;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fdcd43eb-d01a-4430-badf-3afe7e61f0d5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
