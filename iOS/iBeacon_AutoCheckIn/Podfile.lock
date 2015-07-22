@@ -1,29 +1,29 @@
 PODS:
-  - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-    - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.4.1):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.4.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.4.1)
-  - AFNetworking/Security (2.4.1)
-  - AFNetworking/Serialization (2.4.1)
-  - AFNetworking/UIKit (2.4.1):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - JSMessagesViewController (4.0.4):
     - JSQSystemSoundPlayer
-  - JSQSystemSoundPlayer (1.5.2)
-  - SocketRocket (0.3.1-beta2)
+  - JSQSystemSoundPlayer (4.0.0)
+  - SocketRocket (0.4)
 
 DEPENDENCIES:
   - AFNetworking
@@ -31,9 +31,9 @@ DEPENDENCIES:
   - SocketRocket
 
 SPEC CHECKSUMS:
-  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
-  JSMessagesViewController: 1083fdb9043e652a86b29bdfef526a9caef9f40e
-  JSQSystemSoundPlayer: c24914bc96ff5365b5d28b59d7ecffd60d1c5587
-  SocketRocket: 79a68ae186063c65e1fe6f638b1ae2927aa5f304
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  JSMessagesViewController: 63953aa53addd1f4ec2ac878a93ccd1dde261088
+  JSQSystemSoundPlayer: a367c3eba71068e304ef37e5fd6355fb4cd2a258
+  SocketRocket: 01443933b7bc362621325f4607b80b4286a99707
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.38.0

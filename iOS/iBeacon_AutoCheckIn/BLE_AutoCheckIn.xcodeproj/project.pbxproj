@@ -32,8 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3336DCD8A0A1145C9BABE46C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		366D643A10A24F19A47E4CF5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4BE63050EEA812F8CC693667 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D05EB2241916B77F0050CF56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iBeacon_AutoCheckIn/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		D05EB2261916B7920050CF56 /* BLE_AutoCheckIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BLE_AutoCheckIn-Info.plist"; path = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D05EB2271916B7920050CF56 /* BLE_AutoCheckIn-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BLE_AutoCheckIn-Prefix.pch"; path = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -90,13 +91,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22E7B9C735EECE0796878DDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3336DCD8A0A1145C9BABE46C /* Pods.debug.xcconfig */,
+				4BE63050EEA812F8CC693667 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D08FB73A190D5A76002DA3C8 = {
 			isa = PBXGroup;
 			children = (
 				D08FB74C190D5A76002DA3C8 /* BLE_AutoCheckIn */,
 				D08FB745190D5A76002DA3C8 /* Frameworks */,
 				D08FB744190D5A76002DA3C8 /* Products */,
-				8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */,
+				22E7B9C735EECE0796878DDC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,10 +133,10 @@
 		D08FB74C190D5A76002DA3C8 /* BLE_AutoCheckIn */ = {
 			isa = PBXGroup;
 			children = (
-				D0FD86AE19151C2100E04B7E /* Library */,
-				D0CCB1DE190E2A1D004F8137 /* Model */,
 				D05EB2521916B8440050CF56 /* AppDelegate.h */,
 				D05EB2531916B8440050CF56 /* AppDelegate.m */,
+				D0FD86AE19151C2100E04B7E /* Library */,
+				D0CCB1DE190E2A1D004F8137 /* Model */,
 				D0CCB1DF190E2A26004F8137 /* ViewController */,
 				D08FB74D190D5A76002DA3C8 /* Supporting Files */,
 			);
@@ -288,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B991E8D73469463D8F652CCB /* Check Pods Manifest.lock */ = {
@@ -417,7 +427,7 @@
 		};
 		D08FB770190D5A76002DA3C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */;
+			baseConfigurationReference = 3336DCD8A0A1145C9BABE46C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -427,14 +437,14 @@
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = BLE_AutoCheckIn;
-				PROVISIONING_PROFILE = "fdcd43eb-d01a-4430-badf-3afe7e61f0d5";
+				PROVISIONING_PROFILE = "e8386efb-82c6-48a2-a23d-4cddb13d8b02";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		D08FB771190D5A76002DA3C8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8675E3AA8CAA4D3AA9C1E832 /* Pods.xcconfig */;
+			baseConfigurationReference = 4BE63050EEA812F8CC693667 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -444,7 +454,7 @@
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = BLE_AutoCheckIn;
-				PROVISIONING_PROFILE = "fdcd43eb-d01a-4430-badf-3afe7e61f0d5";
+				PROVISIONING_PROFILE = "e8386efb-82c6-48a2-a23d-4cddb13d8b02";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
