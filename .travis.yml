@@ -1,4 +1,4 @@
 language: objective-c
-xcode_project: iOS/iBeacon_AutoCheckIn/BLE_AutoCheckIn.xcworkspace  # path to your xcodeproj folder
+xcode_project: iOS/iBeacon_AutoCheckIn/BLE_AutoCheckIn.xcodeproj #path to your xcodeproj folder
 xcode_scheme: BLE_AutoCheckIn 
 podfile: iOS/iBeacon_AutoCheckIn/Podfile
