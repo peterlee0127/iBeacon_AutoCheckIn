@@ -437,7 +437,7 @@
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = BLE_AutoCheckIn;
-				PROVISIONING_PROFILE = "e8386efb-82c6-48a2-a23d-4cddb13d8b02";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -448,13 +448,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Prefix.pch";
 				INFOPLIST_FILE = "iBeacon_AutoCheckIn/BLE_AutoCheckIn-Info.plist";
 				PRODUCT_NAME = BLE_AutoCheckIn;
-				PROVISIONING_PROFILE = "e8386efb-82c6-48a2-a23d-4cddb13d8b02";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
