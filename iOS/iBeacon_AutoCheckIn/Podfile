@@ -1,3 +1,4 @@
+target 'BLE_AutoCheckIn'
 pod "AFNetworking"
 pod 'SocketRocket'
 pod 'JSMessagesViewController'
